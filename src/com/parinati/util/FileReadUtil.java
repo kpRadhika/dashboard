@@ -1,5 +1,6 @@
 package com.parinati.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,7 +16,9 @@ public class FileReadUtil {
 
 	static {
 		try {
-			FileInputStream file = new FileInputStream("/dashboard.xml");
+			/*File dummyFile = new File("");
+			String path = dummyFile.getPath();*/
+			FileInputStream file = new FileInputStream("config/dashboard.xml");
 			InputSource source = new InputSource(file);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder parser = dbf.newDocumentBuilder();

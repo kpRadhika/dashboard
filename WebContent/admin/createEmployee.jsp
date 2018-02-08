@@ -73,10 +73,10 @@ String emplId = null;
 		<td><%=exp %></td>
 		<td><%=Skills %></td>
 		<td><%=interviewDate %></td>
-		<td><button type="button" id ="button<%=i%>" name="button<%=i%>" disabled="disabled" onclick="performNextStep(this.value)" value="">Onboard</button></td>
 	</tr>
 
 <%}%>
+<tr align="center"><td colspan="5"><button type="button" id ="subbutton" name="subbutton" disabled="disabled" onclick="performNextStep()" value="">Onboard</button></td></tr>
 </table>
 <div id="modal" align="center" class="overlay" style="border: 1px solid #0199CD; text-align: center; display: none; ">
 <table class="overlay-content" style="background-color: #ffC30B;" width="50%">
