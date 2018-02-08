@@ -31,7 +31,7 @@ public class MailerUtil {
 		Properties props = new Properties();
 
 		try {
-			props.load(DBConnectionManager.class.getClassLoader().getResourceAsStream("mailer.properties"));
+			props.load(MailerUtil.class.getClassLoader().getResourceAsStream("mailer.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -43,7 +43,6 @@ public class MailerUtil {
 		MAIL_CC = props.getProperty("MAILCC");
 	}
 
-	DBConnectionManager dal = new DBConnectionManager();
 
 
 	/**********************************************************************************
@@ -52,9 +51,10 @@ public class MailerUtil {
 	 * 
 	 ********************************************************************************/
 
-	public void postMailWithTLSAuth(String toEmail, String subject, String message) {
-		try {			
-			System.out.println("TLSEmail Start");
+	public void postMailWithTLSAuth(String toEmail, String subject, String mailTempPath,String[] varData ) {
+		try {	
+			
+			String body = setMailTemplateData(mailTempPath,varData);
 			Properties props = new Properties();
 			props.put("mail.smtp.host", MAIL_SERVER_IP); //SMTP Host
 			props.put("mail.smtp.port", MAIL_SERVER_PORT); //TLS Port
@@ -70,7 +70,7 @@ public class MailerUtil {
 			};
 			Session session = Session.getInstance(props, auth);
 			
-			sendEmail(session, toEmail, subject, message);
+			sendEmail(session, toEmail, subject, body);
 			
 		} catch (Exception exception) {
 			CustomLogger.exceptionJava(exception, "MailerUtil.java:: postMail()", "MailerUtil.java");
@@ -83,7 +83,7 @@ public class MailerUtil {
 	 * 
 	 ***********************************************************************************/
 
-	public String setMailTemplateData(String filePath, Object[] varData) {
+	public String setMailTemplateData(String filePath, String[] varData) {
 		File f = new File(filePath);
 		String body = null;
 		try {

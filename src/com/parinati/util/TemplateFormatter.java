@@ -22,7 +22,7 @@ public class TemplateFormatter extends Object {
 	/** Creates new TemplateFormatter */
 	public TemplateFormatter() {
 	}
-	public static String format(File fin, Object[] mailData) throws TemplateFormatterException {
+	public static String format(File fin, String[] mailData) throws TemplateFormatterException {
 		StringBuffer inBuf = new StringBuffer();
 		String outStr = "";
 		String inLine = null;
@@ -47,7 +47,7 @@ public class TemplateFormatter extends Object {
 		return outStr;
 	}
 
-	public static String format(String inStr, Object[] mailData) throws TemplateFormatterException {
+	public static String format(String inStr, String[] mailData) throws TemplateFormatterException {
 		StringBuffer sb = new StringBuffer(inStr);
 		// StringBuffer outBuf = new StringBuffer();
 

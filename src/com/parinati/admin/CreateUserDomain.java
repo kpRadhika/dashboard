@@ -30,18 +30,7 @@ public class CreateUserDomain {
 			sql.append(" EXPERIENCEINYRS,                       ");     
 			sql.append(" SKILLS,                                ");
 			sql.append(" TO_CHAR(INTERVIEWDATE,'DD-MM-YYYY')    ");
-			/*sql.append(" STEPDESCRIPTION,                       ");
-			sql.append(" CASE WHEN EOT.STEPID+1<=5        		");
-			sql.append(" THEN (SELECT STEPDESCRIPTION     		");
-			sql.append(" FROM ONBOARDINGSTEPS            		");
-			sql.append(" WHERE STEPID=EOT.STEPID+1)      		");
-			sql.append(" ELSE 'EMPLOYEE ONBOARDED' END    		");*/
 			sql.append(" FROM CANDIDATEDTLS 	                ");
-			/*sql.append(" EMPONBOARDINGTRACKER EOT,              ");
-			sql.append(" ONBOARDINGSTEPS OS                     ");
-			sql.append(" WHERE                                  ");
-			sql.append(" CD.CANDIDATEID = EOT.CANDIDATEID AND   ");
-			sql.append(" EOT.STEPID = OS.STEPID AND             ");*/
 			sql.append(" WHERE ISSELECTED = ?                  	");  
 			sql.append(" AND TO_DATE(TO_CHAR(MODIFIEDDATE,'DD-MM-YYYY'),'DD-MM-YYYY') BETWEEN            ");        
 			sql.append(" TO_DATE(?,'DD-MM-YYYY') AND      		");	

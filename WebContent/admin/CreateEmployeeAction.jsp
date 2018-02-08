@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:useBean id="adminEmplDomain" scope="session" class="com.parinati.admin.CreateEmployeeDomain" />
+<jsp:useBean id="mailUtil" scope="session" class="com.parinati.util.MailerUtil" />
 <%@include file="../commonInclude.jsp" %>
   <%@page import="java.util.*,com.parinati.admin.*,java.io.*" %>
 <html>
@@ -44,6 +45,7 @@ result = adminEmplDomain.generateEmployeeLogin(selectedValue,dateOfJoin,roleId);
 
 <form method="post" action="" >
 	<%if(result!=null && !result.isEmpty()){ %>
+	mailUtil.postMailWithTLSAuth()
 	<table align="center">
 	<tr>
 		<td><b>Employee ID Created Successfully.Employee Id is <%=result.get(0).toString()%>.</b></td>

@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.parinati.util.CustomLogger;
 import com.parinati.util.DBConnectionManager;
+import com.parinati.util.FileReadUtil;
 import com.parinati.util.GenericConstDef;
 import com.parinati.util.GenericUtil;
+import com.parinati.util.MailerUtil;
 
 public class CreateEmployeeDomain {
 	DBConnectionManager dbhelper = null;
@@ -160,22 +162,7 @@ public class CreateEmployeeDomain {
 		}
 		totalTypes.add(valueTypes);
 		
-		/*sql= new StringBuilder();
-		sql.append(" UPDATE EMPONBOARDINGTRACKER    ");
-		sql.append(" SET STEPID = 2,                ");
-		sql.append(" MODIFIEDDATE = SYSDATE         ");
-		sql.append(" WHERE CANDIDATEID = ?          ");
 		
-		totalQueryList.add(sql.toString());	
-		
-		values = new ArrayList();
-		values.add(candidateId);
-		totalValues.add(values);
-		
-		valueTypes = new ArrayList();
-		valueTypes.add(GenericConstDef.DB_STRING);
-		
-		totalTypes.add(valueTypes);*/
 		
 		sql= new StringBuilder();
 		sql.append(" INSERT INTO EMPROLEDTLS(    ");
@@ -239,6 +226,15 @@ public class CreateEmployeeDomain {
 		returnList.add(empId);
 		returnList.add(actualLogin);
 		
+		
+		//sending onboarding mail
+		String mailTempPath = FileReadUtil.getValue("ONBOARDINGMAIL");
+		List var = new ArrayList();
+		var.add(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(0)));
+		var.add(Integer.toString(empId));
+		var.add(actualLogin);
+		
+		new MailerUtil().postMailWithTLSAuth(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(5)), "Welcome to Parinati", mailTempPath, (String[]) var.toArray(new String[3]));
 		}
 		catch (Exception e) {
 			CustomLogger.exceptionJava(e, "Exception in generateEmployeeLogin() while executing the query:"+sql.toString()+" values:"+
