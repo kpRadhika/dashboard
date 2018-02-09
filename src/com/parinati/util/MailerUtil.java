@@ -56,6 +56,7 @@ public class MailerUtil {
 			
 			String body = setMailTemplateData(mailTempPath,varData);
 			Properties props = new Properties();
+			props.put("mail.smtp.ssl.trust", MAIL_SERVER_IP);
 			props.put("mail.smtp.host", MAIL_SERVER_IP); //SMTP Host
 			props.put("mail.smtp.port", MAIL_SERVER_PORT); //TLS Port
 			props.put("mail.smtp.auth", "true"); //enable authentication
@@ -84,7 +85,8 @@ public class MailerUtil {
 	 ***********************************************************************************/
 
 	public String setMailTemplateData(String filePath, String[] varData) {
-		File f = new File(filePath);
+		ClassLoader classLoader = MailerUtil.class.getClassLoader();
+		File f = new File(classLoader.getResource(filePath).getFile());
 		String body = null;
 		try {
 			body = TemplateFormatter.format(f, varData);
@@ -113,7 +115,7 @@ public class MailerUtil {
 
 	      msg.setFrom(new InternetAddress(MAIL_FROM, "NoReply"));
 
-	      msg.setReplyTo(InternetAddress.parse(NO_REPLY_ID, false));
+	     // msg.setReplyTo(InternetAddress.parse(NO_REPLY_ID, false));
 
 	      msg.setSubject(subject, "UTF-8");
 

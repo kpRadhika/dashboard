@@ -18,8 +18,10 @@ public class FileReadUtil {
 		try {
 			/*File dummyFile = new File("");
 			String path = dummyFile.getPath();*/
-			FileInputStream file = new FileInputStream("config/dashboard.xml");
-			InputSource source = new InputSource(file);
+			ClassLoader classLoader = FileReadUtil.class.getClassLoader();
+			File file = new File(classLoader.getResource("config/dashboard.xml").getFile());
+			FileInputStream fis = new FileInputStream(file);
+			InputSource source = new InputSource(fis);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder parser = dbf.newDocumentBuilder();
 			doc = parser.parse(source);

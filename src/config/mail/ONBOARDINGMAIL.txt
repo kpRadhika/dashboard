@@ -1,0 +1,13 @@
+Dear {0},
+Welcome to Parinati. Your details are as follows:
+employee id:{1}
+mail id:{2}
+password: Your date of birth in ddmmyyyy format.
+Please change your password in your first login.
+We request you to submit the following documents asap for completing the onboarding process.
+	(1)Educational documents
+	(2)Address proof
+	(3)Copies of Passport, Aadhar and Pan card
+
+Thank you,
+Parinati

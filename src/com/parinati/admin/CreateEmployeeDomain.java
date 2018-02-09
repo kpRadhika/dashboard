@@ -229,12 +229,12 @@ public class CreateEmployeeDomain {
 		
 		//sending onboarding mail
 		String mailTempPath = FileReadUtil.getValue("ONBOARDINGMAIL");
-		List var = new ArrayList();
-		var.add(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(0)));
-		var.add(Integer.toString(empId));
-		var.add(actualLogin);
+		String[] var = new String[3];
+		var[0] = GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(0));
+		var[1] = Integer.toString(empId);
+		var[2] = actualLogin;
 		
-		new MailerUtil().postMailWithTLSAuth(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(5)), "Welcome to Parinati", mailTempPath, (String[]) var.toArray(new String[3]));
+		new MailerUtil().postMailWithTLSAuth(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(5)), "Welcome to Parinati", mailTempPath, var);
 		}
 		catch (Exception e) {
 			CustomLogger.exceptionJava(e, "Exception in generateEmployeeLogin() while executing the query:"+sql.toString()+" values:"+
