@@ -30,6 +30,7 @@ $(function(){
 	    $( "#doj" ).datepicker({
 	    	changeMonth: true,
 	    	changeYear: true,
+	    	minDate:0,
 			monthRange: ":+12",
 			dateFormat: 'dd-mm-yy'
 	    });
