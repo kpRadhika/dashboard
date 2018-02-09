@@ -32,7 +32,7 @@ html, body, form {
 </style>
 </head>
 <body>
-<% 
+<%
 
 String contentType = request.getContentType();
 String result = null;
@@ -98,7 +98,7 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 		final int MEMORY_THRESHOLD = 1024 * 1024 * 3; // 3MB
 		final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 		final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
-		
+
 		// configures upload settings
 		//DiskFileItemFactory factory = new DiskFileItemFactory();
 		// sets memory threshold - beyond which files are stored in disk
@@ -116,9 +116,10 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 
 		// constructs the directory path to store upload file
 		// this path is relative to application's directory
-		String path1 = new File("").getAbsolutePath();
-		String path2 = new File(path1).getParent();
-		uploadPath = path2+ "\\Dashboard\\Resume";
+		/* String path1 = new File("").getAbsolutePath();
+		String path = new File(path1).getParent();*/
+
+		 uploadPath = "D:\\Dashboard\\Resume";
 
 		// creates the directory if it does not exist
 		File uploadDir = new File(uploadPath);
@@ -178,92 +179,92 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 if(result == null){
 %>
 <form  name  ="createCandidate" id ="createCandidate" action="CreateCandidate.jsp" enctype="multipart/form-data" method="post">
-	<table class="zebra" width="50%" align="center" cellspacing="10" cellpadding="0"> 
+	<table class="zebra" width="50%" align="center" cellspacing="10" cellpadding="0">
 		<tr>
 			<td><label>First Name</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name="firstName" align="left"/></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Middle Name</label></td>
 			<td colspan="3"><input type="text" name = "middName" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Last Name</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name = "lastName" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Date Of Birth</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name = "DOB" id="datepicker" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Phone Number</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name = "phone" id = "phone" align="left" maxlength="10">
 			</td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Email ID</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name = "email" id="email" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Qualification</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name = "qualification" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Experience</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name = "exp" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Skills</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name = "skills" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Address</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="text" name = "address" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Current Employer</label></td>
 			<td colspan="3"><input type="text" name = "currentemployer" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Achievements</label></td>
 			<td colspan="3"><input type="text" name = "achievements" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Date Of Interview</label></td>
 			<td colspan="3"><input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
 		</tr>
-		
+
 		<tr>
 			<td><label>Upload Resume(.pdf format)</label><label style="color:red">*</label></td>
 			<td colspan="3"><input type="file" name = "uploadFile" id = "uploadFile" accept=".pdf" align="left" ></td>
 		</tr>
-		
+
 		<tr align="center">
-			<td colspan="2"><input type="submit" value="Submit" onclick="return formSubmit()"/> 
+			<td colspan="2"><input type="submit" value="Submit" onclick="return formSubmit()"/>
 			<input type="reset" value="Reset" />
 			</td>
 			<td><input type="hidden" name="formValue" value="formValue"/></td>
 		</tr>
-	
+
 	</table>
 
 </form>
 <%
 	}else{
 	%><br> <br> <br> <br> <br>
-	
+
 		<table align="center">
 	<%
 	if(!result.equals("ERROR")){
@@ -274,9 +275,9 @@ if(result == null){
 			<tr>
 				<td><b>Candidate Id : <%=result%></b></td>
 			</tr>
-	<% 
+	<%
 	}else{
-		
+
 	%>
 			<tr>
 				<td><b> Error Occured While Creating Candidate.</b></td>
@@ -285,7 +286,7 @@ if(result == null){
 	}
 	%>
 	</table>
-<%	
+<%
 	}
 %>
 </body>

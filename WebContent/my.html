@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<html>  
+<head>
+<style>
+#wrapper{
+position:relative;
+}
+#menu{
+width: fit-content;
+background-color:pink;
+padding: 0px;
+list-style:none;
+position:relative;
+}
+
+#menu li a{
+display:table-cell;
+}
+
+.sub-menu{
+width: fit-content;
+padding: 0px 20px 0px 20px;
+list-style:none;
+position:absolute;
+display:none;
+z-index:1;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+background-color: aqua;
+}
+#menu li:hover .sub-menu{
+
+display:block;
+}
+#menu li:hover {
+background-color: yellow;
+cursor:pointer;
+}
+</style>
+</head>
+<body>  
+<div id="wrapper">
+<ul id="menu">
+<li>Home</li>
+<li>Carrer</li>
+<li><a>Deployment Level</a>
+<a><ul class="sub-menu">
+<li>Prod</li>
+<li>UaT</li>
+<li>Local</li>
+</ul></a>
+</li>
+<li>Contact</li>
+</ul> 
+</div>
+
+</body>  
+</html>  
