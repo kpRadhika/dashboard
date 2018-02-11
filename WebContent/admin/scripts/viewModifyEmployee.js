@@ -8,7 +8,7 @@ $(function(){
 		if($("#name").is(":checked")){
 			$("#searchOption").show();
 			$("#projectOption").hide();
-			document.getElementById("hrLine").style.display ="block";
+			/*document.getElementById("hrLine").style.display ="block";*/
 		}else{
 			showDropDown();
 
@@ -21,7 +21,7 @@ if($("#skills").is(":checked")){
 if($("#name").is(":checked")){
 	$("#searchOption").show();
 	$("#projectOption").hide();
-	document.getElementById("hrLine").style.display ="block";
+	/*document.getElementById("hrLine").style.display ="block";*/
 }
 
 $("#viewModifyEmolyeeForm").validate({

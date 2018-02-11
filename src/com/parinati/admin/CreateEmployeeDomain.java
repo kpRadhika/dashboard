@@ -325,20 +325,20 @@ public class CreateEmployeeDomain {
 	public int updateEmployeeDetails(List inputParam){
 
 		StringBuilder sql = new StringBuilder();
-		List rs = null;
+		int rs=0;
 		List queryValues = null;
 		List queryTypes = null;
 		try{
-			sql.append("	UPDATE employeedtls		");
+			sql.append("	UPDATE EMPLOYEEDTLS		");
 			sql.append("	SET                     ");
-			sql.append("	    phone =?,           ");
-			sql.append("	    panno =?,           ");
-			sql.append("	    aadharno =?,        ");
-			sql.append("	    passportno =?,      ");
-			sql.append("	    skills =?,          ");
-			sql.append("	    isactive =?         ");
+			sql.append("	    PHONE =?,           ");
+			sql.append("	    PANNO =?,           ");
+			sql.append("	    AADHARNO =?,        ");
+			sql.append("	    PASSPORTNO =?,      ");
+			sql.append("	    SKILLS =?,          ");
+			sql.append("	    ISACTIVE =?         ");
 			sql.append("	WHERE                   ");
-			sql.append("	empid =?                ");
+			sql.append("	EMPID =?                ");
 
 			queryValues = new ArrayList<>();
 			queryValues.add(inputParam.get(0));//phone
@@ -351,18 +351,17 @@ public class CreateEmployeeDomain {
 
 
 			queryTypes = new ArrayList<>();
-			for(int i = 0; i<queryValues.size();i++)
+			for(int i = 0; i<queryValues.size()-1;i++)
 				queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_INT);
 
 
-
-			//rs = dbhelper.prepStmtExecuteMultiple(sql.toString(), null, null);
+			rs = dbhelper.executeInsertUpdate(sql.toString(), queryValues, queryTypes);
 		}
 		catch (Exception e) {
 			CustomLogger.exceptionJava(e, "Exception in fetchRecords() while executing the query:"+sql.toString(), "CreateUserDomain.java");
 		}
 
-		//return rs;
-		return 0;
+		return rs;
 	}
 }
