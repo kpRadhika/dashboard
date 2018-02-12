@@ -72,6 +72,12 @@ padding: 12px 16px;
   display: block;
 }
 </style>
+<script type="text/javascript">
+function logout()
+{
+	window.document.location = "login/Logout.jsp";
+}
+</script>
 </head>
 <body>
 <%String user = (String)session.getAttribute("userID");
@@ -117,7 +123,7 @@ while(catIter.hasNext()){
 
 %>
 <div class="logout">
-<a >LOGOUT</a>
+<a onclick="logout()">LOGOUT</a>
 </div>
 </div>
 
