@@ -20,15 +20,6 @@ font-size:      13px;
 color:          red;
 }
 
-html, body, form {
-	margin: 0px;
-	padding: 0px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13px;
-	color: #61727e;
-}
-
-
 </style>
 </head>
 <body>
@@ -179,85 +170,87 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 if(result == null){
 %>
 <form  name  ="createCandidate" id ="createCandidate" action="CreateCandidate.jsp" enctype="multipart/form-data" method="post">
-	<table class="zebra" width="50%" align="center" cellspacing="10" cellpadding="0">
+<div align="left" style="background-color: #C0C0C0; font-weight: bold;width: 100%">Create Candidate</div>
+<br>
+	<table class="zebra" width="50%" align="left">
 		<tr>
-			<td><label>First Name</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name="firstName" align="left"/></td>
+			<td>First Name<label style="color:red">*</label></td>
+			<td><input type="text" name="firstName" align="left"/></td>
 		</tr>
 
 		<tr>
-			<td><label>Middle Name</label></td>
-			<td colspan="3"><input type="text" name = "middName" align="left"></td>
+			<td>Middle Name</td>
+			<td><input type="text" name = "middName" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Last Name</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name = "lastName" align="left"></td>
+			<td>Last Name<label style="color:red">*</label></td>
+			<td><input type="text" name = "lastName" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Date Of Birth</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name = "DOB" id="datepicker" align="left"></td>
+			<td>Date Of Birth<label style="color:red">*</label></td>
+			<td><input type="text" name = "DOB" id="datepicker" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Phone Number</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name = "phone" id = "phone" align="left" maxlength="10">
+			<td>Phone Number<label style="color:red">*</label></td>
+			<td><input type="text" name = "phone" id = "phone" align="left" maxlength="10">
 			</td>
 		</tr>
 
 		<tr>
-			<td><label>Email ID</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name = "email" id="email" align="left"></td>
+			<td>Email ID<label style="color:red">*</label></td>
+			<td><input type="text" name = "email" id="email" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Qualification</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name = "qualification" align="left"></td>
+			<td>Qualification<label style="color:red">*</label></td>
+			<td><input type="text" name = "qualification" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Experience</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name = "exp" align="left"></td>
+			<td>Experience<label style="color:red">*</label></td>
+			<td><input type="text" name = "exp" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Skills</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name = "skills" align="left"></td>
+			<td>Skills<label style="color:red">*</label></td>
+			<td><input type="text" name = "skills" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Address</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="text" name = "address" align="left"></td>
+			<td>Address<label style="color:red">*</label></td>
+			<td><input type="text" name = "address" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Current Employer</label></td>
-			<td colspan="3"><input type="text" name = "currentemployer" align="left"></td>
+			<td>Current Employer</td>
+			<td><input type="text" name = "currentemployer" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Achievements</label></td>
-			<td colspan="3"><input type="text" name = "achievements" align="left"></td>
+			<td>Achievements</td>
+			<td><input type="text" name = "achievements" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Date Of Interview</label></td>
-			<td colspan="3"><input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
+			<td>Date Of Interview</td>
+			<td><input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
 		</tr>
 
 		<tr>
-			<td><label>Upload Resume(.pdf format)</label><label style="color:red">*</label></td>
-			<td colspan="3"><input type="file" name = "uploadFile" id = "uploadFile" accept=".pdf" align="left" ></td>
+			<td>Upload Resume(.pdf format)<label style="color:red">*</label></td>
+			<td><input type="file" name = "uploadFile" id = "uploadFile" accept=".pdf" align="left" ></td>
 		</tr>
 
 		<tr align="center">
 			<td colspan="2"><input type="submit" value="Submit" onclick="return formSubmit()"/>
 			<input type="reset" value="Reset" />
 			</td>
-			<td><input type="hidden" name="formValue" value="formValue"/></td>
+		
 		</tr>
-
+<input type="hidden" name="formValue" value="formValue"/>
 	</table>
 
 </form>

@@ -25,20 +25,20 @@
 	<location>/ErrorPage.jsp</location>
 </error-page>
 
-<!-- Start code For Session Filter 
+<!-- Start code For Session Filter -->
  <filter>
     <filter-name>SessionFilter</filter-name>
-		<filter-class>com.sbi.payagg.filter.SessionFilter</filter-class>
+		<filter-class>com.parinati.util.SessionFilter</filter-class>
 		<init-param>
 			<param-name>avoid-urls</param-name>
-			<param-value>/index.jsp,login/Login.jsp,/ErrorPage.jsp</param-value>
+			<param-value>/index.jsp,/ErrorPage.jsp</param-value>
 		</init-param>
 </filter>
 <filter-mapping>
    	<filter-name>SessionFilter</filter-name>
    	<url-pattern>*.jsp</url-pattern>
 </filter-mapping>
-End code For Session Filter -->
+<!-- End code For Session Filter -->
   
    <servlet>
     <description></description>

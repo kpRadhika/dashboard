@@ -54,6 +54,13 @@ body {
 	position: absolute;
 	width: 100%;
 }
+
+.logintable{
+/*frame:box;
+ box-shadow: silver; */
+background-color: #ffC30B;
+/* box-shadow: 2px 2px 8px 8px rgba(0,0,0,0.1); */
+}
 </style>
 
 
@@ -83,16 +90,15 @@ body {
 			<br>
 
 
-			<table cellpadding="3" cellspacing="3" width="30%" align="center">
+			<table class="logintable" width="30%" align="center">
 
 
 
-				<tr bgcolor="#ffC30B">
-					<td align="center" style="font-size: 20px; color: white;">
-						Login</td>
+				<tr>
+					<td colspan="2" align="center" style="font-size: medium;font-weight: bold;">Login</td>
 
 				</tr>
-
+				<tr></tr><tr></tr>
 				<tr>
 
 					<td align="center" style="font-size: 15px;">User ID
@@ -107,7 +113,7 @@ body {
 						style="margin-left: 3px;" />
 					</td>
 				</tr>
-
+				<tr></tr><tr></tr>
 				<tr>
 					<td align="center"><input type="submit" value="Login"
 						onClick="return check()" />&emsp; <input type="reset"

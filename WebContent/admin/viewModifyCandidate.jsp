@@ -15,13 +15,6 @@ font-size:      13px;
 color:          red;
 }
 
-html, body, form {
-	margin: 0px;
-	padding: 0px;
-	font-family: Trebuchet MS;
-	font-size: 13px;
-	color: #2f4f4f;
-}
 button {
      background:none!important;
      color:inherit;
@@ -47,15 +40,12 @@ if(searchValue.isEmpty())
  searchValue = request.getParameter("interdate")== null ? "": request.getParameter("interdate");
 String radioButtonVal = request.getParameter("viewModify")== null ? "": request.getParameter("viewModify");
 %>
-
+<div align="center" style="background-color: #C0C0C0; font-weight: bold;width: 100%"><b>Search Candidate</b></div>
 <form method="post" action="viewModifyCandidate.jsp" >
-<table width="80%" border="0" cellspacing="1" cellpadding="2" align="center" >
-			</br>
-			<tr>
-			<td bgcolor="#ffC30B" style="text-align: center;" colspan="7"><b>Search Candidate</b></td>
-			</tr>
+<table width="80%" border="0" align="center" >
 			<tr></tr><tr></tr><tr></tr>
 			<tr >
+			<td>Search Candidate By:</td>
 				<td><input type = "radio" id="name" name = "viewModify" value="name">Name</td>
 				<td><input type = "radio" id ="candidateId" name = "viewModify" value="candidateId">Candidate ID</td>
 				<td><input type = "radio" id="skills" name= "viewModify" value="skills">Skills</td>
@@ -64,21 +54,23 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 		</table> 
 		<br/>
 		
-		<table width="50%" border="0" cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%" id="searchOption" >
+		<table width="80%"  align="center" style="margin-top: 1%" id="searchOption" >
 			<tr>
-				<td><label align="left">Search Value</label></td>
-				<td><input type="text" name ="searchText" id="searchText" ></td>
-				<td><input type="submit" name="search" value="search" id="search" align="left"></td>
+				<td>Search Value</td>
+				<td><input type="text" name ="searchText" id="searchText" >
+				<input type="submit" name="search" value="search" id="search" align="left">
+				</td>
 			</tr>
 		</table>
-		<table width="50%" border="0" cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%" id="dateSelection" >
+		<table width="80%" align="center" style="margin-top: 1%" id="dateSelection" >
 			<tr>
-				<td><label align="left">Search Date</label></td>
-				<td><input type="text" name ="interdate" id="interdate"></td>
-				<td><input type="submit" name="search" value="search" id="search" align="left"></td>
+				<td>Search Date</td>
+				<td><input type="text" name ="interdate" id="interdate">
+				<input type="submit" name="search" value="search" id="search" align="left">
+				</td>
 			</tr>
-			<hr width="80%" />
 		</table>
+		<hr width="80%" />
 		<br/>
 		
 		

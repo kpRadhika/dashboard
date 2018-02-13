@@ -5,26 +5,20 @@ html, body, form {
 	padding: 5px;
 	font-family: Trebuchet MS; 
 	font-size: small;
-	/*font-size: 18px;
-	 color: #2f4f4f; */
 }
 
 
 th{
 	font : Trebuchet MS; 
 	font-size: small;
-	/* color:white; */
 	font-weight: bold;
-	 background-color: #f2f2f2;	 
-}
-table {
-    border-collapse: collapse;
+	background-color: #ffC30B;	 
 }
 
-.zebra>tr:nth-child(even) 
+
+.zebra tr:nth-child(even) 
 {
-	background:#f2f2f2
-	/*background: #fcf75e*/	
+	background-color:#DCDCDC
 }
 
 odd

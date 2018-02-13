@@ -16,16 +16,13 @@ String submitClicked = request.getParameter("subBtn")==null?"":(String)request.g
 String fromDate = request.getParameter("fromDate")==null?"":(String)request.getParameter("fromDate");
 String toDate = request.getParameter("toDate")==null?"":(String)request.getParameter("toDate");
 %>
-<br><br>
 <form action="createEmployee.jsp" method="post">
-<table align="center" width="50%">
-<tr bgcolor="#ffC30B">
-<th colspan="4" align="center" >Create Employee</th>
-</tr>
+<div align="left" style="background-color: #C0C0C0; font-weight: bold;width: 100%">Create Employee</div>
+<table align="left" width="50%">
 <tr>
-<td><label>From Date</label></td>
+<td>From Date</td>
 <td><input type="text" id="fromDate" name="fromDate" value="<%=fromDate %>"/></td>
-<td><label>To Date</label></td>
+<td>To Date</td>
 <td><input type="text" id="toDate" name="toDate" value="<%=toDate %>"/></td>
 </tr>
 </table>
