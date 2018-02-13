@@ -3,20 +3,20 @@ html, body, form {
 	margin-top: 5px;
 	margin-bottom: 5px
 	padding: 5px;
-	font-family: Trebuchet MS; 
+	font-family: Trebuchet MS;
 	font-size: small;
 }
 
 
 th{
-	font : Trebuchet MS; 
+	font : Trebuchet MS;
 	font-size: small;
 	font-weight: bold;
-	background-color: #ffC30B;	 
+	background-color: #ffC30B;
 }
 
 
-.zebra tr:nth-child(even) 
+.zebra tr:nth-child(even)
 {
 	background-color:#DCDCDC
 }
@@ -29,10 +29,10 @@ odd
 /* button {
      background:none!important;
      color:inherit;
-     border:none; 
+     border:none;
      padding:0!important;
      font: inherit;
-     border-bottom:1px solid #0147FA; 
+     border-bottom:1px solid #0147FA;
      cursor: pointer;
 } */
 
@@ -49,3 +49,21 @@ odd
 }
 
 .required:after { content:" *"; color: red}
+
+input[type=submit] {
+border-radius: 20px;
+padding : 4px 14px 4px 14px;
+background-color : #fffc30;
+background: linear-gradient(to top, white, #fffc30);
+}
+
+input[type=text] {
+	border-radius: 20px;
+}
+
+table{
+	border-collapse: inherit;
+	border:1px;
+	border-style: solid;
+	border-color: silver
+}

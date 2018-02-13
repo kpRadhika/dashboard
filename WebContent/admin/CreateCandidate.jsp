@@ -170,30 +170,28 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 if(result == null){
 %>
 <form  name  ="createCandidate" id ="createCandidate" action="CreateCandidate.jsp" enctype="multipart/form-data" method="post">
-<div align="left" style="background-color: #C0C0C0; font-weight: bold;width: 100%">Create Candidate</div>
+<div align="center" style="background-color: #C0C0C0; font-weight: bold;width: 100%">Create Candidate</div>
 <br>
-	<table class="zebra" width="50%" align="left">
+	<table width="80%" align="center">
+	<tr>
+	<th colspan="4"> Personal Details</th>
+	</tr>
 		<tr>
 			<td>First Name<label style="color:red">*</label></td>
 			<td><input type="text" name="firstName" align="left"/></td>
-		</tr>
 
-		<tr>
 			<td>Middle Name</td>
 			<td><input type="text" name = "middName" align="left"></td>
-		</tr>
-
-		<tr>
+	</tr>
+	<tr>
 			<td>Last Name<label style="color:red">*</label></td>
 			<td><input type="text" name = "lastName" align="left"></td>
-		</tr>
 
+		</tr>
 		<tr>
 			<td>Date Of Birth<label style="color:red">*</label></td>
 			<td><input type="text" name = "DOB" id="datepicker" align="left"></td>
-		</tr>
 
-		<tr>
 			<td>Phone Number<label style="color:red">*</label></td>
 			<td><input type="text" name = "phone" id = "phone" align="left" maxlength="10">
 			</td>
@@ -202,14 +200,21 @@ if(result == null){
 		<tr>
 			<td>Email ID<label style="color:red">*</label></td>
 			<td><input type="text" name = "email" id="email" align="left"></td>
+
+			<td>Address<label style="color:red">*</label></td>
+			<td><input type="text" name = "address" align="left"></td>
 		</tr>
 
+		</table>
+<br><br>
+	<table width="80%" align="center">
+	<tr>
+	<th colspan="4">Skill Details</th>
+	</tr>
 		<tr>
 			<td>Qualification<label style="color:red">*</label></td>
 			<td><input type="text" name = "qualification" align="left"></td>
-		</tr>
 
-		<tr>
 			<td>Experience<label style="color:red">*</label></td>
 			<td><input type="text" name = "exp" align="left"></td>
 		</tr>
@@ -217,42 +222,39 @@ if(result == null){
 		<tr>
 			<td>Skills<label style="color:red">*</label></td>
 			<td><input type="text" name = "skills" align="left"></td>
+			<td>Upload Resume(.pdf format)<label style="color:red">*</label></td>
+			<td><input type="file" name = "uploadFile" id = "uploadFile" accept=".pdf" align="left" ></td>
 		</tr>
 
-		<tr>
-			<td>Address<label style="color:red">*</label></td>
-			<td><input type="text" name = "address" align="left"></td>
-		</tr>
+	</table>
+	<br><br>
+	<table width="80%" align="center">
+	<tr><th colspan="4">Employment details</th></tr>
 
 		<tr>
 			<td>Current Employer</td>
 			<td><input type="text" name = "currentemployer" align="left"></td>
-		</tr>
 
-		<tr>
 			<td>Achievements</td>
 			<td><input type="text" name = "achievements" align="left"></td>
 		</tr>
-
+		</table>
+<br><br>
+<table width="80%" align="center">
+<tr><th colspan="4"> Interview details</th></tr>
 		<tr>
 			<td>Date Of Interview</td>
 			<td><input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
-		</tr>
-
-		<tr>
-			<td>Upload Resume(.pdf format)<label style="color:red">*</label></td>
-			<td><input type="file" name = "uploadFile" id = "uploadFile" accept=".pdf" align="left" ></td>
 		</tr>
 
 		<tr align="center">
 			<td colspan="2"><input type="submit" value="Submit" onclick="return formSubmit()"/>
 			<input type="reset" value="Reset" />
 			</td>
-		
-		</tr>
-<input type="hidden" name="formValue" value="formValue"/>
-	</table>
 
+		</tr>
+	</table>
+<input type="hidden" name="formValue" value="formValue"/>
 </form>
 <%
 	}else{
