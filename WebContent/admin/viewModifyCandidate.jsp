@@ -18,10 +18,10 @@ color:          red;
 button {
      background:none!important;
      color:inherit;
-     border:none; 
+     border:none;
      padding:0!important;
      font: inherit;
-     border-bottom:1px solid #0147FA; 
+     border-bottom:1px solid #0147FA;
      cursor: pointer;
 }
 .labelstyle {
@@ -34,6 +34,12 @@ button {
 
 <body>
 <%
+response.setHeader( "Set-Cookie", "name=value; HttpOnly");
+
+         response.addHeader("Pragma", "No-cache");
+         response.setHeader("Cache-Control", "no-cache");
+	  response.setHeader("Cache-Control", "no-store");
+         response.setDateHeader("Expires",0);
 String search = request.getParameter("search")== null ? "": request.getParameter("search");
 String searchValue = request.getParameter("searchText")== null ? "": request.getParameter("searchText");
 if(searchValue.isEmpty())
@@ -47,7 +53,7 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 <tr>
 <td>
 <table width="80%" border="0" align="center" >
-			
+
 			<tr >
 			<td>Search Candidate By:</td>
 				<td><input type = "radio" id="name" name = "viewModify" value="name">Name</td>
@@ -75,23 +81,23 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 		</table>
 			</td>
 			</tr>
-		</table> 
+		</table>
 </td>
 </tr>
 </table>
 
-		
-		
+
+
 </form>
 <form name="viewModifys" method = "post" id ="viewModifys" action="modifyCandidate.jsp">
 <%if(!search.equalsIgnoreCase(""))
-{ 
+{
 	 List viewDetails = userDomain.fetchRecords(searchValue,radioButtonVal);
-	
+
 	if(viewDetails != null && !viewDetails.isEmpty())
 	{
 	%>
-		
+
 		<table class="zebra" align="center" width="50%">
 		<tr bgcolor="#ffC30B" style="font-weight: bold">
 		<td>Candidate Id</td><td>First name</td><td>Skills</td><td>interviewDate</td><td>Selection Status</td>
@@ -113,7 +119,7 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 
 <%}%>
 </table>
-<input type="hidden" id="count" name="count"/> 
+<input type="hidden" id="count" name="count"/>
 
 		<%}
 }%>

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="java.util.*,com.parinati.userLogin.*" %>
+    <%@include file="../SessionManager.jsp"%>
 <jsp:useBean id="loginDomain" scope="session" class="com.parinati.userLogin.LoginDomain" />
 
-    
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -80,8 +81,15 @@ function logout()
 </script>
 </head>
 <body>
-<%String user = (String)session.getAttribute("userID");
-if(user!=null) 
+<%
+response.setHeader( "Set-Cookie", "name=value; HttpOnly");
+         response.addHeader("Pragma", "No-cache");
+         response.setHeader("Cache-Control", "no-cache");
+	  response.setHeader("Cache-Control", "no-store");
+         response.setDateHeader("Expires",0);
+
+String user = (String)session.getAttribute("userID");
+if(user!=null)
 { %>
 <table width="100%">
 <tr>

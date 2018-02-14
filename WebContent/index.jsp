@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@include file="../SessionManager.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -10,31 +11,31 @@
 	function check()
 	{
 	  if(document.getElementById("userId").value=="")
-	   {       
+	   {
 		 document.getElementById("lbl").innerHTML='Enter User ID';
 		 document.getElementById("userId").focus();
 	  return false;
 	   }
 	   else if (document.getElementById("userPassword").value=="")
-	   {     
+	   {
 		 document.getElementById("lbl").innerHTML='Enter Password';
 	     document.getElementById("userPassword").focus();
 	   return false;
 	   }
-	
+
 	  else{
 	  return true;
 	  }
 	}
 
-		
+
 	function setFocus()
 	{
 		document.getElementById("userId").focus();
-		
+
 	}
-	
-	
+
+
 </script>
 
 <style type="text/css">
@@ -118,7 +119,7 @@ body {
 
 					<td colspan="2"><div id="lbl1" style="font-size: 15px; color: #FF0000"
 							align="center">
-							<% 				
+							<%
 					if(request.getParameter("result")!=null){
 					%>
 
