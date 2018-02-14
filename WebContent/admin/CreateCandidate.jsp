@@ -170,9 +170,15 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 if(result == null){
 %>
 <form  name  ="createCandidate" id ="createCandidate" action="CreateCandidate.jsp" enctype="multipart/form-data" method="post">
-<div align="center" style="background-color: #C0C0C0; font-weight: bold;width: 100%">Create Candidate</div>
+
 <br>
+<table width="100%" align="center"><tr align="center" class="tableheader" ><td>Create Candidate</td></tr>
+<tr><td>
 	<table width="80%" align="center">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
 	<tr>
 	<th colspan="4"> Personal Details</th>
 	</tr>
@@ -208,6 +214,10 @@ if(result == null){
 		</table>
 <br><br>
 	<table width="80%" align="center">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
 	<tr>
 	<th colspan="4">Skill Details</th>
 	</tr>
@@ -229,6 +239,10 @@ if(result == null){
 	</table>
 	<br><br>
 	<table width="80%" align="center">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
 	<tr><th colspan="4">Employment details</th></tr>
 
 		<tr>
@@ -241,19 +255,21 @@ if(result == null){
 		</table>
 <br><br>
 <table width="80%" align="center">
+<col width="20%">
+	<col width="20%">
+	<col width="20%">
+	<col width="20%">
 <tr><th colspan="4"> Interview details</th></tr>
 		<tr>
-			<td>Date Of Interview</td>
-			<td><input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
-		</tr>
-
-		<tr align="center">
-			<td colspan="2"><input type="submit" value="Submit" onclick="return formSubmit()"/>
-			<input type="reset" value="Reset" />
-			</td>
-
+			<td><label>Date Of Interview</label>
+			<input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
 		</tr>
 	</table>
+	<br><br>
+	<div align="center"><input type="submit" value="Submit" onclick="return formSubmit()"/>
+			<input type="reset" value="Reset" /></div>
+			<br><br>
+			</td></tr></table>
 <input type="hidden" name="formValue" value="formValue"/>
 </form>
 <%

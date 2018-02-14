@@ -40,10 +40,14 @@ if(searchValue.isEmpty())
  searchValue = request.getParameter("interdate")== null ? "": request.getParameter("interdate");
 String radioButtonVal = request.getParameter("viewModify")== null ? "": request.getParameter("viewModify");
 %>
-<div align="center" style="background-color: #C0C0C0; font-weight: bold;width: 100%"><b>Search Candidate</b></div>
+
 <form method="post" action="viewModifyCandidate.jsp" >
+<table width="100%" align="center">
+<tr class="tableheader"><td>Search Candidate</td></tr>
+<tr>
+<td>
 <table width="80%" border="0" align="center" >
-			<tr></tr><tr></tr><tr></tr>
+			
 			<tr >
 			<td>Search Candidate By:</td>
 				<td><input type = "radio" id="name" name = "viewModify" value="name">Name</td>
@@ -51,10 +55,9 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 				<td><input type = "radio" id="skills" name= "viewModify" value="skills">Skills</td>
 				<td><input type = "radio" id="interviewDate" name= "viewModify" value="InterviewDate">Interview Date</td>
 			</tr>
-		</table> 
-		<br/>
-		
-		<table width="80%"  align="center" style="margin-top: 1%" id="searchOption" >
+			<tr>
+			<td colspan="5">
+			<table width="80%"  align="left" style="border: 0" id="searchOption" >
 			<tr>
 				<td>Search Value</td>
 				<td><input type="text" name ="searchText" id="searchText" >
@@ -62,7 +65,7 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 				</td>
 			</tr>
 		</table>
-		<table width="80%" align="center" style="margin-top: 1%" id="dateSelection" >
+		<table width="80%" align="left" style="border:0" id="dateSelection" >
 			<tr>
 				<td>Search Date</td>
 				<td><input type="text" name ="interdate" id="interdate">
@@ -70,8 +73,13 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 				</td>
 			</tr>
 		</table>
-		<hr width="80%" />
-		<br/>
+			</td>
+			</tr>
+		</table> 
+</td>
+</tr>
+</table>
+
 		
 		
 </form>

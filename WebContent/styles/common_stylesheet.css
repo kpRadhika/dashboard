@@ -3,15 +3,13 @@ html, body, form {
 	margin-top: 5px;
 	margin-bottom: 5px
 	padding: 5px;
-	font-family: Trebuchet MS;
-	font-size: small;
+	font-family: Trebuchet-MS;
+}
+tr{
+	height:27px;
 }
 
-
 th{
-	font : Trebuchet MS;
-	font-size: small;
-	font-weight: bold;
 	background-color: #ffC30B;
 }
 
@@ -50,15 +48,21 @@ odd
 
 .required:after { content:" *"; color: red}
 
-input[type=submit] {
-border-radius: 20px;
+input[type=submit]{
+/* border-radius: 11px; */
 padding : 4px 14px 4px 14px;
-background-color : #fffc30;
-background: linear-gradient(to top, white, #fffc30);
+/*background-color : #fffc30;
+ background: linear-gradient(to top, white, #fffc30); */
+}
+input[type=reset]{
+/* border-radius: 11px; */
+padding : 4px 14px 4px 14px;
+/*background-color : #fffc30;
+ background: linear-gradient(to top, white, #fffc30); */
 }
 
 input[type=text] {
-	border-radius: 20px;
+	border-radius: 5px;
 }
 
 table{
@@ -66,4 +70,13 @@ table{
 	border:1px;
 	border-style: solid;
 	border-color: silver
+}
+
+
+.tableheader{
+	background-color: #C0C0C0; 
+	font-weight: bold;
+	text-align:center;
+	height:40px;
+	width: 100%;
 }

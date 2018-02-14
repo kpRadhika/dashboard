@@ -24,7 +24,9 @@
 	<error-code>403</error-code>
 	<location>/ErrorPage.jsp</location>
 </error-page>
-
+<listener>
+ <listener-class>com.parinati.util.SessionEventListener</listener-class>
+</listener>
 <!-- Start code For Session Filter -->
  <filter>
     <filter-name>SessionFilter</filter-name>
@@ -37,6 +39,14 @@
 <filter-mapping>
    	<filter-name>SessionFilter</filter-name>
    	<url-pattern>*.jsp</url-pattern>
+</filter-mapping>
+ <filter>
+    <filter-name>P3PFilter</filter-name>
+		<filter-class>com.parinati.util.P3PFilter</filter-class>
+</filter>
+<filter-mapping>
+   	<filter-name>P3PFilter</filter-name>
+   	<url-pattern>/*</url-pattern>
 </filter-mapping>
 <!-- End code For Session Filter -->
   
