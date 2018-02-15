@@ -8,10 +8,16 @@ $(function(){
 		if($("#name").is(":checked")){
 			$("#searchOption").show();
 			$("#projectOption").hide();
-			/*document.getElementById("hrLine").style.display ="block";*/
+			$("#projectDropDown").val("");
+			$("#empltable").hide();
+			$("#sumbitTable").hide();
+			document.getElementById("hrLine").style.display ="none";
 		}else{
 			showDropDown();
-
+			 $("#searchText").val("");
+			 $("#empltable").hide();
+			 $("#sumbitTable").hide();
+			 document.getElementById("hrLine").style.display ="none";
 		}
 	});
 
@@ -21,6 +27,7 @@ if($("#skills").is(":checked")){
 if($("#name").is(":checked")){
 	$("#searchOption").show();
 	$("#projectOption").hide();
+
 	/*document.getElementById("hrLine").style.display ="block";*/
 }
 
@@ -97,8 +104,9 @@ function showDropDown(){
 					});
 			  $("#projectDropDown").html(e);
 			  $("#projectOption").show();
-				 $("#searchOption").hide();
-				 document.getElementById("hrLine").style.display ="block";
+			  $("#searchOption").hide();
+			  /*document.getElementById("hrLine").style.display ="block";*/
+
 		}
 	});
 }

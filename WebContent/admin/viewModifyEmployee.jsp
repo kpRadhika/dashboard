@@ -140,7 +140,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 	{
 	%>
 
-		<table align="center" width="100%">
+		<table align="center" id="empltable" width="100%">
 		<tr align="center" bgcolor="#f2f2f2">
 		<th>Select</th><th>Id</th><th>Name</th><th>Phone No.</th><th>PAN No.</th><th>Aadhar No.</th><th>Passport No.</th><th>Skills</th><th>Status</th>
 		</tr>
@@ -184,7 +184,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 
 <%}%>
 </table>
-<table  width="50%" border="0" cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%">
+<table id="sumbitTable" width="50%" border="0" cellspacing="1"  id="empltable" cellpadding="2" align="center" style="margin-top: 1%">
 	<tr >
 		<td align="center"><input type="submit" id="submit" name="submit" value="Submit" onclick = "validateFormData();" disabled="disabled"/></td>
 		<!-- <td align="left"><input type="reset" id="reset" name="reset" value="Reset"/></td> -->
