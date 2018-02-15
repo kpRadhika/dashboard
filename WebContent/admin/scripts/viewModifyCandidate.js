@@ -5,11 +5,11 @@ $(function(){
 		changeYear: true,
 		dateFormat: 'dd-mm-yy'
     });
-	
+
 	$("#searchOption").hide();
 	$("#dateSelection").hide();
 
-	$('input:radio[name="viewModify"]').click(function() { 
+	$('input:radio[name="viewModify"]').click(function() {
 		if($("#interviewDate").is(":checked")){
 			$("#dateSelection").show();
 			$("#searchOption").hide();
@@ -18,9 +18,9 @@ $(function(){
 			$("#searchOption").show();
 			$("#dateSelection").hide();
 		}
-			
+
 	});
-	
+
 });
 function modifyCandidate(i){
 	$("#count").val(i);

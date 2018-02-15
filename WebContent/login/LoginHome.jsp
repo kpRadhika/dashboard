@@ -72,6 +72,11 @@ padding: 12px 16px;
 .dropdown:hover .dropdown-content {
   display: block;
 }
+.widthblock{
+	width: 80%;
+  	margin-left: 10%;
+  	border: 1px;
+}
 </style>
 <script type="text/javascript">
 function logout()
@@ -81,8 +86,9 @@ function logout()
 </script>
 </head>
 <body>
+<div class="widthblock">
 <%
-response.setHeader( "Set-Cookie", "name=value; HttpOnly");
+response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId());
          response.addHeader("Pragma", "No-cache");
          response.setHeader("Cache-Control", "no-cache");
 	  response.setHeader("Cache-Control", "no-store");
@@ -91,7 +97,7 @@ response.setHeader( "Set-Cookie", "name=value; HttpOnly");
 String user = (String)session.getAttribute("userID");
 if(user!=null)
 { %>
-<table width="100%">
+<table width="100%" >
 <tr>
 <td><img alt="" src="images/Parinati_white_logo.jpg"></td>
 <td align="right"><h4>Welcome&nbsp;<%= user%></h4></td>
@@ -140,5 +146,6 @@ while(catIter.hasNext()){
 
 	</iframe>
 <%} %>
+</div>
 </body>
 </html>

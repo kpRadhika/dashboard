@@ -232,7 +232,7 @@ if(result == null){
 		<tr>
 			<td>Skills<label style="color:red">*</label></td>
 			<td><input type="text" name = "skills" align="left"></td>
-			<td>Upload Resume(.pdf format)<label style="color:red">*</label></td>
+			<td>Upload Resume(.pdf)<label style="color:red">*</label></td>
 			<td><input type="file" name = "uploadFile" id = "uploadFile" accept=".pdf" align="left" ></td>
 		</tr>
 
@@ -261,8 +261,10 @@ if(result == null){
 	<col width="20%">
 <tr><th colspan="4"> Interview details</th></tr>
 		<tr>
-			<td><label>Date Of Interview</label>
-			<input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
+			<td><label>Date Of Interview</label></td>
+			<td><input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
+			<td></td>
+			<td></td>
 		</tr>
 	</table>
 	<br><br>

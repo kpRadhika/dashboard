@@ -1,8 +1,4 @@
 html, body, form {
-	margin-left: 15px;
-	margin-top: 5px;
-	margin-bottom: 5px
-	padding: 5px;
 	font-family: Trebuchet-MS;
 }
 tr{
@@ -74,7 +70,7 @@ table{
 
 
 .tableheader{
-	background-color: #C0C0C0; 
+	background-color: #C0C0C0;
 	font-weight: bold;
 	text-align:center;
 	height:40px;
