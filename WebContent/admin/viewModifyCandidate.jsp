@@ -42,6 +42,7 @@ response.setHeader( "Set-Cookie", "name=value; HttpOnly");
          response.setDateHeader("Expires",0);
 String search = request.getParameter("search")== null ? "": request.getParameter("search");
 String searchValue = request.getParameter("searchText")== null ? "": request.getParameter("searchText");
+String interDate = request.getParameter("interdate")== null ? "": request.getParameter("interdate");
 if(searchValue.isEmpty())
  searchValue = request.getParameter("interdate")== null ? "": request.getParameter("interdate");
 String radioButtonVal = request.getParameter("viewModify")== null ? "": request.getParameter("viewModify");
@@ -56,26 +57,26 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 
 			<tr >
 			<td>Search Candidate By:</td>
-				<td><input type = "radio" id="name" name = "viewModify" value="name">Name</td>
-				<td><input type = "radio" id ="candidateId" name = "viewModify" value="candidateId">Candidate ID</td>
-				<td><input type = "radio" id="skills" name= "viewModify" value="skills">Skills</td>
-				<td><input type = "radio" id="interviewDate" name= "viewModify" value="InterviewDate">Interview Date</td>
+				<td><input type = "radio" id="name" name = "viewModify" value="name" <%if("name".equals(radioButtonVal)) {%>checked<%} %>>Name</td>
+				<td><input type = "radio" id ="candidateId" name = "viewModify" value="candidateId" <%if("candidateId".equals(radioButtonVal)) {%>checked<%} %>>Candidate ID</td>
+				<td><input type = "radio" id="skills" name= "viewModify" value="skills" <%if("skills".equals(radioButtonVal)) {%>checked<%} %>>Skills</td>
+				<td><input type = "radio" id="interviewDate" name= "viewModify" value="InterviewDate" <%if("InterviewDate".equals(radioButtonVal)) {%>checked<%} %>>Interview Date</td>
 			</tr>
 			<tr>
 			<td colspan="5">
 			<table width="80%"  align="left" style="border: 0" id="searchOption" >
 			<tr>
 				<td>Search Value</td>
-				<td><input type="text" name ="searchText" id="searchText" >
-				<input type="submit" name="search" value="search" id="search" align="left">
+				<td><input type="text" name ="searchText" id="searchText" value="<%= searchValue%>" ><div id="searchErrorMsg" style = "display: none; color: red;"></div>
+				<input type="submit" name="search" value="search" id="search" align="left" onclick="return TextValidation()">
 				</td>
 			</tr>
 		</table>
 		<table width="80%" align="left" style="border:0" id="dateSelection" >
 			<tr>
 				<td>Search Date</td>
-				<td><input type="text" name ="interdate" id="interdate">
-				<input type="submit" name="search" value="search" id="search" align="left">
+				<td><input type="text" name ="interdate" id="interdate" value = "<%=interDate %>"><div id="dateErrorMsg" style = "display: none; color: red;"></div>
+				<input type="submit" name="search" value="search" id="search" align="left" onclick="return TextValidation()">
 				</td>
 			</tr>
 		</table>
@@ -98,7 +99,7 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 	{
 	%>
 
-		<table class="zebra" align="center" width="50%">
+		<table id = "candidateTbl" class="zebra" align="center" width="50%">
 		<tr bgcolor="#ffC30B" style="font-weight: bold">
 		<td>Candidate Id</td><td>First name</td><td>Skills</td><td>interviewDate</td><td>Selection Status</td>
 		</tr>
@@ -121,7 +122,15 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 </table>
 <input type="hidden" id="count" name="count"/>
 
-		<%}
+		<%}else{
+			%>
+			<table id = "candidateTbl" width="50%" border="0" cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%">
+			<tr>
+						<td align="center"><b>No Record Found</b></td>
+					</tr>
+					</table>
+			<%
+		}
 }%>
 </form>
 </body>

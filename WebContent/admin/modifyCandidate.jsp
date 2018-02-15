@@ -52,11 +52,11 @@ if(viewDetails != null && !viewDetails.isEmpty())
 		String selectStatus = details.get(4).toString().trim();
 		String secStatus = selectStatus.equalsIgnoreCase("N")?"Y":"N";
 		%>
-		<tr><td style="font-weight: bold;">Candidate Id</td><td><input type="text" id="cid" name="cid" value="<%=candidateId %>"></td></tr>
-		<tr><td style="font-weight: bold;">First Name</td><td><%=firstName %></td></tr>
-		<tr><td style="font-weight: bold;">Skills</td><td><input id="skills" name="skills" value="<%=skills%>"/></td></tr>
-		<tr><td style="font-weight: bold;">Interview Date</td><td><input id="interviewDate" name="interviewDate" type="text" value="<%=interviewDate%>"/></td></tr>
-		<tr><td style="font-weight: bold;">Selection Status</td>
+		<tr><td><b>Candidate Id</b></td><td><input type="text" id="cid" name="cid" value="<%=candidateId %>"></td></tr>
+		<tr><td><b>First Name</b></td><td><%=firstName %></td></tr>
+		<tr><td><b>Skills</b></td><td><input id="skills" name="skills" value="<%=skills%>"/></td></tr>
+		<tr><td><b>Interview Date</b></td><td><input id="interviewDate" name="interviewDate" type="text" value="<%=interviewDate%>"/></td></tr>
+		<tr><td><b>Selection Status</b></td>
 		<td>
 			<select id="selection" name="selection">
 				<option value="<%=selectStatus%>"><%=selectStatus.equalsIgnoreCase("N")?"NO":"YES"%></option>
