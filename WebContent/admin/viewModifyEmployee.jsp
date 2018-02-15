@@ -121,11 +121,9 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 		</form>
 		<br><br><br><br>
 		<form id = "viewModifyEmolyeeForm" action="viewModifyEmployee.jsp" >
+		<hr width="100%" id="hrLine" />
 <%if(!search.equalsIgnoreCase(""))
 {
-	%>
-	<hr width="100%" id="hrLine" />
-	<%
 	ArrayList inputParam = new ArrayList();
 	if(!"".equals(searchValue))
 		inputParam.add(searchValue);
