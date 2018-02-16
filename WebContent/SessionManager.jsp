@@ -23,4 +23,3 @@ response.addHeader("x-xss-protection", "1; mode=block"); */
 <meta http-equiv="x-content-type-options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="x-xss-protection" content="1; mode=block">
-<meta http-equiv="X-UA-Compatible" content="IE=10;IE=9; IE=8; IE=7" />

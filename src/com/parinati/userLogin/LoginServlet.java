@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.parinati.util.DBConnectionManager;
 
@@ -43,13 +44,21 @@ public class LoginServlet extends HttpServlet {
 
 			rs = psmt.executeQuery();*/
 		try {
+			request.getSession().invalidate();
+			HttpSession session = request.getSession(true);
+			response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId());
+
+	         response.addHeader("Pragma", "No-cache");
+	         response.setHeader("Cache-Control", "no-cache");
+		  response.setHeader("Cache-Control", "no-store");
+	         response.setDateHeader("Expires",0);
 			List result = new LoginDomain().validateUser(request.getParameter("userId").trim(), request.getParameter("userPassword").trim());
 
 			if (result!=null && !result.isEmpty()) {
 
-				request.getSession().setAttribute("userID", ((ArrayList)result.get(0)).get(0));
-				request.getSession().setAttribute("password", ((ArrayList)result.get(0)).get(1));
-				request.getSession().setAttribute("role", ((ArrayList)result.get(0)).get(2));
+				session.setAttribute("userID", ((ArrayList)result.get(0)).get(0));
+				session.setAttribute("password", ((ArrayList)result.get(0)).get(1));
+				session.setAttribute("role", ((ArrayList)result.get(0)).get(2));
 				request.getRequestDispatcher("/login/LoginHome.jsp").forward(request,
 						response);
 

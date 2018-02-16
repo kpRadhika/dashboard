@@ -38,39 +38,9 @@
    	<filter-name>SessionFilter</filter-name>
    	<url-pattern>*.jsp</url-pattern>
 </filter-mapping>
-<filter>
-    <filter-name>httpHeaderSecurity</filter-name>
-    <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
-    <async-supported>true</async-supported>
-    <init-param>
-       <param-name>antiClickJackingOption</param-name>
-       <param-value>SAMEORIGIN</param-value>
-    </init-param>
-    <init-param>
-	<param-name>xssProtectionEnabled</param-name>
-	<param-value>true</param-value>
-</init-param>
-</filter>
-<filter-mapping>
-    <filter-name>httpHeaderSecurity</filter-name>
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
-<filter>
- <filter-name>CorsFilter</filter-name>
-  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-  <init-param>
-    <param-name>cors.allowed.origins</param-name>
-    <param-value>*</param-value>
-  </init-param>
-   <init-param>
-    <param-name>cors.allowed.headers</param-name>
-    <param-value>X-Frame-Options,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers</param-value>
-  </init-param>
-</filter>
-<filter-mapping>
-  <filter-name>CorsFilter</filter-name>
-  <url-pattern>/*</url-pattern>
-</filter-mapping>
+<listener>
+<listener-class>com.parinati.util.SessionEventListener</listener-class>
+</listener>
 <!-- End code For Session Filter -->
 
    <servlet>

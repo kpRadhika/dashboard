@@ -7,6 +7,7 @@ tr{
 
 th{
 	background-color: #ffC30B;
+	background: linear-gradient(to top, #ffc30b, #fffc70 );
 }
 
 
@@ -45,16 +46,20 @@ odd
 .required:after { content:" *"; color: red}
 
 input[type=submit]{
-/* border-radius: 11px; */
-padding : 4px 14px 4px 14px;
-/*background-color : #fffc30;
- background: linear-gradient(to top, white, #fffc30); */
+border-radius: 15px; 
+/* border:none; */
+font-family: Trebuchet-MS;
+font-size:Medium;
+padding : 3px 20px 3px 20px;
+background: linear-gradient(to top, darkgray, whitesmoke ); 
 }
 input[type=reset]{
-/* border-radius: 11px; */
-padding : 4px 14px 4px 14px;
-/*background-color : #fffc30;
- background: linear-gradient(to top, white, #fffc30); */
+border-radius: 15px; 
+/* border:none; */
+font-family: Trebuchet-MS;
+font-size:Medium;
+padding : 3px 20px 3px 20px;
+background: linear-gradient(to top, darkgray, whitesmoke ); 
 }
 
 input[type=text] {
@@ -71,6 +76,7 @@ table{
 
 .tableheader{
 	background-color: #C0C0C0;
+	background: linear-gradient(to top, lavender,white);
 	font-weight: bold;
 	text-align:center;
 	height:40px;

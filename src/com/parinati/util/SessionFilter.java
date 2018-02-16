@@ -11,6 +11,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,6 +38,11 @@ public class SessionFilter implements Filter {
 			}
 
 			if (session == null || user == null) {
+				Cookie[] appCookies = request.getCookies();
+				for(Cookie c:appCookies){
+					c.setMaxAge(0);
+					c.setPath("/");
+				}
 					RequestDispatcher view = request.getRequestDispatcher("Logout.jsp");
 					view.forward(request, response);
 					return;

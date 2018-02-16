@@ -61,7 +61,9 @@ body {
 
 </head>
 <body onload="setFocus()">
-
+<%
+response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Path=/dashboard/");
+%>
 
 
 	<form action="<%=request.getContextPath()%>/login" method="post"

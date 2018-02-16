@@ -15,6 +15,7 @@
   overflow: hidden;
   background-color: #FFC30B;
   font-family: Trebuchet-MS;
+  background: linear-gradient(to top, #ffc30b, #fffc70 );
 }
 
 .logout{

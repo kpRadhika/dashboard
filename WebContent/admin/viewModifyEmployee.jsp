@@ -35,8 +35,13 @@ button {
 </head>
 
 <body>
+<table width="100%" align="center">
+<tr class="tableheader">
+			<td colspan="3">Search Employee</th>
+</tr>
+<tr>
+<td>
 <%
-
 int result = 0;
 String search = request.getParameter("search")== null ? "": request.getParameter("search");
 String searchValue = request.getParameter("searchText")== null ? "": request.getParameter("searchText");
@@ -69,36 +74,29 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 %>
 
 <form method="post" name = "viewModifys" id="viewModifys" action="viewModifyEmployee.jsp" >
-<table width="50%" class="zebra">
-			</br>
-			<tr>
-			<th style="text-align: left;" colspan="3">Search Employee</th>
-			</tr>
-			
+<table width="80%" align="center">			
 			<tr >
 			<td>Search By &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;:&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
 			<input type = "radio" id="name" name = "viewModify" style="padding-left : 15px" value="name" <% if("name".equals(radioButtonVal)) {%> checked = "checked" <%} %>>First Name
-			&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<input type = "radio" id="skills" name= "viewModify" style="padding-left : 15px" value="projectName" <% if("projectName".equals(radioButtonVal)) {%> checked = "checked" <%} %>>Project Name</td>
+			&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<input type = "radio" id="skills" name= "viewModify" style="padding-left : 15px" value="projectName" <% if("projectName".equals(radioButtonVal)) {%> checked = "checked" <%} %>>Project Name
+			</td>
 			</tr>
-		</table>
-		<br/>
-
-		<table width="50%" id="searchOption" >
 			<tr>
-				<td><label>Search Name</label></td>
-				<td><input type="text" name ="searchText" id="searchText" value="<%= searchText%>">
-				<div id="searchErrorMsg" style="display: none; color: red;" ></div>
-				<input type="submit" name="search" value="search" id="search" onclick="return formSubmit();" align="left">
+			<td>
+			<div width="80%" id="searchOption" style="display: none">
+			<label>Search Name<span class="required"></span>&nbsp;&nbsp;:</label>
+			<input type="text" name ="searchText" id="searchText" value="<%= searchText%>">
+			<div id="searchErrorMsg" style="display: none; color: red;" ></div>
+			<input type="submit" name="search" value="search" id="search" onclick="return formSubmit();" align="left">
+			</div>
 				</td>
 
 			</tr>
 
-		</table>
-
-		 <table width="50%" id="projectOption" >
-			<tr>
-				<td><label>Project Name<span class="required"></span></label></td>
-				<td><select name="projectDropDown" id="projectDropDown">
+			<tr><td>
+		 <div width="80%" id="projectOption" style="display: none">
+				<label>Project Name<span class="required"></span>&nbsp;&nbsp;:</label>
+				<select name="projectDropDown" id="projectDropDown">
 						<option value="">Select</option>
 						<%
 							 if(projectDropDownVal!=null && !"".equalsIgnoreCase(projectDropDownVal))
@@ -114,14 +112,17 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 				    </select>
 				    <div id="projectNameError" style="display: none; color: red;" ></div>
 				    <input type="submit" name="search" value="search" id="search" onclick="return formSubmit();" align="left">
-					</td>
-			  </tr>			  
+							  
+		</div>
+			</td></tr>
 		</table>
+		<br/>
+
+		
 		<input type="hidden" name="projectDropDown" value="<%=projectDropDownVal.trim()%>"/>
 		</form>
-		<br><br><br><br>
+		<br>
 		<form id = "viewModifyEmolyeeForm" action="viewModifyEmployee.jsp" >
-		<hr width="100%" id="hrLine" />
 <%if(!search.equalsIgnoreCase(""))
 {
 	ArrayList inputParam = new ArrayList();
@@ -138,9 +139,9 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 	{
 	%>
 
-		<table align="center" id="empltable" width="100%">
-		<tr align="center" bgcolor="#f2f2f2">
-		<th>Select</th><th>Id</th><th>Name</th><th>Phone No.</th><th>PAN No.</th><th>Aadhar No.</th><th>Passport No.</th><th>Skills</th><th>Status</th>
+		<table align="center" id="empltable" width="80%">
+		<tr align="center" class="tableheader">
+		<td>Select</td><td>Id</td><td>Name</td><td>Phone No.</td><td>PAN No.</td><td>Aadhar No.</td><td>Passport No.</td><td>Skills</td><td>Status</td>
 		</tr>
 		<%
 		String employeeId = null;
@@ -182,7 +183,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 
 <%}%>
 </table>
-<table id="sumbitTable" width="50%" border="0" cellspacing="1"  id="empltable" cellpadding="2" align="center" style="margin-top: 1%">
+<table id="sumbitTable" width="80%" border="0" cellspacing="1"  id="empltable" cellpadding="2" align="center" style="margin-top: 1%">
 	<tr >
 		<td align="center"><input type="submit" id="submit" name="submit" value="Submit" onclick = "validateFormData();" disabled="disabled"/></td>
 		<!-- <td align="left"><input type="reset" id="reset" name="reset" value="Reset"/></td> -->
@@ -193,7 +194,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 		<%}
 	else{
 		%>
-		<table width="50%" border="0" cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%">
+		<table width="80%" border="0" cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%">
 		<tr>
 					<td align="center"><b>No Record Found</b></td>
 				</tr>
@@ -226,5 +227,8 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 }
 %>
 </form>
+</td>
+</tr>
+</table>
 </body>
 </html>
