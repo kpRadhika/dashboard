@@ -38,6 +38,47 @@
    	<filter-name>SessionFilter</filter-name>
    	<url-pattern>*.jsp</url-pattern>
 </filter-mapping>
+
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<filter>
+  <filter-name>defaultCharsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.AddDefaultCharsetFilter </filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>defaultCharsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<filter>
+  <filter-name>csrfFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CsrfPreventionFilter</filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>defaultCharsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<filter>
+  <filter-name>httpHeaderSecurityFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter </filter-class>
+  <init-param>
+  <param-name>antiClickJackingOption</param-name>
+  <param-value>SAMEORIGIN</param-value>
+  </init-param>
+
+</filter>
+<filter-mapping>
+  <filter-name>httpHeaderSecurityFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
 <listener>
 <listener-class>com.parinati.util.SessionEventListener</listener-class>
 </listener>

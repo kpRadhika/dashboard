@@ -3,7 +3,10 @@ $(function(){
 	$("#projectOption").hide();
 	document.getElementById("searchErrorMsg").style.display ="none";
 	document.getElementById("projectNameError").style.display ="none";
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/kpRadhika/dashboard.git
 	$('input:radio[name="viewModify"]').click(function() {
 		if($("#name").is(":checked")){
 			$("#searchOption").show();
@@ -11,19 +14,28 @@ $(function(){
 			$("#projectDropDown").val("");
 			$("#empltable").hide();
 			$("#sumbitTable").hide();
+<<<<<<< HEAD
 			
+=======
+>>>>>>> branch 'master' of https://github.com/kpRadhika/dashboard.git
 		}else{
 			showDropDown();
 			 $("#searchText").val("");
 			 $("#empltable").hide();
 			 $("#sumbitTable").hide();
+<<<<<<< HEAD
 		
+=======
+>>>>>>> branch 'master' of https://github.com/kpRadhika/dashboard.git
 		}
 	});
 
 if($("#skills").is(":checked")){
 	showDropDown();
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/kpRadhika/dashboard.git
 }
 if($("#name").is(":checked")){
 	$("#searchOption").show();
@@ -105,7 +117,6 @@ function showDropDown(){
 			  $("#projectDropDown").html(e);
 			  $("#projectOption").show();
 			  $("#searchOption").hide();
-			  /*document.getElementById("hrLine").style.display ="block";*/
 
 		}
 	});
