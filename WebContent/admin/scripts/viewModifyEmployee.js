@@ -3,7 +3,7 @@ $(function(){
 	$("#projectOption").hide();
 	document.getElementById("searchErrorMsg").style.display ="none";
 	document.getElementById("projectNameError").style.display ="none";
-	document.getElementById("hrLine").style.display ="none";
+	
 	$('input:radio[name="viewModify"]').click(function() {
 		if($("#name").is(":checked")){
 			$("#searchOption").show();
@@ -11,25 +11,24 @@ $(function(){
 			$("#projectDropDown").val("");
 			$("#empltable").hide();
 			$("#sumbitTable").hide();
-			document.getElementById("hrLine").style.display ="none";
+			
 		}else{
 			showDropDown();
 			 $("#searchText").val("");
 			 $("#empltable").hide();
 			 $("#sumbitTable").hide();
-			 document.getElementById("hrLine").style.display ="none";
+		
 		}
 	});
 
 if($("#skills").is(":checked")){
 	showDropDown();
-	 document.getElementById("hrLine").style.display ="block";
+	
 }
 if($("#name").is(":checked")){
 	$("#searchOption").show();
 	$("#projectOption").hide();
 
-	document.getElementById("hrLine").style.display ="block";
 }
 
 $("#viewModifyEmolyeeForm").validate({
