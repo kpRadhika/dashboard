@@ -2,12 +2,16 @@ $(function(){
 	$("#projectDropDown").change(function(){
 		$("#clientTaskId").attr("disabled",false);
 		$("#taskDesc").attr("disabled",false);	
-		showResources();
+		showResources($(this).val());
 	}	);
 });
 
-function showResources(){
+function showResources(val){
 	$.ajax({
+		data: 
+		{
+			projectId:val			
+		},
 		type: "POST",
 		dataType: 'xml',
 		url : "addTaskAjax.jsp",
