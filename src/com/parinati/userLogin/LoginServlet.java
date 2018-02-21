@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 						response);
 
 			} else {
-				request.getRequestDispatcher("/Login.jsp?result='failure'")
+				request.getRequestDispatcher("/index.jsp?result='failure'")
 						.forward(request, response);
 			}
 
