@@ -9,6 +9,20 @@
 <title>view/Modify Candidate</title>
 <script type = "text/javascript" src = "scripts/viewModifyEmployee.js"></script>
 <style type="text/css">
+
+.tableProps{
+width:80%;
+table-layout: fixed;
+align:center;
+}
+
+.tableProps td{
+width:10%;
+}
+.tableProps input[type=text]{
+width:90%;
+}
+
 label.error{
 font-family:    verdana,times new roman;
 font-size:      13px;
@@ -37,7 +51,7 @@ button {
 <body>
 <table width="100%" align="center">
 <tr class="tableheader">
-			<td colspan="3">Search Employee</th>
+			<td colspan="3">Search Employee</td>
 </tr>
 <tr>
 <td>
@@ -139,9 +153,15 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 	{
 	%>
 
-		<table align="center" id="empltable" width="80%">
+		<table align="center" id="empltable" class="tableProps">
 		<tr align="center" class="tableheader">
-		<td>Select</td><td>Id</td><td>Name</td><td>Phone No.</td><td>PAN No.</td><td>Aadhar No.</td><td>Passport No.</td><td>Skills</td><td>Status</td>
+		<td style="width:5%">Select</td>
+		<td style="width:5%">Id</td>
+		<td>Name</td>
+		<td>Phone No.</td>
+		<td>PAN No.</td><td>Aadhar No.</td>
+		<td>Passport No.</td><td>Skills</td>
+		<td>Status</td>
 		</tr>
 		<%
 		String employeeId = null;
@@ -159,15 +179,15 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 			String isActive = details.get(8).toString().trim();
 	%>
 	<tr>
-		<td align="center" ><input type="radio" id="candSel<%=i %>" name="candSel" value="<%=employeeId%>" class="radioCheck" onclick="enableDisable(<%=i%>)"/></td>
-		<td align="center" ><%=employeeId%></td>
-		<td align="center" ><%=firstName %> <%=lastName %></td>
-		<td align="center" ><input  class="labelstyle" type = "text" id = "phone<%=i %>" value="<%=phone %>"  disabled="disabled"/></td>
-		<td align="center" ><input  class="labelstyle" type = "text" id = "panno<%=i %>" value="<%=panno %>"  disabled="disabled"/></td>
-		<td align="center" ><input  class="labelstyle" type = "text" id = "aadharNo<%=i %>" value="<%=aadharNo %>"  disabled="disabled"/></td>
-		<td align="center" ><input  class="labelstyle" type = "text" id = "passportNo<%=i %>" value="<%=passportNo %>" disabled="disabled"/></td>
-		<td align="center" ><input  class="labelstyle" type = "text" id = "skills<%=i %>" value="<%=skills %>" disabled="disabled"/></td>
-		<td align="center" ><select id = "isActive<%=i %>" disabled="disabled">
+		<td style="width:5%"><input type="radio" id="candSel<%=i %>" name="candSel" value="<%=employeeId%>" class="radioCheck" onclick="enableDisable(<%=i%>)"/></td>
+		<td style="width:5%"><%=employeeId%></td>
+		<td><label><%=firstName+" "+lastName %></label></td>
+		<td><input  type = "text" id = "phone<%=i %>" value="<%=phone %>"  disabled="disabled"/></td>
+		<td><input  type = "text" id = "panno<%=i %>" value="<%=panno %>"  disabled="disabled"/></td>
+		<td><input  type = "text" id = "aadharNo<%=i %>" value="<%=aadharNo %>"  disabled="disabled"/></td>
+		<td><input  type = "text" id = "passportNo<%=i %>" value="<%=passportNo %>" disabled="disabled"/></td>
+		<td><input  type = "text" id = "skills<%=i %>" value="<%=skills %>" disabled="disabled"/></td>
+		<td><select id = "isActive<%=i %>" disabled="disabled">
 		<%if(isActive!=null && isActive.equalsIgnoreCase("Y")){ %>
 		<option value="Y" selected="selected">Yes</option>
 		<option value="N" >No</option>
@@ -176,20 +196,12 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 		<option value="N" selected="selected">No</option>
 		<%} %>
 		</select>
-		<%-- 
-		<input style="width: 5%" type = "text" id = "isActive<%=i %>" value="<%=isActive %>" disabled="disabled"/></td>
- --%>
 	</tr>
-
 <%}%>
-</table>
-<table id="sumbitTable" width="80%" border="0" cellspacing="1"  id="empltable" cellpadding="2" align="center" style="margin-top: 1%">
-	<tr >
-		<td align="center"><input type="submit" id="submit" name="submit" value="Submit" onclick = "validateFormData();" disabled="disabled"/></td>
-		<!-- <td align="left"><input type="reset" id="reset" name="reset" value="Reset"/></td> -->
+<tr align="center">
+		<td colspan="9"><input type="submit" id="submit" name="submit" value="Submit" onclick = "validateFormData();" disabled="disabled"/></td>
 	</tr>
 </table>
-
 <input type="hidden" name="employeeId" value="<%=employeeId %>"/>
 		<%}
 	else{
@@ -205,7 +217,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 
 }else{
 	%>
-	<table width="50%" border="0" cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%">
+	<table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: none">
 	<%
 	if(1 == result){
 	%>

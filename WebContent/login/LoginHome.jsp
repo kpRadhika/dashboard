@@ -110,7 +110,6 @@ List<ArrayList> catList = loginDomain.findCategories(roleId);
 Iterator catIter = catList.listIterator();
 %>
 <div class="navbar">
-
 <%
 while(catIter.hasNext()){
 	String catName = (String)((ArrayList)catIter.next()).get(0);

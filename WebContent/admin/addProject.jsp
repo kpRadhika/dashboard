@@ -10,10 +10,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="addProject.jsp"></form>
-<table width="50%" align="center">
+<form action="addProject.jsp">
+<table width="80%" align="center">
 <tbody>
-<tr><th colspan="2">add project</th></tr><tr></tr><tr></tr>
+<tr class="tableheader"><td colspan="2">add project</td></tr><tr></tr>
 <tr>
 <td>
 Project Name
@@ -43,13 +43,15 @@ Project Location
 </select>
 </td>
 </tr>
+<tr></tr>
 <tr>
 <td colspan="2" align="center">
-<input type="submit" id="subBtn" name="subBtn">
+<input type="submit" id="subBtn" name="subBtn" value="Submit">
 <input type="reset" id="resBtn" name="resBtn">
 </td>
 </tr>
 </tbody>
 </table>
+</form>
 </body>
 </html>
