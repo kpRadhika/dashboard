@@ -13,16 +13,6 @@ $(function(){
 			dateFormat: 'dd-mm-yy'
 	    });
 
-	   /* $('input[type="radio"]').click(function() { 
-	    	var row = $(this).closest('tr');
-			if($(this).is(":checked")){
-			      $(row).find('button').prop("disabled",false);    
-			}
-			else{
-				$(row).find('button').prop("disabled","disabled");    
-			}
-				
-		});*/
 	    $('input[type="radio"]').click(function() { 
 	    	$("#subbutton").attr("disabled",false);
 	    });

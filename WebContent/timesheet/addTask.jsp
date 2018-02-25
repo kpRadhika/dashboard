@@ -13,18 +13,52 @@
 </head>
 <body>
 <%
-String projId = request.getParameter("projectDropDown") == null?"":request.getParameter("projectDropDown");
-
+String subButtonVal = request.getParameter("createTask") == null?"":request.getParameter("createTask");
+String user = (String)session.getAttribute("userID");
+if(subButtonVal.equals("Submit")){
+	String clientId = request.getParameter("clientTaskId") == null?"":request.getParameter("clientTaskId");
+	String taskDesc = request.getParameter("taskDesc") == null?"":request.getParameter("taskDesc");
+	String remarks = request.getParameter("remarks") == null?"":request.getParameter("remarks");
+	String projectId = request.getParameter("projectDropDown") == null?"":request.getParameter("projectDropDown");
+	String resources = request.getParameter("selectedRes") == null?"":request.getParameter("selectedRes");
+	 List<String> inputList = new ArrayList<>();
+	 inputList.add(taskDesc);
+	 inputList.add(clientId);
+	 inputList.add(projectId);
+	 inputList.add(resources);
+	 inputList.add(remarks);
+	 inputList.add(user);
+	 int taskId = timeDom.createTask(inputList)	; 
+	 if(taskId>0){		 
+		 %>
+		 <table align ="center" width="80%">
+		 <tr style="font-weight: bold; text-align: center;">
+		 <td>Task created successfully. Task Id:<%=taskId %></td>
+		 </tr>
+		 </table>
+		 <%
+	 }
+	 else{
+		 %>
+		 <table align ="center" width="80%">
+		 <tr style="font-weight: bold;text-align: center;">
+		 <td>Error occurred while creating the task</td>
+		 </tr>
+		 </table>
+		 <%
+	 }
+}
+else{
 %>
-<form action="addProject.jsp">
+<form action="addTask.jsp" method = "Post">
 <table width="80%" align="center">
 <tr class="tableheader"><td colspan="2">Add Task</td></tr><tr></tr>
 <tr>
 <td>
-
-				<label>Project Name<span class="required"></span>&nbsp;&nbsp;:</label>
-				<select name="projectDropDown" id="projectDropDown">
-				<option value="">Select</option>
+Project Name<span class="required"></span>&nbsp;&nbsp;
+<td>
+<select name="projectDropDown" id="projectDropDown">
+<option value="">Select</option>
 				<%
 List allProjectList = new ArrayList();
 String projectId = null;
@@ -55,8 +89,8 @@ String projectName = null;
 						%>
 				    </select>
 				    <div id="projectNameError" style="display: none; color: red;" ></div>
+				    </td>
 
-</td>
 </tr>
 <tr>
 <td>Client Task id</td><td><input type="text" id="clientTaskId" name="clientTaskId" disabled="disabled"></td>
@@ -65,38 +99,30 @@ String projectName = null;
 <td>Task Description</td><td><input type="text" id="taskDesc" name="taskDesc" disabled="disabled"></td>
 </tr>
 <tr>
-
-
-<td>Resources mapped</td><td>
-<table id="resMapping" name="resMapping" style="display: none">
-
-<%if(projId!=null & !projId.isEmpty()){
-	List<ArrayList> emplList = timeDom.fetchEmployeeByProject(projId);
-	Iterator<ArrayList> empIter = emplList.listIterator();
-	while(empIter.hasNext()){
-		String resName = (String)empIter.next().get(0);
-	%>
-	<tr>
-	<td>
-	<input type="checkbox" class="resourceVal" value="<%=resName%>"><%=resName%>
-	</td>
-	</tr>
-	<%	
-	}
-}
-	%>
-	
-	</table>
+<td>Resources mapped</td>
+<td>
+<div id="resMapping" style="display: none"></div>
+</td>
+</tr>
+<tr>
+<td>
+Remarks
+</td>
+<td>
+<input type="text" id="remarks" name="remarks" value=""/>
 </td>
 </tr>
 <tr>
 <td></td>
-<td><table>
-<% %>
-<tr></tr>
-</table></td>
+<td>
+<input type="submit" value="Submit" id="createTask" name="createTask"/>
+</td>
 </tr>
 </table>
+<input type="hidden" id="selectedRes" name="selectedRes" value="">
 </form>
+<%}
+
+%>
 </body>
 </html>

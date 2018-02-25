@@ -4,7 +4,13 @@ $(function(){
 		$("#taskDesc").attr("disabled",false);	
 		showResources($(this).val());
 	}	);
+
 });
+function selectResources(i){
+	var existing = $("#selectedRes").val();
+	$("#selectedRes").val(existing+i+",");	
+	
+}
 
 function showResources(val){
 	$.ajax({
@@ -17,17 +23,21 @@ function showResources(val){
 		url : "addTaskAjax.jsp",
 		async: false,
 		error: function() {
-			ajaxNoResultFound("Error");
+			//ajaxNoResultFound("Error");
 		},
 		success: function(d) {
-			var e = "";
-			$(d).find("resOption").each(
+			var e = "<table>";
+			$(d).find("RESOPTION").each(
 					function() {
-						$(this).find("input").each(
+						$(this).find("RESNAME").each(
 								function() {
-									e = e + '<tr><td>' + $(this).text() + '</td></tr>'
+									var resource = $(this).text().split("|");
+									var id = resource[0];
+									var name = resource[1];
+									e = e + '<tr><td><input type="checkbox"  onclick="selectResources('+id+')" value="' + id + '">'+name+'</td></tr>'
 								});
 					});
+			  e = e+"</table>"
 			  $("#resMapping").html(e);
 			  $("#resMapping").show();
 
