@@ -2,6 +2,7 @@ $( function() {
     $( "#datepicker" ).datepicker({
     	changeMonth: true,
 		changeYear: true,
+		maxDate:"0",
 		yearRange: "-100:+0",
 		dateFormat: 'dd-mm-yy'
     });
@@ -9,6 +10,7 @@ $( function() {
     $( "#interViewDate" ).datepicker({
     	changeMonth: true,
 		monthRange:'12',
+		minDate:"0",
 		dateFormat: 'dd-mm-yy'
     });
   } );
@@ -82,13 +84,13 @@ function formSubmit(){
 				required : "Please upload resume in pdf format"
 			}
 		},
-		
+
 		errorPlacement : function(label, element) {
 			label.addClass('error');
 			label.insertAfter(element);
 	    },
 		wrapper : "div"
-			
+
 	});
 	$.validator.addMethod("number", function(b, a) {
 		return this.optional(a) || /^\s*(?:[0-9]{10})\s*$/i.test(b)
