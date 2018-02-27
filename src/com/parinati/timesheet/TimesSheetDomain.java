@@ -142,7 +142,7 @@ public class TimesSheetDomain {
 		}
 		return res;
 	}
-	public List<List<String>> getTaskList(String fromDate, String toDate){
+	public List<List<String>> getTaskList(String fromDate, String toDate,String projectId){
 		StringBuilder sql = new StringBuilder();
 		List<String> values = new ArrayList();
 		List<String> valueTypes = new ArrayList();
