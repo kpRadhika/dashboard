@@ -155,4 +155,58 @@ public class TimesSheetDomain {
 		}
 		return result;
 		}
+	
+	public List<List<String>> getTaskStatus(){
+
+		String sql=null;
+		List statusList=null;
+		try{
+
+		sql = "select TASKSTATUSIID,STATUSDESCRIPTION from TASKSTATUSMASTER";
+
+		statusList = dbhelper.executeQuery(sql, null, null);
+
+		}
+		catch (Exception e) {
+			CustomLogger.exceptionJava(e, "Exception in generateEmployeeLogin() while executing the query:"+sql, "TimesSheetDomain.java");
+		}
+		return statusList;
+
+	}
+	
+	public List<List<String>> getTaskDetails(String statusId)
+	{
+		StringBuffer sql=new StringBuffer();
+		List taskDetails=null;
+		List queryValues = null;
+		List queryTypes = null;
+		try{
+			sql.append(" SELECT A.TASKID,						");
+			sql.append(" A.TASKDESCRIPTION,						");
+			sql.append(" B.STATUSDESCRIPTION					");
+			sql.append(" FROM TASKMASTER A,						");
+			sql.append(" TASKSTATUSMASTER B						");
+			sql.append(" WHERE A.TASKSTATUSIID=B.TASKSTATUSIID	");
+			
+			if(!statusId.isEmpty())
+			{
+				sql.append("AND B.TASKSTATUSIID=?	");
+			}
+			queryValues=new ArrayList<>();
+			if(!statusId.isEmpty())
+			{
+				queryValues.add(statusId);
+			}
+			
+			queryTypes = new ArrayList<>();
+			queryTypes.add(GenericConstDef.DB_STRING);
+			taskDetails = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
+		}
+		catch(Exception e)
+		{
+			CustomLogger.exceptionJava(e, "Exception in getTaskDetails() while executing the query:"+sql, "TimesSheetDomain.java");
+		}
+		
+		return taskDetails;
+	}
 }

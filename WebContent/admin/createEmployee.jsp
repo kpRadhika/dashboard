@@ -102,7 +102,7 @@ String emplId = null;
 <table class="overlay-content" style="background-color: #ffC30B;" width="50%">
 <tr>
 <th>Date of joining</th><td><input type="text" id="doj" name="doj" value=""/></td></tr>
-<tr style="font-size: 50%; font-weight: bold;">
+<tr>
 <th>Employee Role</th><td><Select id="role" name="role">
 <option value="">Select</option>
 <option value="7">TRAINEE</option>
