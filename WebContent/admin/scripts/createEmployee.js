@@ -49,6 +49,34 @@ $(function(){
 			wrapper : "div"
 
 	    });
+
+	    $("#createEmpl").validate({
+	    	rules : {
+	    		doj : {
+	    			required : true
+	    		},
+	    		role : {
+	    			check_item_dropdown : true
+	    		}
+	    	},
+	    	messages : {
+	    		doj : {
+					required : "Please select Date"
+				},
+				role : {
+					required : "Please select end Date"
+				}
+	    	},
+	    	errorPlacement : function(label, element) {
+				label.addClass('error');
+				label.insertAfter(element);
+		    },
+			wrapper : "div"
+
+	    });
+		$.validator.addMethod("check_item_dropdown", function(b, a) {
+			return $.trim(b) != ""
+		}, "Please select Statement Status");
 });
 
 function performNextStep(){

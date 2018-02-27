@@ -19,6 +19,10 @@ padding : 3px 20px 3px 20px;
 background: linear-gradient(to top, darkgray, whitesmoke ); 
 }
 
+.error {
+    color:#FF0000;  /* red */
+}
+
 </style>
 </head>
 <body>
@@ -113,7 +117,7 @@ String emplId = null;
 </td>
 </tr>
 <tr>
-<td colspan="2"><input type="submit" id="popUpSub" name="popUpSub" value="Submit" onclick="popUpSubmit()"/></td>
+<td colspan="2"><input type="submit" id="popUpSub" name="popUpSub" value="Submit" onclick="return popUpSubmit()"/></td>
 </tr>
 </table>
 </div>

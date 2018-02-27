@@ -45,7 +45,7 @@ result = adminEmplDomain.generateEmployeeLogin(selectedValue,dateOfJoin,roleId);
 
 <form method="post" action="" >
 	<%if(result!=null && !result.isEmpty()){ %>
-	mailUtil.postMailWithTLSAuth()
+	<!-- mailUtil.postMailWithTLSAuth() -->
 	<table align="center">
 	<tr>
 		<td><b>Employee ID Created Successfully.Employee Id is <%=result.get(0).toString()%>.</b></td>
