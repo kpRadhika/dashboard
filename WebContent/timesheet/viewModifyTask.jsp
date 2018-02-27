@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<jsp:useBean id="timesheetDomain" scope="session" class="com.parinati.timesheet.TimesheetDomain" />
+<jsp:useBean id="timesheetDomain" scope="session" class="com.parinati.timesheet.TimesSheetDomain" />
 <%@include file="../commonInclude.jsp" %>
   <%@page import="java.util.*,com.parinati.admin.*,java.io.*" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>view/Modify Candidate</title>
-<script type = "text/javascript" src = "scripts/viewModifyCandidate.js"></script>
 <style type="text/css">
 label.error{
 font-family:    verdana,times new roman;
@@ -54,6 +53,7 @@ String taskStatusCode = request.getParameter("taskStatus")== null ? "": request.
 List<List<String>> taskDescription=timesheetDomain.getTaskDetails(taskStatusCode);
 List<List<String>> statusList=timesheetDomain.getTaskStatus();
 
+session.setAttribute("statusList",statusList);
 
 
 %>
@@ -92,7 +92,7 @@ List<List<String>> statusList=timesheetDomain.getTaskStatus();
 			<tr>
 			<td align="center" colspan="4">
 			<input type="submit" id="submit" name="submit" value="Get Details">
-			<input type="button" id="reset" name="reset" value="Reset" onclick="resetVal()">
+			<input type="reset" id="reset" name="reset" value="Reset" onclick="resetVal()">
 			</td>
 			</tr>
 		</table> 

@@ -82,7 +82,8 @@ function currentTime(dateTimePicker)
 String taskId=request.getParameter("taskId")==null?"":request.getParameter("taskId");
 String taskStatus=request.getParameter("taskStatus")==null?"":request.getParameter("taskStatus");
 String taskName=request.getParameter("taskName")==null?"":request.getParameter("taskName");
-String statusCode=request.getParameter("statusCode")==null?"":request.getParameter("statusCode");
+String selectedStatus=request.getParameter("statusCode")==null?"":request.getParameter("statusCode");
+List<List<String>> statusList=(List<List<String>>)session.getAttribute("statusList");
 
 %>
 </head>
@@ -115,8 +116,8 @@ String statusCode=request.getParameter("statusCode")==null?"":request.getParamet
 			    <td>Task Status:</td>
 			    <td>
 				<select id="taskStatus" name="taskStatus">
-				<option value="<%=statusCode %>"><%=taskStatus%></option>
-				<%-- <% 
+				<option value="<%=selectedStatus %>"><%=taskStatus%></option>
+				<% 
 				List<String> status=null; 
 				String statusCode=null,statusDesc=null;
 				for(int i=0;i<statusList.size();i++)
@@ -132,9 +133,14 @@ String statusCode=request.getParameter("statusCode")==null?"":request.getParamet
 				<%}else{
 				%>
 				<option  value="<%=statusCode %>"><%=statusDesc %></option>
-				<%} }%> --%>
+				<%} }%>
 				</select>
 				</td>
+			</tr>
+			<tr>
+			<td align="center" colspan="4">
+			<input type="submit" id="submit" name="submit" value="submit">
+			</td>
 			</tr>
 		</table>
 		<br />
