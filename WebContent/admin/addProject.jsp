@@ -29,6 +29,7 @@ String submitClicked = request.getParameter("subBtn")==null?"":(String)request.g
 String projectName = request.getParameter("pname")==null?"":(String)request.getParameter("pname");
 String projectTech = request.getParameter("ptech")==null?"":(String)request.getParameter("ptech");
 String projectLocation = request.getParameter("ploc")==null?"":(String)request.getParameter("ploc");
+if(submitClicked.isEmpty()){
 %>
 <form action="addProject.jsp" id="addProject">
 <table width="80%" align="center">
@@ -61,8 +62,8 @@ String projectLocation = request.getParameter("ploc")==null?"":(String)request.g
 </table>
 </form>
 <%
+}else{
 int resultVal = 0;
-if(!submitClicked.isEmpty()){
 	List<String> inputParam = new ArrayList();
 	inputParam.add(projectName);
 	inputParam.add(projectTech);
@@ -70,7 +71,6 @@ if(!submitClicked.isEmpty()){
 	
 	resultVal = addProjectDomain.insertProjectDtls(inputParam);
 	
-}
 %>
 
 <table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: none">
@@ -78,7 +78,7 @@ if(!submitClicked.isEmpty()){
 	if(1 == resultVal){
 	%>
 			<tr>
-				<td><b>Project Added Successfully.</b></td>
+				<td  align="center"><b>Project Added Successfully.</b></td>
 			</tr>
 
 	<%
@@ -89,6 +89,7 @@ if(!submitClicked.isEmpty()){
 				<td ><b style="color:red;"> Error Occured. Please Try Again.</b></td>
 			</tr>
 	</table>
-	<%} %>
+	<%} 
+	}%>
 </body>
 </html>
