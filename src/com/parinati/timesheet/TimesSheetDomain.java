@@ -144,10 +144,29 @@ public class TimesSheetDomain {
 	}
 	public List<List<String>> getTaskList(String fromDate, String toDate){
 		StringBuilder sql = new StringBuilder();
-		List<String> values = null;
-		List<String> valueTypes = null;
+		List<String> values = new ArrayList();
+		List<String> valueTypes = new ArrayList();
 		List<List<String>> result = null;
 		try{
+			sql.append(" SELECT A.TASKID,                                                     ");
+			sql.append(" A.CLIENTTASKID,                                                      ");
+			sql.append(" A.TASKSTATUSIID,                                                     ");
+			sql.append(" A.CREATEDBY,                                                         ");
+			sql.append(" A.CREATIONDATE,                                                      ");
+			sql.append(" (SELECT B.EMPID FROM EMPTASKMAPPINGDTLS B WHERE B.TASKID=A.TASKID)AS EMPLIST,  ");
+			sql.append(" A.TASKDESCRIPTION FROM TASKMASTER A                                  ");
+			sql.append(" WHERE PROJECTID = ?	                                              ");
+			sql.append(" AND A.CREATIONDATE BETWEEN TO_DATE(?,'DD-MM-YYYY')            ");
+			sql.append(" AND TO_DATE(?,'DD-MM-YYYY')                                     ");
+			
+			values.add(projectId);
+			values.add(fromDate);
+			values.add(toDate);
+			
+			valueTypes.add(GenericConstDef.DB_INT);
+			valueTypes.add(GenericConstDef.DB_STRING);
+			valueTypes.add(GenericConstDef.DB_STRING);
+			
 			
 		}
 		catch (Exception e) {
