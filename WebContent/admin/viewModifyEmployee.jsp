@@ -71,6 +71,8 @@ if(!"".equalsIgnoreCase(submitVal)){
 	String newSkills = request.getParameter("skills")== null ? "": request.getParameter("skills");
 	String newIsActive = request.getParameter("isActive")== null ? "": request.getParameter("isActive");
 	String employeeId = request.getParameter("candSel")== null ? "": request.getParameter("candSel");
+	String role = request.getParameter("role")== null ? "": request.getParameter("role");
+	String projectId = request.getParameter("projectName")== null ? "": request.getParameter("projectName");
 
 	List inputParam = new ArrayList();
 	inputParam.add(phoneNo);
@@ -79,8 +81,9 @@ if(!"".equalsIgnoreCase(submitVal)){
 	inputParam.add(passportNumber);
 	inputParam.add(newSkills);
 	inputParam.add(newIsActive);
-	//inputParam.add(projectDropDownVal);
 	inputParam.add(Integer.parseInt(employeeId));
+	inputParam.add(Integer.parseInt(role));
+	inputParam.add(Integer.parseInt(projectId));
 	 result = employeeDomain.updateEmployeeDetails(inputParam);
 
 }
@@ -151,17 +154,22 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 
 	if(viewDetails != null && !viewDetails.isEmpty())
 	{
+		List roleDetails = employeeDomain.fetchEmplRoles();
+		List projectDetails = employeeDomain.fetchProjectDetails();
 	%>
 
-		<table align="center" id="empltable" class="tableProps">
+<div id="empltable" style="border: 1px solid black; margin: auto; width: 80%; height: 260px; vertical: 20px; overflow-y: scroll; overflow-x: scroll;">
+		<table style= "width: 100%;border: none;" id="empltable" class="tableProps">
 		<tr align="center" class="tableheader">
-		<td style="width:5%">Select</td>
-		<td style="width:5%">Id</td>
+		<td >Select</td>
+		<td>Id</td>
 		<td>Name</td>
 		<td>Phone No.</td>
 		<td>PAN No.</td><td>Aadhar No.</td>
 		<td>Passport No.</td><td>Skills</td>
 		<td>Status</td>
+		<td>Role</td>
+		<td>Project Name</td>
 		</tr>
 		<%
 		String employeeId = null;
@@ -177,10 +185,12 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 			String passportNo = details.get(6) == null ? "" : details.get(6).toString().trim();
 			String skills = details.get(7).toString().trim();
 			String isActive = details.get(8).toString().trim();
+			String role = details.get(9).toString().trim();
+			String projectID = details.get(10).toString().trim();
 	%>
 	<tr>
-		<td style="width:5%"><input type="radio" id="candSel<%=i %>" name="candSel" value="<%=employeeId%>" class="radioCheck" onclick="enableDisable(<%=i%>)"/></td>
-		<td style="width:5%"><%=employeeId%></td>
+		<td ><input type="radio" id="candSel<%=i %>" name="candSel" value="<%=employeeId%>" class="radioCheck" onclick="enableDisable(<%=i%>)"/></td>
+		<td ><%=employeeId%></td>
 		<td><label><%=firstName+" "+lastName %></label></td>
 		<td><input  type = "text" id = "phone<%=i %>" value="<%=phone %>"  disabled="disabled"/></td>
 		<td><input  type = "text" id = "panno<%=i %>" value="<%=panno %>"  disabled="disabled"/></td>
@@ -195,8 +205,43 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 		<option value="Y" >Yes</option>
 		<option value="N" selected="selected">No</option>
 		<%} %>
+		</select></td>
+		<td><select style="width: 100%;" id = "role<%=i %>" disabled="disabled"/>
+		<%for(int k=0;k<roleDetails.size();k++){ 
+			List recordsSelect =new ArrayList();
+			recordsSelect=(ArrayList)roleDetails.get(k);
+			String roleId = recordsSelect.get(0) == null ? "" :recordsSelect.get(0).toString();
+			String roleDesc = recordsSelect.get(1) == null ? "" :recordsSelect.get(1).toString();
+			if(role.equals(roleId)){
+		
+		%>
+		<option value="<%=roleId%>" selected="selected"><%=roleDesc %></option>
+		
+		<%}else{ %>
+		<option value="<%=roleId%>" ><%= roleDesc%></option>
+		<%} 
+			}%>
 		</select>
+		</td>
+		<td><select style="width: 100%;" id = "projectName<%=i %>" disabled="disabled"/>
+		<%for(int k=0;k<projectDetails.size();k++){ 
+			List recordsSelect =new ArrayList();
+			recordsSelect=(ArrayList)projectDetails.get(k);
+			String projectId = recordsSelect.get(0) == null ? "" :recordsSelect.get(0).toString();
+			String projectDesc = recordsSelect.get(1) == null ? "" :recordsSelect.get(1).toString();
+			if(projectID.equals(projectId)){
+		
+		%>
+		<option value="<%=projectId%>" selected="selected"><%=projectDesc %></option>
+		
+		<%}else{ %>
+		<option value="<%=projectId%>" ><%= projectDesc%></option>
+		<%} 
+			}%>
+		</select>
+		</td>
 	</tr>
+	</div>
 <%}%>
 <tr align="center">
 		<td colspan="9"><input type="submit" id="submit" name="submit" value="Submit" onclick = "validateFormData();" disabled="disabled"/></td>
@@ -222,7 +267,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 	if(1 == result){
 	%>
 			<tr>
-				<td><b>Employee modified Successfully.</b></td>
+				<td align="center"><b>Employee modified Successfully.</b></td>
 			</tr>
 
 	<%
@@ -230,7 +275,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 
 	%>
 			<tr>
-				<td ><b style="color:red;"> Error Occured. Please Try Again.</b></td>
+				<td align="center"><b style="color:red;"> Error Occured. Please Try Again.</b></td>
 			</tr>
 	</table>
 	<%
