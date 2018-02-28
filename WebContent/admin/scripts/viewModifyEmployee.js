@@ -135,6 +135,8 @@ function enableDisable(i){
 			$("#passportNo"+j).prop("disabled",false);
 			$("#skills"+j).prop("disabled",false);
 			$("#isActive"+j).prop("disabled",false);
+			$("#role"+j).prop("disabled",false);
+			$("#projectName"+j).prop("disabled",false);
 
 			$("#phone"+j).attr("name","phone");
 			$("#panno"+j).attr("name","panno");
@@ -142,6 +144,8 @@ function enableDisable(i){
 			$("#passportNo"+j).attr("name","passportNo");
 			$("#skills"+j).attr("name","skills");
 			$("#isActive"+j).attr("name","isActive");
+			$("#role"+j).attr("name","role");
+			$("#projectName"+j).attr("name","projectName");
 
 		}
 		else{
@@ -151,6 +155,8 @@ function enableDisable(i){
 			$("#passportNo"+j).prop("disabled",true);
 			$("#skills"+j).prop("disabled",true);
 			$("#isActive"+j).prop("disabled",true);
+			$("#role"+j).prop("disabled",true);
+			$("#projectName"+j).prop("disabled",true);
 
 		}
 		j++;

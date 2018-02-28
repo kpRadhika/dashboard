@@ -55,7 +55,7 @@ public class AddProjectDomain
 			queryValues.add(projectId);
 			queryValues.add(inputParam.get(0).toString());
 			queryValues.add(inputParam.get(2).toString());
-			queryValues.add("A");
+			queryValues.add("Y");
 			queryValues.add(inputParam.get(1).toString());
 
 			queryTypes = new ArrayList<>();

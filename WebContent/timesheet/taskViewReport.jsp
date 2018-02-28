@@ -37,17 +37,16 @@ if(subButtonVal.equals("Submit")){
 %>
 <form action="taskViewReport.jsp" method = "Post">
 <table width="80%" align="center">
-<tr class="tableheader"><td colspan="2">Task View Report</td></tr><tr></tr>
+<tr class="tableheader"><td colspan="4">Task View Report</td></tr><tr></tr>
 <tr>
 <td>
-From Date&nbsp;<input type="text" id="fromDate" name="fromDate" value="<%=from%>">
+From Date</td><td><input type="text" id="fromDate" name="fromDate" value="<%=from%>">
 </td>
 <td>
-To Date&nbsp;<input type="text" id="toDate" name="toDate" value="<%=to%>">
+To Date</td><td><input type="text" id="toDate" name="toDate" value="<%=to%>">
 </td>
 </tr>
-<tr><td>Project </td>
-<td><select name="projectDropDown" id="projectDropDown">
+<tr><td>Project</td><td><select name="projectDropDown" id="projectDropDown">
 <option value="">Select</option>
 				<%
 List allProjectList = new ArrayList();
