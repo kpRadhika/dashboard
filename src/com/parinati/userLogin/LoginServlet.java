@@ -29,20 +29,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		/*DBConnectionManager dbhelper = null;
-		ResultSet rs = null;
-
-		try {
-
-			dbhelper = new DBConnectionManager();
-			String qry = "SELECT LOGINID,password FROM USERLOGIN WHERE LOGINID= ? and password= ?";
-
-			PreparedStatement psmt = dbhelper.dbConnection.prepareStatement(qry);
-
-			psmt.setString(1, request.getParameter("userId"));
-			psmt.setString(2, request.getParameter("userPassword"));
-
-			rs = psmt.executeQuery();*/
 		try {
 			request.getSession().invalidate();
 			HttpSession session = request.getSession(true);

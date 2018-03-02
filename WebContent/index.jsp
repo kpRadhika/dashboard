@@ -100,7 +100,7 @@ input[type=text], input[type=password] {
   border-bottom-left-radius:5px;
 }
 input[type="submit"] {
-  background-color: #4CAF50;    
+  background-color: #4CAF50;
   box-shadow: inset 0px 1px 0px #0f6133, 0px 5px 0px 0px #37710c, 0px 10px 5px #999;
 }
 
@@ -140,10 +140,14 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 							<%
 					if(request.getParameter("result")!=null){
 					%>
-
 							Invalid UserName and PassWord
 							<%	}
 				%>
+						</span>
+						<div align="right" style="margin-right: 10%;"><A style="color:  black;" href="forgotPassword.jsp">Forgot Password</A></div>
+						<input type="submit" class="formbuttons" value="Login" onClick="return check()" />
+
+					</div>
 
 						</span>
 						<input type="submit" class="formbuttons" value="Login" onClick="return check()" />

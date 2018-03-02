@@ -175,6 +175,9 @@ public class DBConnectionManager {
 			List list = new ArrayList(columnCount);
 
 			for (int i = 1; i <= columnCount; i++) {
+				if(rsmd.getColumnTypeName(i).equalsIgnoreCase("DASHBOARD.EMPLIST"))
+					list.add(rs.getArray(i));
+				else
 				list.add(rs.getString(i));
 			}
 			result.add(list);

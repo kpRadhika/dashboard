@@ -231,9 +231,7 @@ public class CreateEmployeeDomain {
 		String mailTempPath = FileReadUtil.getValue("ONBOARDINGMAIL");
 		String[] var = new String[3];
 		var[0] = GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(0));
-		var[1] = Integer.toString(empId);
-		var[2] = actualLogin;
-
+		
 		new MailerUtil().postMailWithTLSAuth(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(5)), "Welcome to Parinati", mailTempPath, var);
 		}
 		catch (Exception e) {
@@ -283,25 +281,28 @@ public class CreateEmployeeDomain {
 		List queryTypes = null;
 		try{
 
-			sql.append("	SELECT												");
-			sql.append("	    ed.empid,                                       ");
-			sql.append("	    ed.fname,                                       ");
-			sql.append("	    ed.lname,                                       ");
-			sql.append("	    ed.phone,                                       ");
-			sql.append("	    ed.PANNO,                                       ");
-			sql.append("	    ed.AADHARNO,                                    ");
-			sql.append("	    ed.PASSPORTNO,                                  ");
-			sql.append("	    ed.SKILLS,                                      ");
-			sql.append("	    ed.ISACTIVE                                     ");
-			sql.append("	FROM                                                ");
-			sql.append("	    employeedtls ed                                 ");
-			sql.append("	    JOIN emproledtls erd ON ed.empid = erd.empid    ");
-			sql.append("	WHERE                                               ");
+			sql.append("	SELECT						");
+			sql.append("	    ed.empid,               ");
+			sql.append("	    ed.fname,               ");
+			sql.append("	    ed.lname,               ");
+			sql.append("	    ed.phone,               ");
+			sql.append("	    ed.panno,               ");
+			sql.append("	    ed.aadharno,            ");
+			sql.append("	    ed.passportno,          ");
+			sql.append("	    ed.skills,              ");
+			sql.append("	    ed.isactive,            ");
+			sql.append("	    erd.roleid,             ");
+			sql.append("	    erd.PROJECTID         	");
+			sql.append("	FROM                        ");
+			sql.append("	    employeedtls ed,        ");
+			sql.append("	    emproledtls erd        ");
+			sql.append("	WHERE                       ");
+			sql.append("ed.empid = erd.empid			");
 
 			if(!"".equalsIgnoreCase(inputParam.get(0).toString()) && "projectName".equalsIgnoreCase(inputParam.get(1).toString()))
-				sql.append("	    erd.projectid = ?        ");
+				sql.append(" and	    erd.projectid = ?        ");
 			else if(!"".equalsIgnoreCase(inputParam.get(0).toString()) && "name".equalsIgnoreCase(inputParam.get(1).toString()))
-				sql.append("	    UPPER(FNAME)like ?    		");
+				sql.append(" and	    UPPER(FNAME)like ?    		");
 
 			queryValues = new ArrayList<>();
 			if(!"".equalsIgnoreCase(inputParam.get(0).toString()) && "projectName".equalsIgnoreCase(inputParam.get(1).toString()))
@@ -325,6 +326,9 @@ public class CreateEmployeeDomain {
 	public int updateEmployeeDetails(List inputParam){
 
 		StringBuilder sql = new StringBuilder();
+		List totalQueryList =null;
+		List totalValues = null;
+		List totalTypes = null;
 		int rs=0;
 		List queryValues = null;
 		List queryTypes = null;
@@ -340,6 +344,9 @@ public class CreateEmployeeDomain {
 			sql.append("	WHERE                   ");
 			sql.append("	EMPID =?                ");
 
+			totalQueryList = new ArrayList();
+			totalQueryList.add(sql.toString());
+
 			queryValues = new ArrayList<>();
 			queryValues.add(inputParam.get(0));//phone
 			queryValues.add(inputParam.get(1));//panno
@@ -348,15 +355,70 @@ public class CreateEmployeeDomain {
 			queryValues.add(inputParam.get(4));//skills
 			queryValues.add(inputParam.get(5));//isActive
 			queryValues.add(inputParam.get(6));//empid
-
+			totalValues = new ArrayList();
+			totalValues.add(queryValues);
 
 			queryTypes = new ArrayList<>();
 			for(int i = 0; i<queryValues.size()-1;i++)
 				queryTypes.add(GenericConstDef.DB_STRING);
 			queryTypes.add(GenericConstDef.DB_INT);
 
+			totalTypes = new ArrayList();
+			totalTypes.add(queryTypes);
 
-			rs = dbhelper.executeInsertUpdate(sql.toString(), queryValues, queryTypes);
+			sql = new StringBuilder();
+			sql.append("	UPDATE emproledtls		");
+			sql.append("	SET                     ");
+			sql.append("	    roleid =?,          ");
+			sql.append("	    projectid =?        ");
+			sql.append("	WHERE                   ");
+			sql.append("	empid =?                ");
+
+			totalQueryList = new ArrayList();
+			totalQueryList.add(sql.toString());
+
+			queryValues = new ArrayList<>();
+			queryValues.add(inputParam.get(7));//roleid
+			queryValues.add(inputParam.get(8));//projectid
+			queryValues.add(inputParam.get(6));//empid
+			totalValues = new ArrayList();
+			totalValues.add(queryValues);
+
+			queryTypes = new ArrayList<>();
+			for(int i = 0; i<queryValues.size();i++)
+				queryTypes.add(GenericConstDef.DB_INT);
+
+			totalTypes = new ArrayList();
+			totalTypes.add(queryTypes);
+
+			rs = dbhelper.prepStmtExecuteMultiple(totalQueryList, totalValues, totalTypes);
+		}
+		catch (Exception e) {
+			CustomLogger.exceptionJava(e, "Exception in updateEmployeeDetails() while executing the query:"+sql.toString(), "CreateUserDomain.java");
+		}
+
+		return rs;
+	}
+
+	/**
+	 * This method will fetch all role for employee
+	 * @return
+	 */
+	public List<ArrayList> fetchEmplRoles(){
+
+		StringBuffer sql = new StringBuffer();
+		List rs = null;
+		List queryValues = null;
+		List queryTypes = null;
+		try{
+			sql.append("	SELECT					");
+			sql.append("	    roleid,          	");
+			sql.append("	    jobdesignation      ");
+			sql.append("	FROM                    ");
+			sql.append("	    rolemaster       	");
+
+
+			rs = dbhelper.executeQuery(sql.toString(), null, null);
 		}
 		catch (Exception e) {
 			CustomLogger.exceptionJava(e, "Exception in fetchRecords() while executing the query:"+sql.toString(), "CreateUserDomain.java");

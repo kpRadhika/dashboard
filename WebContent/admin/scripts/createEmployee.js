@@ -13,16 +13,6 @@ $(function(){
 			dateFormat: 'dd-mm-yy'
 	    });
 
-	   /* $('input[type="radio"]').click(function() { 
-	    	var row = $(this).closest('tr');
-			if($(this).is(":checked")){
-			      $(row).find('button').prop("disabled",false);    
-			}
-			else{
-				$(row).find('button').prop("disabled","disabled");    
-			}
-				
-		});*/
 	    $('input[type="radio"]').click(function() { 
 	    	$("#subbutton").attr("disabled",false);
 	    });
@@ -59,6 +49,34 @@ $(function(){
 			wrapper : "div"
 
 	    });
+
+	    $("#createEmpl").validate({
+	    	rules : {
+	    		doj : {
+	    			required : true
+	    		},
+	    		role : {
+	    			check_item_dropdown : true
+	    		}
+	    	},
+	    	messages : {
+	    		doj : {
+					required : "Please select Date"
+				},
+				role : {
+					required : "Please select end Date"
+				}
+	    	},
+	    	errorPlacement : function(label, element) {
+				label.addClass('error');
+				label.insertAfter(element);
+		    },
+			wrapper : "div"
+
+	    });
+		$.validator.addMethod("check_item_dropdown", function(b, a) {
+			return $.trim(b) != ""
+		}, "Please select Statement Status");
 });
 
 function performNextStep(){

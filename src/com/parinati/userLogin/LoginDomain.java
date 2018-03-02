@@ -32,7 +32,7 @@ public class LoginDomain {
 		query.append("AND LOGINID= ? ");
 		query.append("AND PASSWORD= ?");
 
-		
+
 		prepValues.add(userId);
 		prepValues.add(pass);
 
@@ -48,61 +48,98 @@ public class LoginDomain {
 		return rs;
 
 	}
-	
+
 	public List<ArrayList> findToolsByRole(int roleId, String Category)  {
 
 		List queryValues = new ArrayList<>();
 		List<String> queryTypes = new ArrayList();
 		List<ArrayList> result = null;
 		StringBuilder sql = new StringBuilder();
-		try{		
+		try{
 		sql.append("SELECT FUNCTIONNAME, 	");
 		sql.append("FUNCTIONURL 	 		");
 		sql.append("FROM FUNCTIONMAPTBL 	");
 		sql.append("WHERE ROLEID=?			");//Change query here
 		sql.append("AND CATEGORY=?			");
 		sql.append("AND ISACTIVE=?			");
-		
-		
+
+
 		queryValues.add(roleId);
 		queryValues.add(Category);
 		queryValues.add("Y");
-		
+
 		queryTypes.add(GenericConstDef.DB_INT);
 		queryTypes.add(GenericConstDef.DB_STRING);
 		queryTypes.add(GenericConstDef.DB_STRING);
-		
+
 		result = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
 		}
 		catch (Exception e) {
 			CustomLogger.exceptionJava(e, "Exception occured in findToolsByRole():: query:"+sql.toString()+" values:"+queryValues.toString(), "LoginDomain.java");
 		}
-		
+
 		return result;
 	}
-	
+
 	public List findCategories(int roleId){
 		List queryValues = new ArrayList<>();
 		List<String> queryTypes = new ArrayList();
 		List<ArrayList> result = null;
 		StringBuilder sql = new StringBuilder();
-		try{		
+		try{
 		sql.append("SELECT CATEGORY		 	");
 		sql.append("FROM TOOLCATEGORYMAP 	");
 		sql.append("WHERE ROLEID=?			");//Change query here
-		
-		
+
+
 		queryValues.add(roleId);
-		
+
 		queryTypes.add(GenericConstDef.DB_INT);
-		
+
 		result = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
 		}
 		catch (Exception e) {
 			CustomLogger.exceptionJava(e, "Exception occured in findToolsByRole():: query:"+sql.toString()+" values:"+queryValues.toString(), "LoginDomain.java");
 		}
-		
+
 		return result;
 	}
-	
+
+	/**
+	 *
+	 * @param inputParam
+	 * @return
+	 */
+	public int updatePasswordDetails(List inputParam){
+
+		StringBuilder sql = new StringBuilder();
+		int rs=0;
+		List queryValues = null;
+		List queryTypes = null;
+		try{
+			sql.append("	UPDATE USERLOGIN						");
+			sql.append("	SET                                     ");
+			sql.append("	    PASSWORD =?,                        ");
+			sql.append("	    MODIFIEDDATE = sysdate,             ");
+			sql.append("	    MODIFIEDBY = 'Forgot Password Tool' ");
+			sql.append("	WHERE                                   ");
+			sql.append("	LOGINID =?                              ");
+
+			queryValues=new ArrayList();
+			queryValues.add(inputParam.get(1));
+			queryValues.add(inputParam.get(0));
+
+			queryTypes=new ArrayList();
+			queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_STRING);
+
+			rs = dbhelper.executeInsertUpdate(sql.toString(), queryValues, queryTypes);
+		}
+		catch (Exception e) {
+			CustomLogger.exceptionJava(e, "Exception in updateEmployeeDetails() while executing the query:"+sql.toString(), "CreateUserDomain.java");
+		}
+
+		return rs;
+	}
+
 }

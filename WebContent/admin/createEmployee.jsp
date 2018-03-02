@@ -19,6 +19,10 @@ padding : 3px 20px 3px 20px;
 background: linear-gradient(to top, darkgray, whitesmoke ); 
 }
 
+.error {
+    color:#FF0000;  /* red */
+}
+
 </style>
 </head>
 <body>
@@ -98,7 +102,7 @@ String emplId = null;
 <table class="overlay-content" style="background-color: #ffC30B;" width="50%">
 <tr>
 <th>Date of joining</th><td><input type="text" id="doj" name="doj" value=""/></td></tr>
-<tr style="font-size: 50%; font-weight: bold;">
+<tr>
 <th>Employee Role</th><td><Select id="role" name="role">
 <option value="">Select</option>
 <option value="7">TRAINEE</option>
@@ -113,7 +117,7 @@ String emplId = null;
 </td>
 </tr>
 <tr>
-<td colspan="2"><input type="submit" id="popUpSub" name="popUpSub" value="Submit" onclick="popUpSubmit()"/></td>
+<td colspan="2"><input type="submit" id="popUpSub" name="popUpSub" value="Submit" onclick="return popUpSubmit()"/></td>
 </tr>
 </table>
 </div>
