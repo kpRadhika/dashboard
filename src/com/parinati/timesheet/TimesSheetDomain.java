@@ -142,22 +142,22 @@ public class TimesSheetDomain {
 		}
 		return res;
 	}
-	public List<List<String>> getTaskList(String fromDate, String toDate,String projectId){
+	public List<ArrayList> getTaskList(String fromDate, String toDate,int projectId){
 		StringBuilder sql = new StringBuilder();
-		List<String> values = new ArrayList();
+		List values = new ArrayList();
 		List<String> valueTypes = new ArrayList();
-		List<List<String>> result = null;
+		List<ArrayList> result = null;
 		try{
-			sql.append(" SELECT A.TASKID,                                                     ");
-			sql.append(" A.CLIENTTASKID,                                                      ");
-			sql.append(" A.TASKSTATUSIID,                                                     ");
-			sql.append(" A.CREATEDBY,                                                         ");
-			sql.append(" A.CREATIONDATE,                                                      ");
-			sql.append(" (SELECT B.EMPID FROM EMPTASKMAPPINGDTLS B WHERE B.TASKID=A.TASKID)AS EMPLIST,  ");
-			sql.append(" A.TASKDESCRIPTION FROM TASKMASTER A                                  ");
-			sql.append(" WHERE PROJECTID = ?	                                              ");
-			sql.append(" AND A.CREATIONDATE BETWEEN TO_DATE(?,'DD-MM-YYYY')            ");
-			sql.append(" AND TO_DATE(?,'DD-MM-YYYY')                                     ");
+			sql.append(" SELECT TASKID,                                                     ");
+			sql.append(" CLIENTTASKID,                                                      ");
+			sql.append(" TASKSTATUSIID,                                                     ");
+			sql.append(" CREATEDBY,                                                         ");
+			sql.append(" TO_CHAR(CREATIONDATE,'DD-MM-YYYY'),                                ");
+			sql.append(" GETEMPLOYEESBYTASK(TASKID),                                        ");
+			sql.append(" TASKDESCRIPTION FROM TASKMASTER                                    ");
+			sql.append(" WHERE PROJECTID = ?	                                            ");
+			sql.append(" AND CREATIONDATE BETWEEN TO_DATE(?,'DD-MM-YYYY')            		");
+			sql.append(" AND TO_DATE(?,'DD-MM-YYYY')                                     	");
 			
 			values.add(projectId);
 			values.add(fromDate);
@@ -167,6 +167,7 @@ public class TimesSheetDomain {
 			valueTypes.add(GenericConstDef.DB_STRING);
 			valueTypes.add(GenericConstDef.DB_STRING);
 			
+			result = dbhelper.executeQuery(sql.toString(), values, valueTypes);
 			
 		}
 		catch (Exception e) {

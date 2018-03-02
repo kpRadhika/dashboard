@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
- <%@page import="java.util.*"%>
+ <%@page import="java.util.*,java.sql.*"%>
  <%@include file="../commonInclude.jsp" %>
  <jsp:useBean id="createEmplDom" scope="session" class="com.parinati.admin.CreateEmployeeDomain" /> 
  <jsp:useBean id="timeDom" scope="session" class="com.parinati.timesheet.TimesSheetDomain" /> 
@@ -16,24 +16,7 @@
 String subButtonVal = request.getParameter("subBtn") == null?"":request.getParameter("subBtn");
 String from = request.getParameter("fromDate") == null?"":request.getParameter("fromDate");;
 String to = request.getParameter("toDate") == null?"":request.getParameter("toDate");
-String projectId = request.getParameter("projectId") == null?"":request.getParameter("projectId");
-if(subButtonVal.equals("Submit")){
-	List<List<String>> taskList = timeDom.getTaskList(from,to,projectId);
-	if(taskList!=null && !taskList.isEmpty()){
-		Iterator iterator = taskList.listIterator();
-		while(iterator.hasNext()){
-			%>
-			<form action="">
-			<table align="center" width="80%">
-			<tr>
-			<td> </td>
-			</tr>
-			</table>
-			</form>
-			<%
-		}
-	}
-}
+int projectId = request.getParameter("projectDropDown") == null?0:Integer.parseInt(request.getParameter("projectDropDown"));
 %>
 <form action="taskViewReport.jsp" method = "Post">
 <table width="80%" align="center">
@@ -84,5 +67,57 @@ String pName = null;
 </tr>
 </table>
 </form>
+<%
+if(subButtonVal.equals("Submit")){
+	List<ArrayList> taskList = timeDom.getTaskList(from,to,projectId);
+	if(taskList!=null && !taskList.isEmpty()){
+		Iterator iterator = taskList.listIterator();
+			%>
+			<form action="">
+			<table align="center" width="80%">
+			<tr>
+			<th>TASKID</th>
+			<th>TASKDESCRIPTION</th>
+			<th>CLIENTTASKID</th>
+			<th>TASKSTATUSID</th>
+			<th>EMPLOYEES</th>
+			<th>CREATEDBY</th>
+			<th>CREATIONDATE</th>
+			</tr>
+			<%
+			while(iterator.hasNext()){
+				ArrayList taskDtls = (ArrayList)iterator.next();
+				String taskId = (String)taskDtls.get(0);
+				String clientTaskId = (String)taskDtls.get(1);
+				String taskStatusId = (String)taskDtls.get(2);
+				String createdBy = (String)taskDtls.get(3);
+				String creationDate = (String)taskDtls.get(4);
+				Array employees = (Array)taskDtls.get(5);
+				String[] empList = null;
+				if(employees!=null){
+				 empList = (String[])employees.getArray();
+				}
+				String taskDesc = (String)taskDtls.get(6);			
+			%>
+			<tr>
+			<td><%=taskId%></td>
+			<td><%=taskDesc %></td>
+			<td><%=clientTaskId %></td>
+			<td><%=taskStatusId %></td>
+			<td>
+			<%for(String s:empList) {%>
+			<%=s + ","%>
+			<%} %>
+			</td>
+			<td><%=createdBy %></td>
+			<td><%=creationDate %></td>
+			</tr>
+			<%} %>
+			</table>
+			</form>
+			<%
+		}
+	}
+%>
 </body>
 </html>

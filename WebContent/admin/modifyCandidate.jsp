@@ -9,9 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <script type = "text/javascript" src = "scripts/modifyCandidate.js"></script>
+<style >
+.error {
+    color:#FF0000;  /* red */
+}
+</style>
 </head>
-<body onload="zebraTR()">
-<form action="modifyCandidate.jsp" method="post">
+<body >
+<form action="modifyCandidate.jsp" id = "modifyCandidateForm" method="post">
 <%
 String count = request.getParameter("count")==null?"":(String)request.getParameter("count");
 String candId = request.getParameter("link"+count)==null?"":(String)request.getParameter("link"+count);
@@ -23,13 +28,24 @@ if(!save.isEmpty()){
 	String saveSelectStatus = request.getParameter("selection")==null?"":(String)request.getParameter("selection");
 	List inputs = new ArrayList();
 	inputs.add(saveSkill);
-	inputs.add(saveInterviewDate);
 	inputs.add(saveSelectStatus);
+	inputs.add(saveInterviewDate);
 	inputs.add(cId);
 	int updateCount = userDomain.modifyCandidate(inputs);
 	if(updateCount>0){
 		%>
-		<div align="center" style="font-size: small;"><br><br><br><br><br><br><b> Candidate id <%=cId %> updated successfully</b></div>
+		<table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: none">
+	
+			<tr>
+				<td  align="center"><b>Candidate id <%=cId %> updated successfully.</b></td>
+			</tr>
+	<%
+	}else{
+	%>
+			<tr>
+				<td ><b style="color:red;"> Error Occured. Please Try Again.</b></td>
+			</tr>
+	</table>
 		<%
 	}
 }
@@ -39,7 +55,7 @@ if(viewDetails != null && !viewDetails.isEmpty())
 {
 	%>
 	<table align="center" width="50%">
-	<tr><td colspan="2" align="center" style="font-weight: bold; font-size: medium;">Modify Candidate</td></tr>
+	<tr class="tableheader"><td>Search Candidate</td></tr>
 	<tr></tr><tr></tr><tr></tr>
 	<%
 	for(int i=0; i<viewDetails.size(); i++)
