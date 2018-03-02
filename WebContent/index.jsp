@@ -123,29 +123,21 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 %>
 
 <div id="loginform">
-	<form action="<%=request.getContextPath()%>/login" method="post"
-		autocomplete="off">
-
-
-
-			<img src="<%=request.getContextPath()%>/images/Parinati_white_logo.png"
-						style="align: center;" />
-						<div class="login">
-
+	<form action="<%=request.getContextPath()%>/login" method="post" autocomplete="off">
+			<img src="<%=request.getContextPath()%>/images/Parinati_white_logo.png" style="align: center;" />
+				<div class="login">
 					<input type="text" name="userId" id="userId" placeholder="User ID"/>
 
 					<input type="password" name="userPassword" id="userPassword" placeholder="Password" />
-					<span id="errordiv" style="font-size: 15px; color: #FF0000"
-							align="center">
-							<%
+					<span id="errordiv" style="font-size: 15px; color: #FF0000" align="center">
+					<%
 					if(request.getParameter("result")!=null){
 					%>
-
 							Invalid UserName and PassWord
 							<%	}
 				%>
-
 						</span>
+						<div align="right" style="margin-right: 10%;"><A style="color:  black;" href="forgotPassword.jsp">Forgot Password</A></div>
 						<input type="submit" class="formbuttons" value="Login" onClick="return check()" />
 
 					</div>
