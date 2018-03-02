@@ -60,7 +60,7 @@ function TextValidation(){
 		return false;
 	}
 	if($("#interviewDate").is(":checked") && $("#interdate").val() == ""){
-		document.getElementById("dateErrorMsg").innerHTML = "Please selsct date" ;
+		document.getElementById("dateErrorMsg").innerHTML = "Please select date" ;
 		document.getElementById("dateErrorMsg").style.display ="block";
 		return false;
 	}

@@ -86,7 +86,7 @@ int resultVal = 0;
 
 	%>
 			<tr>
-				<td ><b style="color:red;"> Error Occured. Please Try Again.</b></td>
+				<td align="center"><b style="color:red;"> Error Occured. Please Try Again.</b></td>
 			</tr>
 	</table>
 	<%} 

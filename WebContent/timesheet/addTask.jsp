@@ -10,6 +10,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type = "text/javascript" src = "scripts/addTask.js"></script>
 <title>Insert title here</title>
+<style>
+.error {
+    color:#FF0000;  /* red */
+}
+</style>
 </head>
 <body>
 <%
@@ -50,14 +55,13 @@ if(subButtonVal.equals("Submit")){
 }
 else{
 %>
-<form action="addTask.jsp" method = "Post">
+<form action="addTask.jsp" id="addTask" method = "Post">
 <table width="80%" align="center">
 <tr class="tableheader"><td colspan="2">Add Task</td></tr><tr></tr>
 <tr>
-<td>
-Project Name<span class="required"></span>&nbsp;&nbsp;
-<td>
-<select name="projectDropDown" id="projectDropDown">
+	<td align="right"><b>Project Name<span class="required"></span>:</b></td>
+	<td>
+<select name="projectDropDown" id="projectDropDown" style="padding-right: 14%;">
 <option value="">Select</option>
 				<%
 List allProjectList = new ArrayList();
@@ -93,30 +97,26 @@ String projectName = null;
 
 </tr>
 <tr>
-<td>Client Task id</td><td><input type="text" id="clientTaskId" name="clientTaskId" disabled="disabled"></td>
+	<td align="right"><b>Client Task id<span class="required"></span>:</b></td>
+	<td><input type="text" id="clientTaskId" name="clientTaskId" disabled="disabled"></td>
 </tr>
 <tr>
-<td>Task Description</td><td><input type="text" id="taskDesc" name="taskDesc" disabled="disabled"></td>
+	<td align="right"><b>Task Description<span class="required"></span>:</b></td>
+	<td><input type="text" id="taskDesc" name="taskDesc" disabled="disabled"></td>
 </tr>
 <tr>
-<td>Resources mapped</td>
+	<td align="right"><b>Resources mapped<span class="required"></span>:</b></td>
 <td>
 <div id="resMapping" style="display: none"></div>
 </td>
 </tr>
 <tr>
-<td>
-Remarks
-</td>
-<td>
-<input type="text" id="remarks" name="remarks" value=""/>
-</td>
+	<td align="right"><b>Remarks<span class="required"></span>:</b></td>
+<td><input type="text" id="remarks" name="remarks" disabled="disabled"/></td>
 </tr>
 <tr>
 <td></td>
-<td>
-<input type="submit" value="Submit" id="createTask" name="createTask"/>
-</td>
+<td><input type="submit" value="Submit" id="createTask" name="createTask"/></td>
 </tr>
 </table>
 <input type="hidden" id="selectedRes" name="selectedRes" value="">
