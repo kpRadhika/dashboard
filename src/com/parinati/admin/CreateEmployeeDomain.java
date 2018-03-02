@@ -231,9 +231,7 @@ public class CreateEmployeeDomain {
 		String mailTempPath = FileReadUtil.getValue("ONBOARDINGMAIL");
 		String[] var = new String[3];
 		var[0] = GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(0));
-		var[1] = Integer.toString(empId);
-		var[2] = actualLogin;
-
+		
 		new MailerUtil().postMailWithTLSAuth(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(5)), "Welcome to Parinati", mailTempPath, var);
 		}
 		catch (Exception e) {

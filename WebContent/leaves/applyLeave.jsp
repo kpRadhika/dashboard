@@ -16,26 +16,27 @@ String subButtonVal = request.getParameter("subBtn") == null?"":request.getParam
 String from = request.getParameter("fromDate") == null?"":request.getParameter("fromDate");;
 String to = request.getParameter("toDate") == null?"":request.getParameter("toDate");
 int leaveId = request.getParameter("leaveDropDown") == null?0:Integer.parseInt(request.getParameter("leaveDropDown"));
-int userId = (Integer)session.getAttribute("userID");
+String userId = (String)session.getAttribute("userID");
 if("Submit".equals(subButtonVal)){
 	List values = new ArrayList();
 	values.add(userId);
 	values.add(from);
 	values.add(to);
+	values.add(leaveId);
 	leaveDom.submitLeaveForApproval(values);
 }
 
 %>
 
-<form action="taskViewReport.jsp" method = "Post">
+<form action="applyLeave.jsp" method = "Post">
 <table width="80%" align="center">
-<tr class="tableheader"><td colspan="4">Task View Report</td></tr><tr></tr>
+<tr class="tableheader"><td colspan="4">Apply Leave</td></tr><tr></tr>
 <tr><th>Leave Type</th><th>From Date</th><th>To Date</th><th>Remarks</th></tr>
 <tr><td><select name="leaveDropDown" id="leaveDropDown">
 <option value="">Select</option>
 <%
 List<ArrayList> leaveList = null;
-String leaveId = null;
+
 String leaveType = null;
 			try {
 				leaveList = leaveDom.fetchLeaveTypes();
@@ -49,7 +50,7 @@ String leaveType = null;
  			 for (int size = 0; size < leaveList.size(); size++)
 		 			{
 		 				ArrayList leaveRec = (ArrayList) leaveList.get(size);
-		 				leaveId = leaveRec.get(0).toString();
+		 				leaveId = Integer.parseInt((String)leaveRec.get(0));
 		 				leaveType = leaveRec.get(1).toString();
 		 		
 		 			

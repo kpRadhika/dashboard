@@ -1,0 +1,8 @@
+Dear {0},
+
+You have a new  leave application pending for your action.
+Submitted by:{1}
+Kindly login and approve/reject the same.
+
+Thank you,
+Parinati
