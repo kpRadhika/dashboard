@@ -36,6 +36,9 @@
 
 	}
 
+	function signup(){
+		alert("Please wait... Sign up page will be created soon!!");
+	}
 
 </script>
 
@@ -119,6 +122,35 @@ input[type=submit]:hover {
 #loginform{
 	text-align: center;
 }
+#signup{
+	position:absolute;
+	margin-left: 245px;
+	margin-top: -47px;
+	width:10%;
+	height:10%;
+	z-index:10;
+}
+#signupimg{
+	z-index:-1; 
+	position:absolute;
+	left: 25px;
+    top: 43px;
+    width: 51px;
+    height: 50px;
+    opacity:0.6;
+}
+#signupimg:hover{
+opacity:1 !important;
+width: 56px;
+height: 55px;
+left: 22px;
+}
+#pinimg{
+	width: 40px;
+    height: 40px;
+    margin-top: 16px;
+    margin-left: -3px;
+}
 </style>
 
 
@@ -134,6 +166,7 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 	<form action="<%=request.getContextPath()%>/login" method="post" autocomplete="off">
 			<img src="<%=request.getContextPath()%>/images/Parinati_white_logo.png" style="align: center;" />
 				<div class="login">
+					<div id="signup"><img src="<%=request.getContextPath()%>/images/pinimage.png" id="pinimg" /><img id="signupimg" src="<%=request.getContextPath()%>/images/signup.png" onclick="signup()"/></div>
 					<input type="text" name="userId" id="userId" placeholder="User ID"/>
 
 
