@@ -14,7 +14,8 @@
 <%
 String loginId = session.getAttribute("userID") == null ?"" : session.getAttribute("userID").toString();
 String submitVal = request.getParameter("submit") == null ? "" : request.getParameter("submit");
-String emlId = request.getParameter("emlSel") == null ? "" : request.getParameter("emlSel");
+String emlAppId = request.getParameter("emlSel") == null ? "" : request.getParameter("emlSel");
+String emlId = request.getParameter("emlId") == null ? "" : request.getParameter("emlId");
 String isApproved = request.getParameter("isApproved") == null ? "" : request.getParameter("isApproved");
 int result = 0;
 if("".equals(submitVal)){
@@ -78,9 +79,10 @@ if(!emplList.isEmpty()){
 	}else{
 	
 		List<String> inputParam = new ArrayList();
-		inputParam.add(emlId);
+		inputParam.add(emlAppId);
 		inputParam.add(isApproved);
 		inputParam.add(loginId);
+		inputParam.add(emlId);
 		
 		result = leaveDomain.updateEmpLeaveDetail(inputParam);
 		%>

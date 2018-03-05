@@ -82,3 +82,4 @@ table{
 	height:40px;
 	width: 100%;
 }
+div.error {color: red !important;text-align: left;font-size: small;}
