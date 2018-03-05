@@ -1,0 +1,8 @@
+Dear {0},
+
+Your leave application has been Approved.
+Approved by:{1}
+
+
+Thank you,
+Parinati
