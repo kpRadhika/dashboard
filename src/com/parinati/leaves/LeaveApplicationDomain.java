@@ -15,7 +15,7 @@ public class LeaveApplicationDomain {
 	public LeaveApplicationDomain(){
 		dbhelper = new DBConnectionManager();
 	}
-	
+
 	public List<ArrayList> fetchLeaveTypes(){
 		List<ArrayList> rs = null;
 		StringBuilder sql = new StringBuilder();
@@ -23,11 +23,11 @@ public class LeaveApplicationDomain {
 			sql.append(" SELECT LEAVETYPEID,    ");
 			sql.append(" LEAVETYPE              ");
 			sql.append(" FROM LEAVETYPEMASTER   ");
-			
+
 			rs = dbhelper.executeQuery(sql.toString(), null, null);
 		}
 		catch (Exception e) {
-			
+
 		}
 		return rs;
 	}
@@ -40,25 +40,23 @@ public class LeaveApplicationDomain {
 			sql = new StringBuilder();
 			sql.append(" SELECT                              ");
 			sql.append(" A.EMPID,                            ");
-			sql.append(" B.PROJECTLEADID,                    ");
+			sql.append(" C.REPORTINGMANAGERID,               ");
 			sql.append(" A.FNAME||' '||A.LNAME               ");
 			sql.append(" FROM                                ");
 			sql.append(" EMPLOYEEDTLS A,                     ");
-			sql.append(" EMPROLEDTLS C,                      ");
-			sql.append(" PROJECTMASTER B                     ");
+			sql.append(" EMPROLEDTLS C                       ");
 			sql.append(" WHERE                               ");
 			sql.append(" A.EMPID = C.EMPID                   ");
-			sql.append(" AND   C.PROJECTID = B.PROJECTID     ");
 			sql.append(" AND   A.OFFICIALEMAIL = ?           ");
-			
-			values = new ArrayList<>();			
+
+			values = new ArrayList<>();
 			values.add(valueList.get(0));
-			
+
 			valueTypes = new ArrayList<>();
 			valueTypes.add(GenericConstDef.DB_STRING);
-			
+
 			List rs = dbhelper.executeQuery(sql.toString(), values, valueTypes);
-			
+
 			if(rs!=null && !rs.isEmpty()){
 				sql = new StringBuilder();
 				sql.append(" INSERT                     ");
@@ -82,8 +80,8 @@ public class LeaveApplicationDomain {
 				sql.append("?,                          ");
 				sql.append("?                           ");
 				sql.append(")                           ");
-				
-				values = new ArrayList<>();			
+
+				values = new ArrayList<>();
 				values.add(Integer.parseInt((String)((ArrayList)rs.get(0)).get(0)));
 				values.add(valueList.get(3));
 				values.add(valueList.get(1));
@@ -91,7 +89,7 @@ public class LeaveApplicationDomain {
 				values.add("P");
 				values.add(valueList.get(0));
 				values.add(Integer.parseInt((String)((ArrayList)rs.get(0)).get(1)));
-				
+
 				valueTypes = new ArrayList<>();
 				valueTypes.add(GenericConstDef.DB_INT);
 				valueTypes.add(GenericConstDef.DB_INT);
@@ -100,31 +98,31 @@ public class LeaveApplicationDomain {
 				valueTypes.add(GenericConstDef.DB_STRING);
 				valueTypes.add(GenericConstDef.DB_STRING);
 				valueTypes.add(GenericConstDef.DB_INT);
-				
+
 				int result = dbhelper.executeInsertUpdate(sql.toString(), values, valueTypes);
 				if(result>0){
 					sql = new StringBuilder();
 					sql.append(" SELECT FNAME, OFFICIALEMAIL FROM EMPLOYEEDTLS WHERE EMPID = ? ");
-					
+
 					values = new ArrayList<>();
 					values.add(Integer.parseInt((String)((ArrayList)rs.get(0)).get(1)));
-					
+
 					valueTypes = new ArrayList<>();
 					valueTypes.add(GenericConstDef.DB_INT);
-					
+
 					List managerDetails = dbhelper.executeQuery(sql.toString(), values, valueTypes);
-					
+
 					if(managerDetails!=null && !managerDetails.isEmpty()){
-					
+
 					String mailTempPath = FileReadUtil.getValue("LEAVEAPPMAIL");
 					String[] var = new String[2];
 					var[0] = (String)((ArrayList)managerDetails.get(0)).get(0);
 					var[1] = valueList.get(0).toString();
-					
-					new MailerUtil().postMailWithTLSAuth((String)((ArrayList)managerDetails.get(0)).get(1), "Leave Application Pending for action", mailTempPath, var);
+
+					new MailerUtil().postMailWithTLSAuth((String)((ArrayList)managerDetails.get(0)).get(1),(String)valueList.get(0), "Leave Application Pending for action", mailTempPath, var);
 					}
 				}
-				
+
 			}
 		}
 		catch (Exception e) {
@@ -208,6 +206,22 @@ public class LeaveApplicationDomain {
 			queryTypes.add(GenericConstDef.DB_INT);
 
 			rs = dbhelper.executeInsertUpdate(sql.toString(), queryValues, queryTypes);
+			if(rs > 0){
+				sql = new StringBuilder();
+				sql.append(" SELECT FNAME, OFFICIALEMAIL FROM EMPLOYEEDTLS WHERE EMPID = ? ");
+				queryValues = new ArrayList<>();
+				queryValues.add(Integer.parseInt((String)inputParam.get(3)));
+				queryTypes = new ArrayList<>();
+				queryTypes.add(GenericConstDef.DB_INT);
+				List managerDetails = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
+				if(managerDetails!=null && !managerDetails.isEmpty()){
+				String mailTempPath = FileReadUtil.getValue("LEAVEAPPROVEMAIL");
+				String[] var = new String[2];
+				var[0] = (String)((ArrayList)managerDetails.get(0)).get(0);
+				var[1] = (String)((ArrayList)managerDetails.get(0)).get(0);
+				new MailerUtil().postMailWithTLSAuth((String)((ArrayList)managerDetails.get(0)).get(1),(String)inputParam.get(2), "Leave Application action", mailTempPath, var);
+				}
+			}
 		}
 		catch (Exception e) {
 			CustomLogger.exceptionJava(e, "Exception in updateEmpLeaveDetail() while executing the query:"+sql.toString(), "LeaveApplicationDomain.java");
