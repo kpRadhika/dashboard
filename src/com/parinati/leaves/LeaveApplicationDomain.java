@@ -141,7 +141,19 @@ public class LeaveApplicationDomain {
 		StringBuilder sql = new StringBuilder();
 		List values = null;
 		List valueTypes = null;
+
 		try{
+			/*sql.append(" SELECT APPLICATIONID,
+			sql.append("  EMPID,
+			sql.append("  LEAVETYPEID,
+			sql.append("  LEAVEFROM,
+			sql.append("  LEAVETO
+			sql.append(" FROM LEAVEDETAILS
+			sql.append(" WHERE APPROVALSTATUS = 'P'
+			AND MANAGERID        =
+			  (SELECT EMPID FROM EMPLOYEEDTLS WHERE officialemail=?
+			  )*/
+
 			sql.append("	SELECT									");
 			sql.append("	    UL.EMPID,                           ");
 			sql.append("	    ED.FNAME,                           ");
@@ -208,18 +220,21 @@ public class LeaveApplicationDomain {
 			rs = dbhelper.executeInsertUpdate(sql.toString(), queryValues, queryTypes);
 			if(rs > 0){
 				sql = new StringBuilder();
-				sql.append(" SELECT FNAME, OFFICIALEMAIL FROM EMPLOYEEDTLS WHERE EMPID = ? ");
+				sql.append(" SELECT FNAME, OFFICIALEMAIL FROM EMPLOYEEDTLS,				");
+				sql.append(" LEAVEDETAILS WHERE LEAVEDETAILS.EMPID =EMPLOYEEDTLS.EMPID	");
+				sql.append(" AND APPLICATIONID = ?										");
+				/*sql.append(" SELECT FNAME, OFFICIALEMAIL FROM EMPLOYEEDTLS WHERE EMPID = ? ");*/
 				queryValues = new ArrayList<>();
-				queryValues.add(Integer.parseInt((String)inputParam.get(3)));
+				queryValues.add(Integer.parseInt(inputParam.get(0).toString()));
 				queryTypes = new ArrayList<>();
 				queryTypes.add(GenericConstDef.DB_INT);
-				List managerDetails = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
-				if(managerDetails!=null && !managerDetails.isEmpty()){
+				List empDetails = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
+				if(empDetails!=null && !empDetails.isEmpty()){
 				String mailTempPath = FileReadUtil.getValue("LEAVEAPPROVEMAIL");
 				String[] var = new String[2];
-				var[0] = (String)((ArrayList)managerDetails.get(0)).get(0);
-				var[1] = (String)((ArrayList)managerDetails.get(0)).get(0);
-				new MailerUtil().postMailWithTLSAuth((String)((ArrayList)managerDetails.get(0)).get(1),(String)inputParam.get(2), "Leave Application action", mailTempPath, var);
+				var[0] = (String)((ArrayList)empDetails.get(0)).get(0);
+				var[1] = (String)((ArrayList)empDetails.get(0)).get(0);
+				new MailerUtil().postMailWithTLSAuth((String)((ArrayList)empDetails.get(0)).get(1),(String)inputParam.get(2), "Leave Application action", mailTempPath, var);
 				}
 			}
 		}
