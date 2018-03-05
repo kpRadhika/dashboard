@@ -31,7 +31,7 @@
 		<filter-class>com.parinati.util.SessionFilter</filter-class>
 		<init-param>
 			<param-name>avoid-urls</param-name>
-			<param-value>/index.jsp,/ErrorPage.jsp,/forgotPassword.jsp</param-value>
+			<param-value>/index.jsp,/ErrorPage.jsp,/forgotPassword.jsp,/candidatesignup.jsp</param-value>
 		</init-param>
 </filter>
 <filter-mapping>

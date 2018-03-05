@@ -35,11 +35,6 @@
 		document.getElementById("userId").focus();
 
 	}
-
-	function signup(){
-		alert("Please wait... Sign up page will be created soon!!");
-	}
-
 </script>
 
 <style type="text/css">
@@ -76,7 +71,7 @@ body {
   background: #eceeee;
   border: 1px solid #42464b;
   border-radius: 6px;
-  height: 155px;
+  height: 170px;
   margin: 20px auto 0;
   width: 298px;
    box-shadow: inset 0px 1px 0px #272928, 0px 5px 0px 0px #504f54, 12px 15px 10px #999;
@@ -115,6 +110,7 @@ input[type=text], input[type=password] {
 input[type="submit"] {
   background-color: #4CAF50;
   box-shadow: inset 0px 1px 0px #0f6133, 0px 5px 0px 0px #37710c, 0px 10px 5px #999;
+  margin-bottom: 8px;
 }
 input[type=submit]:hover {
     opacity: 0.8;
@@ -123,34 +119,41 @@ input[type=submit]:hover {
 	text-align: center;
 }
 #signup{
-	position:absolute;
-	margin-left: 245px;
-	margin-top: -47px;
-	width:10%;
-	height:10%;
-	z-index:10;
+	position: absolute;
+    margin-top: -11px;
+    z-index: 10;
 }
 #signupimg{
-	z-index:-1; 
-	position:absolute;
-	left: 25px;
-    top: 43px;
+	z-index: -1;
+    position: absolute;
+    left: -22px;
+    top: 6px;
     width: 51px;
-    height: 50px;
-    opacity:0.6;
+    transform: rotate(-50deg);
 }
 #signupimg:hover{
-opacity:1 !important;
 width: 56px;
-height: 55px;
-left: 22px;
+cursor: pointer;
 }
-#pinimg{
-	width: 40px;
-    height: 40px;
-    margin-top: 16px;
-    margin-left: -3px;
+#signupfooter{
+z-index: 999px;
+display:block;
+position:fixed;
+width:100%;
+height:0px;
+bottom:0px;
+background-color: #2aab64;
+color: #ffffff;
+text-align: center; 
+border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+transition:             height 500ms ease;
+        -moz-transition:    height 500ms ease;
+        -ms-transition:     height 500ms ease;
+        -o-transition:      height 500ms ease;
+        -webkit-transition: height 500ms ease;
 }
+
 </style>
 
 
@@ -160,13 +163,13 @@ left: 22px;
 <%
 response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Path=/dashboard/");
 %>
-
+<div id="signupfooter">Sign Up Form For Candidates.</div>
 <div class="bgimage"></div>
 <div id="loginform">
 	<form action="<%=request.getContextPath()%>/login" method="post" autocomplete="off">
 			<img src="<%=request.getContextPath()%>/images/Parinati_white_logo.png" style="align: center;" />
 				<div class="login">
-					<div id="signup"><img src="<%=request.getContextPath()%>/images/pinimage.png" id="pinimg" /><img id="signupimg" src="<%=request.getContextPath()%>/images/signup.png" onclick="signup()"/></div>
+					<div id="signup"><img id="signupimg" src="<%=request.getContextPath()%>/images/signup.png" /></div>
 					<input type="text" name="userId" id="userId" placeholder="User ID"/>
 
 
@@ -187,12 +190,26 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 						<input type="submit" class="formbuttons" value="Login" onClick="return check()" />
 
 						</div>
-
+					
 
 
 	</form>
 
 
 		</div>
+		
+		<script>
+		document.getElementById('signupimg').addEventListener( 'click', function() {
+			window.location = "candidatesignup.jsp";
+		}, false );
+
+		document.getElementById('signupimg').addEventListener( 'mouseover', function() {
+			document.getElementById('signupfooter').style.height = '30px'; 
+			    
+			}, false );
+		document.getElementById( 'signupimg' ).addEventListener( 'mouseout', function() {
+			document.getElementById( 'signupfooter' ).style.height = '0px';
+			}, false );
+		</script>
 </body>
 </html>
