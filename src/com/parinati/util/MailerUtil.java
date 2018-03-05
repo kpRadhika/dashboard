@@ -70,6 +70,8 @@ public class MailerUtil {
 				}
 			};
 			Session session = Session.getInstance(props, auth);
+			
+			ccMail = ccMail.isEmpty()?MAIL_CC:ccMail;
 
 			sendEmail(session, toEmail, ccMail, subject, body);
 
