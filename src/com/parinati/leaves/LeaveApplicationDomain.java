@@ -143,18 +143,18 @@ public class LeaveApplicationDomain {
 		List valueTypes = null;
 
 		try{
-			/*sql.append(" SELECT APPLICATIONID,
-			sql.append("  EMPID,
-			sql.append("  LEAVETYPEID,
-			sql.append("  LEAVEFROM,
-			sql.append("  LEAVETO
-			sql.append(" FROM LEAVEDETAILS
-			sql.append(" WHERE APPROVALSTATUS = 'P'
-			AND MANAGERID        =
-			  (SELECT EMPID FROM EMPLOYEEDTLS WHERE officialemail=?
-			  )*/
+			sql.append(" SELECT APPLICATIONID,			");
+			sql.append("  EMPID,						");
+			sql.append("  LEAVETYPEID,					");
+			sql.append("  LEAVEFROM,					");
+			sql.append("  LEAVETO						");
+			sql.append(" FROM LEAVEDETAILS				");
+			sql.append(" WHERE APPROVALSTATUS = 'P'		");
+			sql.append(" AND MANAGERID        =			");
+			sql.append(" (SELECT EMPID FROM EMPLOYEEDTLS");
+			sql.append(" WHERE officialemail=?)			");
 
-			sql.append("	SELECT									");
+			/*sql.append("	SELECT									");
 			sql.append("	    UL.EMPID,                           ");
 			sql.append("	    ED.FNAME,                           ");
 			sql.append("	    ED.LNAME,                           ");
@@ -171,7 +171,7 @@ public class LeaveApplicationDomain {
 			sql.append("	AND LD.EMPID = ED.EMPID                 ");
 			sql.append("	AND LD.LEAVETYPEID = LTM.LEAVETYPEID    ");
 			sql.append("	    AND LD.APPROVALSTATUS = 'P'         ");
-			sql.append("	    AND UL.LOGINID = ?                  ");
+			sql.append("	    AND UL.LOGINID = ?                  ");*/
 
 			values = new ArrayList();
 			values.add(loginId);
@@ -233,7 +233,7 @@ public class LeaveApplicationDomain {
 				String mailTempPath = FileReadUtil.getValue("LEAVEAPPROVEMAIL");
 				String[] var = new String[2];
 				var[0] = (String)((ArrayList)empDetails.get(0)).get(0);
-				var[1] = (String)((ArrayList)empDetails.get(0)).get(0);
+				var[1] = (String)inputParam.get(2);
 				new MailerUtil().postMailWithTLSAuth((String)((ArrayList)empDetails.get(0)).get(1),(String)inputParam.get(2), "Leave Application action", mailTempPath, var);
 				}
 			}
