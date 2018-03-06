@@ -134,9 +134,24 @@ input[type=submit]:hover {
 #loginform{
 	text-align: center;
 }
+.bgimage{
+top:0;
+position:absolute;
+background-size:cover;
+background-image:url(images/Goa.jpg);
+background-position:center;
+z-index:-1;
+width:100%;
+height: 150%;
+opacity: 0.2;
+filter: alpha(opacity=20);
+
+}
 </style>
 </head>
 <body onload="setFocus()">
+<div class="bgimage"></div>
+<div><center><img src="<%=request.getContextPath()%>/images/Parinati_white_logo.png" /></center></div>
 <%
 String submitClicked = request.getParameter("subBtn")==null?"":(String)request.getParameter("subBtn");
 String newPassword = request.getParameter("newPassword")==null?"":(String)request.getParameter("newPassword");
