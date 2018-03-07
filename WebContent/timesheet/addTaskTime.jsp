@@ -57,12 +57,14 @@ if(submitVal.equals("submit"))
 	String selEndDate=request.getParameter("endDateTime")==null?"":request.getParameter("endDateTime");
 	String empIdHidden=request.getParameter("empIdHidden")==null?"":request.getParameter("empIdHidden");
 	String taskIdHidden=request.getParameter("taskIdHidden")==null?"":request.getParameter("taskIdHidden");
+	String hours=request.getParameter("hours")==null?"":request.getParameter("hours");
 	List<String> inputList=new ArrayList<>();
 	inputList.add(empIdHidden);
 	inputList.add(taskIdHidden);
 	inputList.add(selStartDate);
 	inputList.add(selEndDate);
 	inputList.add(selectedStatus);
+	inputList.add(hours);
 	int result=timesheetDomain.insertTaskDetails(inputList);
 	 if(result>0){		 
 %>
@@ -139,6 +141,8 @@ else{
 			<input type="submit" id="submit" name="submit" value="submit">
 	<input type="hidden" id="taskIdHidden" name="taskIdHidden" value="<%=taskId %>">
 	<input type="hidden" id="empIdHidden" name="empIdHidden" value="<%=empId %>">
+	<input type="hidden" id="hours" name="hours">
+	
 			</td>
 			</tr>
 		</table>
