@@ -67,14 +67,14 @@ body {
 	width: 100%;
 }
 .login {
-	display:grid;
+  display:grid;
   background: floralwhite;
   border: 1px solid #42464b;
   border-radius: 6px;
-  height: 170px;
+  height: 200px;
   margin: 20px auto 0;
-  width: 400px;
-   box-shadow: inset 0px 1px 0px #272928, 0px 5px 0px 0px #504f54, 12px 15px 10px #999;
+  width: 325px;
+  box-shadow: inset 0px 1px 0px #272928, 0px 5px 0px 0px #504f54, 12px 15px 10px #999;
 }
 input[type=text], input[type=password] {
 	height:70%;
@@ -118,7 +118,7 @@ input[type=submit]:hover {
 }
 #loginform{
 	text-align: center;
-	
+
 }
 #signup{
 	position: absolute;
@@ -188,10 +188,9 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 							<%	}
 				%>
 						</span>
-						<br>
 						<input type="submit" class="formbuttons" value="Login" onClick="return check()" />
-						<div align="left" style="margin-left: 10%;"><a style="color:  black;" href="forgotPassword.jsp">Forgot Password</a></div>
-						<div align="left" style="margin-left: 10%;"><a style="color:  black;" href="candidatesignup.jsp">Career explorer? Submit your resume here</a></div>
+						<div align="left" style="margin-left: 10%;"><a style="color:  blue;text-decoration: none" href="forgotPassword.jsp">Forgot Password?</a></div>
+						<div align="left" style="margin-left: 10%;"><a style="color:  blue;text-decoration: none;" href="candidatesignup.jsp">Career explorer? Submit your resume</a></div>
 						</div>
 
 
