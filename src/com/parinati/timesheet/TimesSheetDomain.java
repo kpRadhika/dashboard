@@ -272,22 +272,30 @@ public class TimesSheetDomain {
 		String fromDate=inpuList.get(2)==null?"":inpuList.get(2).toString();
 		String toDate=inpuList.get(3)==null?"":inpuList.get(3).toString();
 		String status=inpuList.get(4)==null?"":inpuList.get(4).toString();
-		StringBuffer sql=new StringBuffer();
-		List taskDetails=null;
+		String hours=inpuList.get(5)==null?"":inpuList.get(5).toString();
+		StringBuilder sql=new StringBuilder();
 		try{
-			sql.append(" INSERT INTO TIMESHEETENTRY	(				");
-			sql.append(" EMPID,TASKID,FROMTIME,TOTIME)				");
-			sql.append("  VALUES(									");
-			sql.append(" 		?	,								");
-			sql.append(" 		?	,								");
-			sql.append(" 		TO_TIMESTAMP(?,'dd-MM-yyyy HH24:mi'),  	");
-			sql.append(" 		TO_TIMESTAMP(?,'dd-MM-yyyy HH24:mi')	)	");
+			sql.append(" INSERT INTO TIMESHEETENTRY	(						");
+			sql.append(" EMPID,TASKID,FROMTIME,TOTIME,TASKHOURS,TASKDATE)	");
+			sql.append("  VALUES(											");
+			sql.append(" 		?	,										");
+			sql.append(" 		?	,										");
+			sql.append(" 		TO_TIMESTAMP(?,'dd-MM-yyyy HH24:mi'), 		");
+			sql.append(" 		TO_TIMESTAMP(?,'dd-MM-yyyy HH24:mi'),		");
+			sql.append(" 		?	,										");
+			sql.append(" 		TO_DATE(?,'dd-MM-yyyy')	)					");
+			
+			
 			queryValues=new ArrayList<>();
 			queryValues.add(empId);
 			queryValues.add(taskId);
 			queryValues.add(fromDate);
 			queryValues.add(toDate);
+			queryValues.add(hours);
+			queryValues.add(fromDate.substring(0, 10));
 			queryTypes = new ArrayList<>();
+			queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_STRING);
 			queryTypes.add(GenericConstDef.DB_STRING);
 			queryTypes.add(GenericConstDef.DB_STRING);
 			queryTypes.add(GenericConstDef.DB_STRING);
