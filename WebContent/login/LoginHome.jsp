@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 <style>
 .navbar {
+box-shadow: 0px 0px 1px #272928, 0px 0px 0px 0px #504f54, 0px 0px 0px #999;
   overflow: hidden;
   background-color: #FFC30B;
   font-family: Trebuchet-MS;
@@ -74,9 +75,10 @@ padding: 12px 16px;
   display: block;
 }
 .widthblock{
+	box-shadow: 0px 0px 1px #272928, 0px 0px 0px 0px #504f54, 0px 0px 0px #999;
 	width: 80%;
   	margin-left: 10%;
-  	border: 1px;
+  	height: 100%;
 }
 </style>
 <script type="text/javascript">
@@ -100,7 +102,7 @@ if(user!=null)
 { %>
 <table width="100%" >
 <tr>
-<td><img alt="" src="images/Parinati_white_logo.jpg"></td>
+<td><img alt="" src="images/Parinati_white_logo.png"></td>
 <td align="right"><h4>Welcome&nbsp;<%= user%></h4></td>
 </tr>
 </table>
@@ -141,10 +143,11 @@ while(catIter.hasNext()){
 </div>
 </div>
 
-	<iframe name="down" width="100%" height="800" scrolling="auto"
+	<iframe name="down" width="100%" height="73%" scrolling="auto"
 		style="border: none;" align="left">
 
 	</iframe>
+	<div class="navbar" style="width:100%;height:5%"></div>
 <%} %>
 </div>
 </body>
