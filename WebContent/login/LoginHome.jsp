@@ -89,7 +89,7 @@ function logout()
 </script>
 </head>
 <body>
-<!-- <div class="widthblock"> -->
+<div class="widthblock"> 
 <%
 response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId());
          response.addHeader("Pragma", "No-cache");
@@ -149,6 +149,6 @@ while(catIter.hasNext()){
 	</iframe>
 	<div class="navbar" style="width:100%;height:5%"></div>
 <%} %>
-<!-- </div> -->
+</div>
 </body>
 </html>
