@@ -67,14 +67,14 @@ body {
 	width: 100%;
 }
 .login {
-	display:grid;
-  background: #eceeee;
+  display:grid;
+  background: floralwhite;
   border: 1px solid #42464b;
   border-radius: 6px;
-  height: 170px;
+  height: 200px;
   margin: 20px auto 0;
-  width: 298px;
-   box-shadow: inset 0px 1px 0px #272928, 0px 5px 0px 0px #504f54, 12px 15px 10px #999;
+  width: 325px;
+  box-shadow: inset 0px 1px 0px #272928, 0px 5px 0px 0px #504f54, 12px 15px 10px #999;
 }
 input[type=text], input[type=password] {
 	height:70%;
@@ -106,6 +106,7 @@ input[type=text], input[type=password] {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius:5px;
+  background: linear-gradient(to top, #2aab64, #ADFF2F );
 }
 input[type="submit"] {
   background-color: #4CAF50;
@@ -117,6 +118,7 @@ input[type=submit]:hover {
 }
 #loginform{
 	text-align: center;
+
 }
 #signup{
 	position: absolute;
@@ -144,7 +146,7 @@ height:0px;
 bottom:0px;
 background-color: #2aab64;
 color: #ffffff;
-text-align: center; 
+text-align: center;
 border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 transition:             height 500ms ease;
@@ -186,26 +188,26 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 							<%	}
 				%>
 						</span>
-						<div align="right" style="margin-right: 10%;"><A style="color:  black;" href="forgotPassword.jsp">Forgot Password</A></div>
 						<input type="submit" class="formbuttons" value="Login" onClick="return check()" />
-
+						<div align="left" style="margin-left: 10%;"><a style="color:  blue;text-decoration: none" href="forgotPassword.jsp">Forgot Password?</a></div>
+						<div align="left" style="margin-left: 10%;"><a style="color:  blue;text-decoration: none;" href="candidatesignup.jsp">Career explorer? Submit your resume</a></div>
 						</div>
-					
+
 
 
 	</form>
 
 
 		</div>
-		
+
 		<script>
 		document.getElementById('signupimg').addEventListener( 'click', function() {
 			window.location = "candidatesignup.jsp";
 		}, false );
 
 		document.getElementById('signupimg').addEventListener( 'mouseover', function() {
-			document.getElementById('signupfooter').style.height = '30px'; 
-			    
+			document.getElementById('signupfooter').style.height = '30px';
+
 			}, false );
 		document.getElementById( 'signupimg' ).addEventListener( 'mouseout', function() {
 			document.getElementById( 'signupfooter' ).style.height = '0px';

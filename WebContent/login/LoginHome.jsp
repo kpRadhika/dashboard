@@ -89,7 +89,7 @@ function logout()
 </script>
 </head>
 <body>
-<div class="widthblock">
+<!-- <div class="widthblock"> -->
 <%
 response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId());
          response.addHeader("Pragma", "No-cache");
@@ -100,7 +100,7 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId());
 String user = (String)session.getAttribute("userID");
 if(user!=null)
 { %>
-<table width="100%" >
+<table width="100%">
 <tr>
 <td><img alt="" src="images/Parinati_white_logo.png"></td>
 <td align="right"><h4>Welcome&nbsp;<%= user%></h4></td>
@@ -149,6 +149,6 @@ while(catIter.hasNext()){
 	</iframe>
 	<div class="navbar" style="width:100%;height:5%"></div>
 <%} %>
-</div>
+<!-- </div> -->
 </body>
 </html>

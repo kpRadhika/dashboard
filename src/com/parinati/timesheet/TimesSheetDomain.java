@@ -1,6 +1,7 @@
 package com.parinati.timesheet;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.parinati.util.CustomLogger;
@@ -143,11 +144,12 @@ public class TimesSheetDomain {
 		return res;
 	}
 	public List<ArrayList> getTaskList(String fromDate, String toDate,int projectId){
-		StringBuilder sql = new StringBuilder();
+		StringBuilder sql = null;
 		List values = new ArrayList();
 		List<String> valueTypes = new ArrayList();
 		List<ArrayList> result = null;
 		try{
+			sql = new StringBuilder();
 			sql.append(" SELECT TASKID,                                                     ");
 			sql.append(" CLIENTTASKID,                                                      ");
 			sql.append(" TASKSTATUSIID,                                                     ");
@@ -194,31 +196,59 @@ public class TimesSheetDomain {
 
 	}
 	
-	public List<List<String>> getTaskDetails(String statusId)
+	public List<List<String>> getTaskDetails(String statusId,String userLogin)
 	{
-		StringBuffer sql=new StringBuffer();
+		StringBuffer sql=null;
 		List taskDetails=null;
 		List queryValues = null;
 		List queryTypes = null;
+		List empIdList=null;
+		String empId=null;
 		try{
-			sql.append(" SELECT A.TASKID,						");
-			sql.append(" A.TASKDESCRIPTION,						");
-			sql.append(" B.STATUSDESCRIPTION					");
-			sql.append(" FROM TASKMASTER A,						");
-			sql.append(" TASKSTATUSMASTER B						");
+			sql = new StringBuffer();
+			
+			sql.append(" SELECT EMPID                                  ");
+			sql.append(" FROM USERLOGIN                                ");
+			sql.append(" WHERE LOGINID=?                                ");
+			
+			queryValues=new ArrayList<>();
+			
+			queryValues.add(userLogin);
+			queryTypes = new ArrayList<>();
+			queryTypes.add(GenericConstDef.DB_STRING);
+			
+			empIdList = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
+			
+			Iterator<List<String>> itr=empIdList.listIterator();
+			while (itr.hasNext()) {
+				empId=itr.next().get(0);
+			}
+			
+			sql = new StringBuffer();
+			
+			sql.append(" SELECT A.TASKID,						");	
+			sql.append(" A.TASKDESCRIPTION,						");	
+			sql.append("B.STATUSDESCRIPTION,					");
+			sql.append(" C.EMPID,								");
+			sql.append(" B.TASKSTATUSIID						");
+			sql.append(" FROM TASKMASTER A,						");		
+			sql.append("TASKSTATUSMASTER B,						");
+			sql.append("EMPTASKMAPPINGDTLS c					");
 			sql.append(" WHERE A.TASKSTATUSIID=B.TASKSTATUSIID	");
+			sql.append("AND A.TASKID=C.TASKID					");
+			sql.append(" AND C.EMPID=?							");
 			
 			if(!statusId.isEmpty())
-			{
 				sql.append("AND B.TASKSTATUSIID=?	");
-			}
 			queryValues=new ArrayList<>();
+			queryValues.add(empId);
+			
 			if(!statusId.isEmpty())
-			{
 				queryValues.add(statusId);
-			}
 			
 			queryTypes = new ArrayList<>();
+			queryTypes.add(GenericConstDef.DB_STRING);
+			if(!statusId.isEmpty())
 			queryTypes.add(GenericConstDef.DB_STRING);
 			taskDetails = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
 		}
@@ -228,5 +258,69 @@ public class TimesSheetDomain {
 		}
 		
 		return taskDetails;
+	}
+	public int insertTaskDetails(List<String> inpuList)
+	{
+		int result=0;
+		List totalQueries = new ArrayList<>();
+		List totalValues = new ArrayList<>();
+		List totalValueTypes = new ArrayList<>();
+		List queryValues = null;
+		List queryTypes = null;
+		String empId=inpuList.get(0)==null?"":inpuList.get(0).toString();
+		String taskId=inpuList.get(1)==null?"":inpuList.get(1).toString();
+		String fromDate=inpuList.get(2)==null?"":inpuList.get(2).toString();
+		String toDate=inpuList.get(3)==null?"":inpuList.get(3).toString();
+		String status=inpuList.get(4)==null?"":inpuList.get(4).toString();
+		String hours=inpuList.get(5)==null?"":inpuList.get(5).toString();
+		StringBuilder sql=new StringBuilder();
+		try{
+			sql.append(" INSERT INTO TIMESHEETENTRY	(						");
+			sql.append(" EMPID,TASKID,FROMTIME,TOTIME,TASKHOURS,TASKDATE)	");
+			sql.append("  VALUES(											");
+			sql.append(" 		?	,										");
+			sql.append(" 		?	,										");
+			sql.append(" 		TO_TIMESTAMP(?,'dd-MM-yyyy HH24:mi'), 		");
+			sql.append(" 		TO_TIMESTAMP(?,'dd-MM-yyyy HH24:mi'),		");
+			sql.append(" 		?	,										");
+			sql.append(" 		TO_DATE(?,'dd-MM-yyyy')	)					");
+			
+			
+			queryValues=new ArrayList<>();
+			queryValues.add(empId);
+			queryValues.add(taskId);
+			queryValues.add(fromDate);
+			queryValues.add(toDate);
+			queryValues.add(hours);
+			queryValues.add(fromDate.substring(0, 10));
+			queryTypes = new ArrayList<>();
+			queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_STRING);
+			totalQueries.add(sql.toString());
+			totalValues.add(queryValues);
+			totalValueTypes.add(queryTypes);
+			StringBuffer sql1=new StringBuffer();
+			sql1.append(" UPDATE TASKMASTER SET TASKSTATUSIID = ? ");
+			sql1.append(" WHERE TASKID = ? 								");
+			queryValues=new ArrayList<>();
+			queryValues.add(status);
+			queryValues.add(taskId);
+			queryTypes = new ArrayList<>();
+			queryTypes.add(GenericConstDef.DB_STRING);
+			queryTypes.add(GenericConstDef.DB_STRING);
+			totalQueries.add(sql1.toString());
+			totalValues.add(queryValues);
+			totalValueTypes.add(queryTypes);
+			result = dbhelper.prepStmtExecuteMultiple(totalQueries, totalValues, totalValueTypes);
+		}
+		catch(Exception e)
+		{
+			CustomLogger.exceptionJava(e, "Exception in getTaskDetails() while executing the query:"+sql, "TimesSheetDomain.java");
+		}
+		return result;
 	}
 }

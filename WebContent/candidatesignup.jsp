@@ -25,8 +25,8 @@ filter: alpha(opacity=20);
 
 }
 #signupform{
-	box-shadow: 0px 0px 5px #272928, 0px 0px 0px 0px #504f54, 0px 23px 50px #999; 
-	background-color: #FFFFFF;
+	box-shadow: 0px 0px 5px #272928, 0px 0px 0px 0px #504f54, 0px 23px 50px #999;
+	background-color: lavender;
 	height: 60%;
 }
 #formcontent{
@@ -39,26 +39,27 @@ table{
     height:100%
 }
 .formstyle{
-        width: 80%;
+    width: 80%;
     margin-left: 10%;
-    padding: 10px !important;
-    margin-top: 3% !important;
+    padding: 7px !important;
+    margin-top: 1% !important;
 }
 tr label{
 	margin-left: 36%;
 }
 
 #uploadfilediv{
-background-color: #fdcf16;
-    width: 80% !important;
-    text-align: center;
-      border-style: solid;
-          border-width: 2px;
+width: 80% !important;
+text-align: center;
+/* border-style: solid; */
+border-width: 2px;
+background: linear-gradient(to top, #ffc30b, #fffc70 );
 }
 #register{
 background-color: #2aab64;
 width: 84% !important;
 border: 0;
+background: linear-gradient(to top, #2aab64, #ADFF2F );
 }
 #clear{
 background-color: #dbd8cd;
@@ -70,9 +71,9 @@ cursor:pointer;
 opacity:0.9;
 padding: 5px;
 }
-.important{
+/* .important{
 	border-color:red;
-}
+} */
 .error{
 	color:red;
 	margin-left: 10% !important;
@@ -134,35 +135,38 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 <form name="candidateregisterform" id="candidateregisterform">
 <div>
 <table>
-<caption style="background-color: #2aab64;height:20px;text-align:center;padding: 10px;;">Candidate Registration</caption>
+<caption style="background-color: #2aab64;height:20px;text-align:center;padding: 10px;background: linear-gradient(to top, #2aab64, #ADFF2F );font-weight: bold">Candidate Registration</caption>
 <tr>
 <td>
-<input type="text" name="firstname" id="firstname" class="formstyle important valid" style="width:37%" placeholder="Firstname"/><input type="text" name="lastname" class="formstyle" style="width:37%;margin-left:2%" placeholder="Lastname"/>
+<input type="text" name="firstname" id="firstname" class="formstyle valid" style="width:37%" placeholder="Firstname*"/><input type="text" name="lastname" class="formstyle" style="width:37%;margin-left:2%" placeholder="Lastname"/>
 <label for="firstname" generated="true" class="error" style="display: none;">This field is required.</label>
 </td>
 </tr>
 <tr>
-<td><input type="text" name="candidateemail" class="formstyle important valid" placeholder="EmailId"/></td>
+<td><input type="text" name="candidateemail" class="formstyle valid" placeholder="EmailId*"/></td>
 </tr>
 <tr>
-<td><input type="text" name="candidateno" class="formstyle important valid" placeholder="Phone No."/></td>
+<td><input type="text" name="candidateno" class="formstyle valid" placeholder="Phone No.*"/></td>
 </tr>
 <tr>
-<td><textarea name="address" class="formstyle important valid" placeholder="Current Address" style="border-width: 2px;resize: none;"></textarea></td>
+<td><textarea name="address" class="formstyle valid" placeholder="Current Address*" style="border-width: 2px;resize: none;"></textarea></td>
 </tr>
 <tr>
-<td><input type="text" name="qualification" class="formstyle important valid" placeholder="Qualification"/></td>
+<td><input type="text" name="qualification" class="formstyle valid" placeholder="Qualification*"/></td>
 </tr>
 <tr>
-<td><input type="text" name="skills" class="formstyle important valid" placeholder="Skills"/></td>
+<td><input type="text" name="skills" class="formstyle valid" placeholder="Skills*"/></td>
 </tr>
 <tr>
-<td><input type="text" name="experience" class="formstyle important valid" placeholder="Experience (in Years)"/></td>
+<td><input type="text" name="experience" class="formstyle valid" placeholder="Experience (in Years)*"/></td>
+</tr>
+<tr>
+<td><label class="formstyle" style="color: grey">* mandatory fields</label></td>
 </tr>
 <tr>
 <td>
 <input type="file" name="uploadcv" id="uploadfile" class="valid" accept=".pdf" style="display: none;"/>
-<label for="uploadfile"><div class="formstyle important" id="uploadfilediv">
+<label for="uploadfile"><div class="formstyle" id="uploadfilediv">
 <svg width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg> <span id="cvlabel">Click to Upload CV</span>
 </div>
 </label>
@@ -171,9 +175,10 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 <tr>
 <td><input type="submit" id="register" class="formstyle" value="Register"/></td>
 </tr>
-<tr>
+<!-- <tr>
 <td><input type="reset" id="clear" class="formstyle" value="Reset" style=" margin-bottom: 3%;"/></td>
-</tr>
+</tr> -->
+<tr><td><br></td></tr>
 </table>
 </div>
 </form>

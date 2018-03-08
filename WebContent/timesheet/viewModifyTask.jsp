@@ -36,21 +36,16 @@ button {
 }
 </style>
 
-<script>
-function resetVal()
-{
-	$("#taskStatus").val("");
-}
-
-</script>
+<script type = "text/javascript" src = "scripts/addTaskTime.js"></script>
 
 </head>
 
 <body>
 <%
 String taskStatusCode = request.getParameter("taskStatus")== null ? "": request.getParameter("taskStatus");
+String user = (String)session.getAttribute("userID");
 
-List<List<String>> taskDescription=timesheetDomain.getTaskDetails(taskStatusCode);
+List<List<String>> taskDescription=timesheetDomain.getTaskDetails(taskStatusCode,user);
 List<List<String>> statusList=timesheetDomain.getTaskStatus();
 
 session.setAttribute("statusList",statusList);
@@ -116,7 +111,7 @@ session.setAttribute("statusList",statusList);
 					taskDetails=taskDescription.get(i);
 			%>	
 			<tr>
-				<td align="center"><a href="addTaskTime.jsp?taskId=<%=taskDetails.get(0)%>&taskName=<%=taskDetails.get(1)%>&taskStatus=<%=taskDetails.get(2)%>&statusCode=<%=statusCode %>"><%=taskDetails.get(0)%></a></td>
+				<td align="center"><a href="addTaskTime.jsp?taskId=<%=taskDetails.get(0)%>&taskName=<%=taskDetails.get(1)%>&taskStatus=<%=taskDetails.get(2)%>&statusCode=<%=taskDetails.get(4) %>&empId=<%=taskDetails.get(3) %>"><%=taskDetails.get(0)%></a></td>
 				<td align="center"><%=taskDetails.get(1) %></td>
 				<td align="center"><%=taskDetails.get(2) %></td>
 			</tr>

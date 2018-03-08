@@ -76,6 +76,8 @@ function formSubmit()
 	var toDate=	new Date($("#endDateTime").val().split("-")[1]+"-"+$("#endDateTime").val().split("-")[0]+"-"+$("#endDateTime").val().split("-")[2]);
 	var diff = Math.abs(toDate - fromDate);
 	var hours = Math.floor((diff/1000)/(60*60));
+	
+	$("#hours").val(hours);
 	if(hours>12)
 		{
 		alert("End Date should not be greater than 12 hours from Start Date")
