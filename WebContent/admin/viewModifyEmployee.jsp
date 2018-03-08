@@ -51,7 +51,7 @@ button {
 <body>
 <table width="100%" align="center">
 <tr class="tableheader">
-			<td colspan="3">Search Employee</td>
+			<td colspan="3">Update Employee Details</td>
 </tr>
 <tr>
 <td>

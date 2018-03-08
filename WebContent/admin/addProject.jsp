@@ -34,7 +34,7 @@ if(submitClicked.isEmpty()){
 <form action="addProject.jsp" id="addProject">
 <table width="80%" align="center">
 <tbody>
-<tr class="tableheader"><td colspan="2">add project</td></tr><tr></tr>
+<tr class="tableheader"><td colspan="2">Project Management</td></tr><tr></tr>
 <tr>
 	<td>Project Name<span class="required"></span></td>
 	<td><input type="text" id="pname" name="pname"></td>
