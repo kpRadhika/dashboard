@@ -94,4 +94,15 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <display-name>DownloadReportServlet</display-name>
+    <servlet-name>DownloadReportServlet</servlet-name>
+    <servlet-class>com.parinati.util.DownloadReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadReportServlet</servlet-name>
+    <url-pattern>/DownloadReportServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
