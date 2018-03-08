@@ -105,7 +105,7 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 			String candidateId = details.get(0).toString().trim();
 			String firstName = details.get(1).toString().trim();
 			String Skills = details.get(2).toString().trim();
-			String interviewDate = details.get(3).toString().trim();
+			String interviewDate =details.get(3) == null ? "": details.get(3).toString().trim();
 			String selectStatus = details.get(4).toString().trim();
 	%>
 	<tr>

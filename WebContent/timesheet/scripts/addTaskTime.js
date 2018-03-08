@@ -7,7 +7,6 @@ $(document).ready(function(){
 		numberOfMonths : 1,
 		showSecond:false,
 		onSelect : function(selected) {
-			//$("#endDateTime").datepicker("option", "minDate", selected)
 		}
 	})
 	
@@ -17,7 +16,6 @@ $(document).ready(function(){
 		changeYear : true,
 		numberOfMonths : 1,
 		onSelect : function(selected) {
-			//$("#startDateTime").datepicker("option", "minDate", selected)
 		}
 	})
 	
@@ -58,11 +56,9 @@ function currentTime(dateTimePicker)
 	var year=today.getFullYear();
 	var hours="0"+today.getHours();
 	var minuts="0"+today.getMinutes();
-	//var currentDateTime=today.getDate()+"-"+("0"+(today.getMonth()+1)).slice(-2)+"-"+today.getFullYear()+" "+today.getHours()+":"+today.getMinutes();
 	var currentDateTime=date.slice(-2)+"-"+month.slice(-2)+"-"+year+" "+hours.slice(-2)+":"+minuts.slice(-2);
 	
 	$("#"+dateTimePicker).val(currentDateTime);
-	//$("#startDateTime").val(currentDateTime);
 }
 
 function resetVal()

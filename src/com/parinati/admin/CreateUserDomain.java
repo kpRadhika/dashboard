@@ -70,6 +70,7 @@ public class CreateUserDomain {
 
 			candId = "PARI"+candId;
 
+			
 			sql = new StringBuilder();
 
 			sql.append("	INSERT INTO CANDIDATEDTLS (		");
@@ -117,7 +118,8 @@ public class CreateUserDomain {
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(4)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(5)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(6)));
-			queryValues.add(GenericUtil.setValue((String)inputParam.get(7)));
+			//queryValues.add(GenericUtil.setValue((String)inputParam.get(7)));
+			queryValues.add(inputParam.get(7));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(8)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(9)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(10)));
@@ -163,7 +165,7 @@ public class CreateUserDomain {
 		sql.append("	    CANDIDATEDTLS       					");
 		sql.append("	    WHERE       							");
 		if("candidateId".equalsIgnoreCase(radioButtonVal))
-			sql.append("	    CANDIDATEID = ?        ");
+			sql.append("	    UPPER(CANDIDATEID) = ?        ");
 		else if("name".equalsIgnoreCase(radioButtonVal))
 			sql.append("	    UPPER(FNAME)= ?    		");
 		else if("skills".equalsIgnoreCase(radioButtonVal))
@@ -173,7 +175,7 @@ public class CreateUserDomain {
 
 		queryValues = new ArrayList<>();
 		if("candidateId".equalsIgnoreCase(radioButtonVal))
-			queryValues.add(searchValue);
+			queryValues.add(searchValue.toUpperCase());
 		else if("name".equalsIgnoreCase(radioButtonVal))
 			queryValues.add(searchValue.toUpperCase());
 		else if("skills".equalsIgnoreCase(radioButtonVal))

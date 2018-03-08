@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <style>
+
 .navbar {
 box-shadow: 0px 0px 1px #272928, 0px 0px 0px 0px #504f54, 0px 0px 0px #999;
   overflow: hidden;
@@ -80,6 +81,8 @@ padding: 12px 16px;
   	margin-left: 10%;
   	height: 100%;
 }
+
+
 </style>
 <script type="text/javascript">
 function logout()
@@ -103,7 +106,7 @@ if(user!=null)
 <table width="100%">
 <tr>
 <td><img alt="" src="images/Parinati_white_logo.png"></td>
-<td align="right"><h4>Welcome&nbsp;<%= user%></h4></td>
+<td align="right"><h4>Welcome&nbsp;<%= user.split("@")[0]%></h4></td>
 </tr>
 </table>
 <%

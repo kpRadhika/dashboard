@@ -110,7 +110,7 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 		/* String path1 = new File("").getAbsolutePath();
 		String path = new File(path1).getParent();*/
 
-		 uploadPath = "D:\\Dashboard\\Resume";
+		 uploadPath = "/DashBoard/Resume";
 
 		// creates the directory if it does not exist
 		File uploadDir = new File(uploadPath);
@@ -196,7 +196,7 @@ if(result == null){
 		</tr>
 		<tr>
 			<td>Date Of Birth<label style="color:red">*</label></td>
-			<td><input type="text" name = "DOB" id="datepicker" align="left"></td>
+			<td><input type="text" name="DOB" id="DOB" align="left" readonly/></td>
 
 			<td>Phone Number<label style="color:red">*</label></td>
 			<td><input type="text" name = "phone" id = "phone" align="left" maxlength="10">
@@ -268,7 +268,7 @@ if(result == null){
 		</tr>
 	</table>
 	<br><br>
-	<div align="center"><input type="submit" value="Submit" onclick="return formSubmit()"/>
+	<div align="center"><input type="submit" value="Submit"/>
 			<input type="reset" value="Reset" /></div>
 			<br><br>
 			</td></tr></table>

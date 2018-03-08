@@ -1,20 +1,24 @@
 $( function() {
-    $( "#datepicker" ).datepicker({
+    $( "#DOB" ).datepicker({
     	changeMonth: true,
 		changeYear: true,
 		maxDate:"0",
 		yearRange: "-100:+0",
-		dateFormat: 'dd-mm-yy'
+		dateFormat: 'dd-mm-yy',
+		onSelect : function(selected) {
+			$("label[for=DOB]").css("display","none");
+		}
     });
 
     $( "#interViewDate" ).datepicker({
     	changeMonth: true,
 		monthRange:'12',
 		minDate:"0",
-		dateFormat: 'dd-mm-yy'
+		dateFormat: 'dd-mm-yy',
+		onSelect : function(selected) {
+		}
     });
-  } );
-function formSubmit(){
+
 
 	$("#createCandidate").validate({
 		rules : {
@@ -89,7 +93,8 @@ function formSubmit(){
 			label.addClass('error');
 			label.insertAfter(element);
 	    },
-		wrapper : "div"
+		wrapper : "div",
+		
 
 	});
 	$.validator.addMethod("number", function(b, a) {
@@ -99,7 +104,8 @@ function formSubmit(){
 		return this.optional(a) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(b)
 	}, "Please Enter valid Email Id");
 
-}
+
+  } );
 
 
 
