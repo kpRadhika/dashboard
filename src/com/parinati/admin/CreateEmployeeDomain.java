@@ -220,6 +220,22 @@ public class CreateEmployeeDomain {
 		valueTypes.add(GenericConstDef.DB_STRING);
 		valueTypes.add(GenericConstDef.DB_STRING);
 		totalTypes.add(valueTypes);
+		
+	
+	    sql= new StringBuilder();
+		sql.append(" DELETE FROM CANDIDATEDTLS WHERE CANDIDATEID=?");;
+
+		totalQueryList.add(sql.toString());
+
+		values = new ArrayList();
+		values.add(candidateId);
+		
+		totalValues.add(values);
+
+		valueTypes = new ArrayList();
+		valueTypes.add(GenericConstDef.DB_INT);
+		totalTypes.add(valueTypes);
+		
 
 		int res = dbhelper.prepStmtExecuteMultiple(totalQueryList, totalValues, totalTypes);
 		//if success, welcome mail to be sent
