@@ -80,7 +80,8 @@ if(subButtonVal.equals("Submit")){
 		Iterator iterator = taskList.listIterator();
 			%>
 			<form action="">
-			<table align="center" width="80%" style="margin-top: 1%">
+			<div id="empltable" style="border: 1px solid silver; margin: auto; width: 100%;margin-top: 1%; height: 350px; vertical: 20px; overflow-y: scroll; overflow-x: scroll;">
+			<table align="center" class="zebra" width="100%" style="border: none">
 			<tr>
 			<th>TaskId</th>
 			<th>TaskDescription</th>
@@ -120,6 +121,7 @@ if(subButtonVal.equals("Submit")){
 			</tr>
 			<%} %>
 			</table>
+			</div>
 			</form>
 			<%
 		}

@@ -390,21 +390,19 @@ public class CreateEmployeeDomain {
 			sql.append("	WHERE                   ");
 			sql.append("	empid =?                ");
 
-			totalQueryList = new ArrayList();
 			totalQueryList.add(sql.toString());
 
 			queryValues = new ArrayList<>();
 			queryValues.add(inputParam.get(7));//roleid
 			queryValues.add(inputParam.get(8));//projectid
 			queryValues.add(inputParam.get(6));//empid
-			totalValues = new ArrayList();
+
 			totalValues.add(queryValues);
 
 			queryTypes = new ArrayList<>();
 			for(int i = 0; i<queryValues.size();i++)
 				queryTypes.add(GenericConstDef.DB_INT);
 
-			totalTypes = new ArrayList();
 			totalTypes.add(queryTypes);
 
 			rs = dbhelper.prepStmtExecuteMultiple(totalQueryList, totalValues, totalTypes);

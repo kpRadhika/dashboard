@@ -29,6 +29,7 @@ if(!emplList.isEmpty()){
 </tr>
 <tr>
 <td>
+<div id="empltable" style="border: 1px solid black; margin: auto; width: 100%; height: 350px; vertical: 20px; overflow-y: scroll; overflow-x: scroll;">
 <table style= "width: 80%;border: none;" align="center" id="empltable" >
 	<tr align="center" class="tableheader">
 		<td>Select</td>
@@ -106,6 +107,7 @@ if(!emplList.isEmpty()){
 	<%}%>
 	
 </table>
+</div>
 </td>
 </tr>
 </table>

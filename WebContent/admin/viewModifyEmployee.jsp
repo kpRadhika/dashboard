@@ -1,3 +1,4 @@
+<%@page import="com.parinati.util.GenericUtil"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:useBean id="employeeDomain" scope="session" class="com.parinati.admin.CreateEmployeeDomain" />
@@ -158,35 +159,35 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 		List projectDetails = employeeDomain.fetchProjectDetails();
 	%>
 
-<div id="empltable" style="border: 1px solid black; margin: auto; width: 80%; height: 260px; vertical: 20px; overflow-y: scroll; overflow-x: scroll;">
+<div id="empltable" style="border: 1px solid silver; margin: auto; width: 80%; height: 260px; vertical: 20px; overflow-y: scroll; overflow-x: scroll;">
 		<table style= "width: 100%;border: none;" id="empltable" class="tableProps">
-		<tr align="center" class="tableheader">
-		<td >Select</td>
-		<td>Id</td>
-		<td>Name</td>
-		<td>Phone No.</td>
-		<td>PAN No.</td><td>Aadhar No.</td>
-		<td>Passport No.</td><td>Skills</td>
-		<td>Status</td>
-		<td>Role</td>
-		<td>Project Name</td>
+		<tr align="center">
+		<th>Select</th>
+		<th>Id</th>
+		<th>Name</th>
+		<th>Phone No.</th>
+		<th>PAN No.</th><th>Aadhar No.</th>
+		<th>Passport No.</th><th>Skills</th>
+		<th>Status</th>
+		<th>Role</th>
+		<th>Project Name</th>
 		</tr>
 		<%
 		String employeeId = null;
 		for(int i=0; i<viewDetails.size(); i++)
 		{
 			 ArrayList details=(ArrayList)viewDetails.get(i);
-			employeeId = details.get(0).toString().trim();
-			String firstName = details.get(1).toString().trim();
-			String lastName = details.get(2).toString().trim();
-			String phone = details.get(3).toString().trim();
-			String panno = details.get(4) == null ? "" : details.get(4).toString().trim();
-			String aadharNo = details.get(5) == null ? "" : details.get(5).toString().trim();
-			String passportNo = details.get(6) == null ? "" : details.get(6).toString().trim();
-			String skills = details.get(7).toString().trim();
-			String isActive = details.get(8).toString().trim();
-			String role = details.get(9).toString().trim();
-			String projectID = details.get(10).toString().trim();
+			employeeId = GenericUtil.setValue((String)details.get(0));
+			String firstName = GenericUtil.setValue((String)details.get(1));
+			String lastName = GenericUtil.setValue((String)details.get(2));
+			String phone = GenericUtil.setValue((String)details.get(3));
+			String panno = GenericUtil.setValue((String)details.get(4));
+			String aadharNo = GenericUtil.setValue((String)details.get(5));
+			String passportNo = GenericUtil.setValue((String)details.get(6));
+			String skills = GenericUtil.setValue((String)details.get(7));
+			String isActive = GenericUtil.setValue((String)details.get(8));
+			String role = GenericUtil.setValue((String)details.get(9));
+			String projectID = GenericUtil.setValue((String)details.get(10));
 	%>
 	<tr>
 		<td ><input type="radio" id="candSel<%=i %>" name="candSel" value="<%=employeeId%>" class="radioCheck" onclick="enableDisable(<%=i%>)"/></td>
@@ -262,7 +263,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 
 }else{
 	%>
-	<table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: none">
+	<table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: 1px solid #ccc">
 	<%
 	if(1 == result){
 	%>

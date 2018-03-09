@@ -143,7 +143,7 @@ public class LeaveApplicationDomain {
 		List valueTypes = null;
 
 		try{
-			sql.append(" SELECT APPLICATIONID,			");
+			/*sql.append(" SELECT APPLICATIONID,			");
 			sql.append("  EMPID,						");
 			sql.append("  LEAVETYPEID,					");
 			sql.append("  LEAVEFROM,					");
@@ -152,10 +152,10 @@ public class LeaveApplicationDomain {
 			sql.append(" WHERE APPROVALSTATUS = 'P'		");
 			sql.append(" AND MANAGERID        =			");
 			sql.append(" (SELECT EMPID FROM EMPLOYEEDTLS");
-			sql.append(" WHERE officialemail=?)			");
+			sql.append(" WHERE officialemail=?)			");*/
 
-			/*sql.append("	SELECT									");
-			sql.append("	    UL.EMPID,                           ");
+			sql.append("	SELECT									");
+			sql.append("	    LD.EMPID,                           ");
 			sql.append("	    ED.FNAME,                           ");
 			sql.append("	    ED.LNAME,                           ");
 			sql.append("		TO_CHAR(LD.LEAVEFROM,'DD/MM/YYYY'), ");
@@ -171,7 +171,9 @@ public class LeaveApplicationDomain {
 			sql.append("	AND LD.EMPID = ED.EMPID                 ");
 			sql.append("	AND LD.LEAVETYPEID = LTM.LEAVETYPEID    ");
 			sql.append("	    AND LD.APPROVALSTATUS = 'P'         ");
-			sql.append("	    AND UL.LOGINID = ?                  ");*/
+			sql.append(" 		AND MANAGERID        =				");
+			sql.append(" (SELECT EMPID FROM EMPLOYEEDTLS  			");
+			sql.append(" WHERE officialemail=?)						");
 
 			values = new ArrayList();
 			values.add(loginId);
