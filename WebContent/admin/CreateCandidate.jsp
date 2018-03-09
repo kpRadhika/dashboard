@@ -172,9 +172,9 @@ if(result == null){
 <form  name  ="createCandidate" id ="createCandidate" action="CreateCandidate.jsp" enctype="multipart/form-data" method="post">
 
 <br>
-<table width="100%" align="center"><tr align="center" class="tableheader" ><td>Create Candidate</td></tr>
+<table width="100%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );"><tr align="center" class="tableheader"><td>Create Candidate</td></tr>
 <tr><td>
-	<table width="80%" align="center">
+	<table width="80%" align="center" bgcolor="white">
 	<col width="20%">
 	<col width="20%">
 	<col width="20%">
@@ -213,7 +213,7 @@ if(result == null){
 
 		</table>
 <br><br>
-	<table width="80%" align="center">
+	<table width="80%" align="center" bgcolor="white">
 	<col width="20%">
 	<col width="20%">
 	<col width="20%">
@@ -238,7 +238,7 @@ if(result == null){
 
 	</table>
 	<br><br>
-	<table width="80%" align="center">
+	<table width="80%" align="center" bgcolor="white">
 	<col width="20%">
 	<col width="20%">
 	<col width="20%">
@@ -254,7 +254,7 @@ if(result == null){
 		</tr>
 		</table>
 <br><br>
-<table width="80%" align="center">
+<table width="80%" align="center" bgcolor="white">
 <col width="20%">
 	<col width="20%">
 	<col width="20%">

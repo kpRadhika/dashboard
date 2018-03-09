@@ -52,7 +52,7 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 <tr>
 <td>
 <form method="post" action="viewModifyCandidate.jsp" >
-<table width="80%" border="0" align="center" >
+<table width="80%" border="0" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
 
 			<tr >
 			<td>Search Candidate By:</td>
@@ -96,7 +96,7 @@ String radioButtonVal = request.getParameter("viewModify")== null ? "": request.
 
 		<table id = "candidateTbl" class="zebra" align="center" width="80%">
 		<tr bgcolor="#ffC30B" style="font-weight: bold">
-		<td>Candidate Id</td><td>First name</td><td>Skills</td><td>InterviewDate</td><td>Selection Status</td>
+		<th>Candidate Id</th><th>First name</th><th>Skills</th><th>InterviewDate</th><th>Selection Status</th>
 		</tr>
 		<%
 		for(int i=0; i<viewDetails.size(); i++)

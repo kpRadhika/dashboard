@@ -80,6 +80,7 @@ padding: 12px 16px;
 	width: 80%;
   	margin-left: 10%;
   	height: 100%;
+  	background-color: white; 
 }
 
 

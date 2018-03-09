@@ -13,7 +13,7 @@ th{
 
 .zebra tr:nth-child(even)
 {
-	background-color:#DCDCDC
+	background: linear-gradient(to top, #DCDCDC, white );
 }
 
 odd
@@ -75,7 +75,6 @@ table{
 
 
 .tableheader{
-	background-color: #C0C0C0;
 	background: linear-gradient(to top, lavender,white);
 	font-weight: bold;
 	text-align:center;

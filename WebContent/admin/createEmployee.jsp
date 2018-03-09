@@ -38,7 +38,7 @@ String fromDate = request.getParameter("fromDate")==null?"":(String)request.getP
 String toDate = request.getParameter("toDate")==null?"":(String)request.getParameter("toDate");
 %>
 <form id = "createEmployee" action="createEmployee.jsp" method="post">
-<table width="80%" align="center">
+<table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
 <tr>
 <td>From Date<span class="required"></span></td>
 <td><input type="text" id="fromDate" name="fromDate" value="<%=fromDate %>"/></td>
@@ -61,13 +61,13 @@ if(candidateDetails !=null && !candidateDetails.isEmpty()){
 %>
 <form action="CreateEmployeeAction.jsp" id="createEmpl" method="post">
 <table id = "tbl" class="zebra" align="center" width="80%">
-<tr class="tableheader" >
-<td>Modify</td>
-<td>Candidate/Emp Id</td>
-<td>First Name</td>
-<td>Experience</td>
-<td>Skills</td>
-<td>Interview Date</td>
+<tr>
+<th>Modify</th>
+<th>Candidate/Emp Id</th>
+<th>First Name</th>
+<th>Experience</th>
+<th>Skills</th>
+<th>Interview Date</th>
 
 </tr>
 <%
@@ -97,21 +97,22 @@ String emplId = null;
 
 <%}%>
 <tr align="center"><td colspan="6"><button type="button" id ="subbutton" name="subbutton" disabled="disabled" onclick="performNextStep()" value="">Onboard</button></td></tr>
+
 </table>
+
 <div id="modal" align="center" class="overlay" style="border: 1px solid #0199CD; text-align: center; display: none; ">
-<table class="overlay-content" style="background-color: #ffC30B;" width="50%">
+<table class="overlay-content" style="background-color: #ffC30B;background:linear-gradient(to top, #ffc30b, #fffc70 );" width="50%">
 <tr>
-<th>Date of joining</th><td><input type="text" id="doj" name="doj" value=""/></td></tr>
+<td>Date of joining</td><td><input type="text" id="doj" name="doj" value=""/></td></tr>
 <tr>
-<th>Employee Role</th><td><Select id="role" name="role">
+<td>Employee Role</td><td><Select id="role" name="role">
 <option value="">Select</option>
-<option value="7">TRAINEE</option>
-<option value="6">JUNIOR DEVELOPER</option>
-<option value="5">DEVELOPER</option>
-<option value="4">SENIOR DEVELOPER</option>
-<option value="3">TEAM LEAD</option>
-<option value="3">TEAM LEAD</option>
-<option value="2">PROJECT MANAGER</option>
+<option value="7">Trainee</option>
+<option value="6">Junior Developer</option>
+<option value="5">Developer</option>
+<option value="4">Senior Developer</option>
+<option value="3">Team Lead</option>
+<option value="2">Project Manager</option>
 <option value="1">HR</option>
 </Select>
 </td>
