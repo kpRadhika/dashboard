@@ -73,5 +73,61 @@ public class AddProjectDomain
 
 	}
 
+	public List<List<ArrayList>> fetchProjectDetails(String projectId){
+		List<List<ArrayList>> rs = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		try{
+			sql.append(" SELECT PROJECTLOC,		");
+			sql.append(" TECHNOLOGY,            ");
+			sql.append(" PROJECTLEADID,         ");
+			sql.append(" FNAME                  ");
+			sql.append(" || ' '                 ");
+			sql.append(" || LNAME               ");
+			sql.append(" FROM                   ");
+			sql.append(" EMPLOYEEDTLS,          ");
+			sql.append(" FROM PROJECTMASTER     ");
+			sql.append(" PROJECTLEADID = EMPID  ");
+			sql.append(" WHERE PROJECTID=?      ");
+			
+			List values = new ArrayList();
+			values.add(projectId);
+			
+			List valueTypes = new ArrayList();
+			valueTypes.add(GenericConstDef.DB_INT);
+			
+			List result1 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
+			String leadId = null;
+			if(result1!=null && !result1.isEmpty()){
+				leadId = (String)result1.get(2);
+			}
+			sql = new StringBuilder();
+			
+			sql.append(" SELECT                         ");
+			sql.append("     ERD.EMPID,                 ");
+			sql.append("     ED.FNAME                   ");
+			sql.append("     || ' '                     ");
+			sql.append("     || ED.LNAME                ");
+			sql.append(" FROM                           ");
+			sql.append("     EMPROLEDTLS ERD,           ");
+			sql.append("     EMPLOYEEDTLS ED            ");
+			sql.append(" WHERE                          ");
+			sql.append("     ERD.EMPID = ED.EMPID       ");
+			sql.append("     AND   ERD.ROLEID = 3       ");
+			sql.append("     AND   ERD.PROJECTID = ?    ");
+			sql.append("     AND   EMPID NOT IN(?)    	");
+			
+			values.add(leadId);
+			valueTypes.add(GenericConstDef.DB_INT);
+			
+			List result2 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
+			
+			rs.add(result1);
+			rs.add(result2);
+		}
+		catch(Exception e){
+			CustomLogger.exceptionJava(e, "Exception in fetchEmployeeByProject() while executing the query:"+sql.toString(), "TimesSheetDomain.java");
+		}
+		return rs;
+	}
 
 }

@@ -16,38 +16,39 @@ th{
 	background: linear-gradient(to top, #DCDCDC, white );
 }
 
-odd
+.zebra tr:nth-child(odd)
 {
-    background-color:#fcf75e;
+    background:white;
 }
 
-/* button {
-     background:none!important;
-     color:inherit;
-     border:none;
-     padding:0!important;
-     font: inherit;
-     border-bottom:1px solid #0147FA;
-     cursor: pointer;
-} */
 
-.overlay{position: absolute;left: 0; top: 0; right: 0; bottom: 0;z-index: 3;background-color: rgba(255,255,255,0.8);}
+.overlay{
+	position: absolute;
+	left: 0; 
+	top: 0;
+	right: 0; 
+	bottom: 0;
+	z-index: 3;
+	background-color: rgba(255,255,255,0.8);
+	}
 
 .overlay-content {
+	font-family: Trebuchet-MS;
     position: fixed;
-    top: 50%;
+    top: 30%;
     left: 25%;
     right:50%;
+    width:50%;
+    height:50%;
     text-align: center;
-    font-size:small;
-    font-weight:bold;
+    font-size:medium;
+    font-weight: bold
 }
 
 .required:after { content:" *"; color: red}
 
 input[type=submit]{
 border-radius: 15px; 
-/* border:none; */
 font-family: Trebuchet-MS;
 font-size:Medium;
 padding : 3px 20px 3px 20px;
@@ -55,7 +56,6 @@ background: linear-gradient(to top, darkgray, whitesmoke );
 }
 input[type=reset]{
 border-radius: 15px; 
-/* border:none; */
 font-family: Trebuchet-MS;
 font-size:Medium;
 padding : 3px 20px 3px 20px;
@@ -81,4 +81,8 @@ table{
 	height:40px;
 	width: 100%;
 }
-div.error {color: red !important;text-align: left;font-size: small;}
+div.error {
+	color: red !important;
+	text-align: left;
+	font-size: small;
+}

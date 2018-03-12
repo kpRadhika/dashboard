@@ -110,7 +110,7 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 		/* String path1 = new File("").getAbsolutePath();
 		String path = new File(path1).getParent();*/
 
-		 uploadPath = "/DashBoard/Resume";
+		 uploadPath = "C:/dashBoard/Resume";
 
 		// creates the directory if it does not exist
 		File uploadDir = new File(uploadPath);
@@ -192,7 +192,9 @@ if(result == null){
 	<tr>
 			<td>Last Name<label style="color:red">*</label></td>
 			<td><input type="text" name = "lastName" align="left"></td>
-
+			<td>Sex<label style="color:red">*</label></td>
+			<td><input type="radio" name = "sex" id="sex" align="left" value="M">Male
+			<input type="radio" name = "sex" id="sex" align="left" value="F">Female</td>
 		</tr>
 		<tr>
 			<td>Date Of Birth<label style="color:red">*</label></td>
@@ -223,7 +225,17 @@ if(result == null){
 	</tr>
 		<tr>
 			<td>Qualification<label style="color:red">*</label></td>
-			<td><input type="text" name = "qualification" align="left"></td>
+			<td><select name = "qualification" align="left" id = "qualification">
+			<option value="">Select</option>
+			<option value="B.Tech">B.Tech</option>
+			<option value="BE">BE</option>
+			<option value="MCA">MCA</option>
+			<option value="BCA">BCA</option>
+			<option value="B.Sc">B.Sc</option>
+			<option value="MBA">MBA</option>
+			<option value="Diploma">Diploma</option>
+			</select>
+			<!-- <input type="text" name = "qualification" align="left"> --></td>
 
 			<td>Experience<label style="color:red">*</label></td>
 			<td><input type="text" name = "exp" align="left"></td>
@@ -261,7 +273,7 @@ if(result == null){
 	<col width="20%">
 <tr><th colspan="4"> Interview details</th></tr>
 		<tr>
-			<td><label>Date Of Interview</label></td>
+			<td><label>Date Of Interview</label><label style="color:red">*</label></td>
 			<td><input type="text" name = "interViewDate" id="interViewDate" align="left"></td>
 			<td></td>
 			<td></td>

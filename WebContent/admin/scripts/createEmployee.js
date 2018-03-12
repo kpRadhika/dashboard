@@ -3,14 +3,22 @@ $(function(){
 	    	changeMonth: true,
 			changeYear: true,
 			yearRange: "-100:+0",
-			dateFormat: 'dd-mm-yy'
+			dateFormat: 'dd-mm-yy',
+			maxDate:"0",
+			onSelect : function(selected) {
+				$("#toDate").datepicker("option", "minDate", selected)
+			}
 	    });
 
 	    $( "#toDate" ).datepicker({
 	    	changeMonth: true,
 	    	changeYear: true,
 			yearRange: "-100:+0",
-			dateFormat: 'dd-mm-yy'
+			dateFormat: 'dd-mm-yy',
+			maxDate:"0",
+			onSelect : function(selected) {
+				$("#fromDate").datepicker("option", "maxDate", selected)
+			}
 	    });
 
 	    $('input[type="radio"]').click(function() { 

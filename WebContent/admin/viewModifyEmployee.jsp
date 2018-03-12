@@ -58,22 +58,22 @@ button {
 <td>
 <%
 int result = 0;
-String search = request.getParameter("search")== null ? "": request.getParameter("search");
-String searchValue = request.getParameter("searchText")== null ? "": request.getParameter("searchText");
-String radioButtonVal = request.getParameter("viewModify")== null ? "": request.getParameter("viewModify");
-String projectDropDownVal = request.getParameter("projectDropDown")== null ? "": request.getParameter("projectDropDown");
-String searchText = request.getParameter("searchText")== null ? "": request.getParameter("searchText");
-String submitVal = request.getParameter("submit")== null ? "": request.getParameter("submit");
+String search = GenericUtil.setValue(request.getParameter("search"));
+String searchValue = GenericUtil.setValue(request.getParameter("searchText"));
+String radioButtonVal = GenericUtil.setValue(request.getParameter("viewModify"));
+String projectDropDownVal = GenericUtil.setValue(request.getParameter("projectDropDown"));
+String searchText = GenericUtil.setValue(request.getParameter("searchText"));
+String submitVal = GenericUtil.setValue(request.getParameter("submit"));
 if(!"".equalsIgnoreCase(submitVal)){
-	String phoneNo = request.getParameter("phone")== null ? "": request.getParameter("phone");
-	String panNo = request.getParameter("panno")== null ? "": request.getParameter("panno");
-	String aadharNumber = request.getParameter("aadharNo")== null ? "": request.getParameter("aadharNo");
-	String passportNumber = request.getParameter("passportNo")== null ? "": request.getParameter("passportNo");
-	String newSkills = request.getParameter("skills")== null ? "": request.getParameter("skills");
-	String newIsActive = request.getParameter("isActive")== null ? "": request.getParameter("isActive");
-	String employeeId = request.getParameter("candSel")== null ? "": request.getParameter("candSel");
-	String role = request.getParameter("role")== null ? "": request.getParameter("role");
-	String projectId = request.getParameter("projectName")== null ? "": request.getParameter("projectName");
+	String phoneNo = GenericUtil.setValue(request.getParameter("phone"));
+	String panNo = GenericUtil.setValue(request.getParameter("panno"));
+	String aadharNumber = GenericUtil.setValue(request.getParameter("aadharNo"));
+	String passportNumber = GenericUtil.setValue(request.getParameter("passportNo"));
+	String newSkills = GenericUtil.setValue(request.getParameter("skills"));
+	String newIsActive = GenericUtil.setValue(request.getParameter("isActive"));
+	String employeeId = GenericUtil.setValue(request.getParameter("candSel"));
+	String role = GenericUtil.setValue(request.getParameter("role"));
+	String projectId = GenericUtil.setValue(request.getParameter("projectName"));
 
 	List inputParam = new ArrayList();
 	inputParam.add(phoneNo);

@@ -1,3 +1,4 @@
+<%@page import="com.parinati.util.GenericUtil"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,18 +19,20 @@
 <body >
 <form action="modifyCandidate.jsp" id = "modifyCandidateForm" method="post">
 <%
-String count = request.getParameter("count")==null?"":(String)request.getParameter("count");
-String candId = request.getParameter("link"+count)==null?"":(String)request.getParameter("link"+count);
-String save = request.getParameter("saveBtn")==null?"":(String)request.getParameter("saveBtn");
+String userId = GenericUtil.setValue((String)session.getAttribute("userID"));
+String count = GenericUtil.setValue(request.getParameter("count"));
+String candId = GenericUtil.setValue(request.getParameter("link"+count));
+String save = GenericUtil.setValue(request.getParameter("saveBtn"));
 if(!save.isEmpty()){
-	String cId = request.getParameter("cid")==null?"":(String)request.getParameter("cid");
-	String saveSkill = request.getParameter("skills")==null?"":(String)request.getParameter("skills");
-	String saveInterviewDate = request.getParameter("interviewDate")==null?"":(String)request.getParameter("interviewDate");
-	String saveSelectStatus = request.getParameter("selection")==null?"":(String)request.getParameter("selection");
+	String cId = GenericUtil.setValue(request.getParameter("cid"));
+	String saveSkill = GenericUtil.setValue(request.getParameter("skills"));
+	String saveInterviewDate = GenericUtil.setValue(request.getParameter("interviewDate"));
+	String saveSelectStatus = GenericUtil.setValue(request.getParameter("selection"));
 	List inputs = new ArrayList();
 	inputs.add(saveSkill);
 	inputs.add(saveSelectStatus);
 	inputs.add(saveInterviewDate);
+	inputs.add(userId);
 	inputs.add(cId);
 	int updateCount = userDomain.modifyCandidate(inputs);
 	if(updateCount>0){
@@ -55,7 +58,7 @@ if(viewDetails != null && !viewDetails.isEmpty())
 {
 	%>
 	<table align="center" width="50%">
-	<tr class="tableheader"><td>Search Candidate</td></tr>
+	<tr><th colspan="2">Modify Candidate</th></tr>
 	<tr></tr><tr></tr><tr></tr>
 	<%
 	for(int i=0; i<viewDetails.size(); i++)
@@ -83,7 +86,7 @@ if(viewDetails != null && !viewDetails.isEmpty())
 		<%
 	}
 	%>
-	<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+	<tr></tr><tr></tr><tr></tr><tr></tr>
 	<tr><td colspan="2" align="center"><input type="submit" value="Save" id="saveBtn" name="saveBtn"></td></tr>
 	</table>
 <%

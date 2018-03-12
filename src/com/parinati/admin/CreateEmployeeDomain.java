@@ -73,7 +73,7 @@ public class CreateEmployeeDomain {
 
 		values = new ArrayList();
 
-		values.add(proposedLogin);
+		values.add(proposedLogin+"@parinati.in");
 
 		valueTypes = new ArrayList();
 		valueTypes.add(GenericConstDef.DB_STRING);
@@ -233,7 +233,7 @@ public class CreateEmployeeDomain {
 		totalValues.add(values);
 
 		valueTypes = new ArrayList();
-		valueTypes.add(GenericConstDef.DB_INT);
+		valueTypes.add(GenericConstDef.DB_STRING);
 		totalTypes.add(valueTypes);
 		
 
@@ -247,7 +247,9 @@ public class CreateEmployeeDomain {
 		String mailTempPath = FileReadUtil.getValue("ONBOARDINGMAIL");
 		String[] var = new String[3];
 		var[0] = GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(0));
-
+		var[1] = Integer.toString(empId);
+		var[2] = GenericUtil.setValue(actualLogin);
+		
 		new MailerUtil().postMailWithTLSAuth(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(5)),"", "Welcome to Parinati", mailTempPath, var);
 		}
 		catch (Exception e) {

@@ -26,7 +26,7 @@ background: linear-gradient(to top, darkgray, whitesmoke );
 </style>
 </head>
 <body>
-<table width="100%" align="center">
+<table width="100%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
 <tr class="tableheader">
 			<td colspan="3">On Board Employee</td>
 </tr>
@@ -38,7 +38,7 @@ String fromDate = request.getParameter("fromDate")==null?"":(String)request.getP
 String toDate = request.getParameter("toDate")==null?"":(String)request.getParameter("toDate");
 %>
 <form id = "createEmployee" action="createEmployee.jsp" method="post">
-<table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
+<table width="80%" align="center" bgcolor="white">
 <tr>
 <td>From Date<span class="required"></span></td>
 <td><input type="text" id="fromDate" name="fromDate" value="<%=fromDate %>"/></td>
@@ -80,12 +80,7 @@ String emplId = null;
 			String exp = details.get(2).toString().trim();
 			String Skills = details.get(3).toString().trim();
 			String interviewDate = details.get(4).toString().trim();
-			/* String stepCompleted = details.get(5).toString().trim();
-			String nextStepDesc = details.get(6).toString().trim(); */
-			/* if(details.size() > 6){
-				emplId = details.get(7).toString().trim();
-			} */
-	%>
+				%>
 	<tr>
 		<td><input type="radio" id="candSel" name="candSel" value="<%=candidateId%>" /></td>
 		<td><%=candidateId%></td>
@@ -96,16 +91,17 @@ String emplId = null;
 	</tr>
 
 <%}%>
-<tr align="center"><td colspan="6"><button type="button" id ="subbutton" name="subbutton" disabled="disabled" onclick="performNextStep()" value="">Onboard</button></td></tr>
+<tr align="center"><td colspan="6"><button type="button" id ="subbutton" name="subbutton" style="border-radius: 15px; font-family: Trebuchet-MS;font-size:Medium;padding : 3px 20px 3px 20px;
+background: linear-gradient(to top, darkgray, whitesmoke ); " disabled="disabled" onclick="performNextStep()" value="">Onboard</button></td></tr>
 
 </table>
 
 <div id="modal" align="center" class="overlay" style="border: 1px solid #0199CD; text-align: center; display: none; ">
-<table class="overlay-content" style="background-color: #ffC30B;background:linear-gradient(to top, #ffc30b, #fffc70 );" width="50%">
+<table class="overlay-content" style="background:linear-gradient(to top, #ffc30b, #fffc70 );" width="50%">
 <tr>
-<td>Date of joining</td><td><input type="text" id="doj" name="doj" value=""/></td></tr>
+<td>Date of joining</td><td><input type="text" id="doj" name="doj" align="left" value=""/></td></tr>
 <tr>
-<td>Employee Role</td><td><Select id="role" name="role">
+<td>Employee Role</td><td><Select id="role" name="role" align="left">
 <option value="">Select</option>
 <option value="7">Trainee</option>
 <option value="6">Junior Developer</option>

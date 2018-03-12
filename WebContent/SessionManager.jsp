@@ -12,14 +12,10 @@ response.setHeader("Cache-Control", "max-stale=0"); // HTTP 1.1
 //int b = back.intValue();
 //--b;
 //session.setAttribute("BACK",new Integer(b));
-/* response.addHeader("x-content-type-options", "nosniff");
-response.addHeader("X-Frame-Options", "SAMEORIGIN");
-response.addHeader("x-xss-protection", "1; mode=block"); */
 %>
 
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="x-content-type-options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="x-xss-protection" content="1; mode=block">

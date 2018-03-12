@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<script type = "text/javascript" src = "scripts/addProject.js"></script>
+<script type = "text/javascript" src = "scripts/modifyProject.js"></script>
 <style >
 .Button{
 border-radius: 15px; 
@@ -26,37 +26,49 @@ background: linear-gradient(to top, darkgray, whitesmoke );
 <body>
 <%
 String submitClicked = GenericUtil.setValue(request.getParameter("subBtn"));
-String projectName = request.getParameter("pname")==null?"":(String)request.getParameter("pname");
-String projectTech = request.getParameter("ptech")==null?"":(String)request.getParameter("ptech");
-String projectLocation = request.getParameter("ploc")==null?"":(String)request.getParameter("ploc");
+String projectName = GenericUtil.setValue(request.getParameter("pname"));
+String projectTech = GenericUtil.setValue(request.getParameter("ptech"));
+String projectLocation = GenericUtil.setValue(request.getParameter("ploc"));
+String projectDropDownVal = GenericUtil.setValue(request.getParameter("projectDropDown"));
 if(submitClicked.isEmpty()){
 %>
-<form action="addProject.jsp" id="addProject">
+<form action="modifyProject.jsp" id="modifyProject">
 <table width="80%" align="center">
 <tbody>
-<tr class="tableheader"><td colspan="2">Add Project</td></tr><tr></tr>
+<tr class="tableheader"><td colspan="2">Modify Project</td></tr><tr></tr>
 <tr>
-	<td>Project Name<span class="required"></span></td>
-	<td><input type="text" id="pname" name="pname"></td>
-</tr>
-<tr>
-	<td>Project Technology<span class="required"></span></td>
-	<td><input type="text" id="ptech" name="ptech"></td>
-</tr>
-<tr>
-	<td>Project Location<span class="required"></span></td>
-	<td><select id="ploc" name="ploc">
+	<th>Project Name</th>
+	<th>Project Technology</th>
+	<th>Project Location</th>
+	<th>Project Lead</th>
+	</tr>
+	<tr>
+	<td><select name="projectDropDown" id="projectDropDown">
+						<option value="">Select</option>
+						<%
+							 if(projectDropDownVal!=null && !"".equalsIgnoreCase(projectDropDownVal))
+							 {
+
+						%>
+
+						<option value="<%=projectDropDownVal.trim()%>" selected="selected"></option>
+
+						<%
+							}
+						%>
+				    </select></td>
+	
+	<td><input type="text" id="ptech" name="ptech" disabled="disabled"></td>
+	
+	<td><input type="text" id="ploc" name="ploc" disabled="disabled"></td>
+
+	<td><select id="plead" name="plead" disabled="disabled">
 	<option value="">-Please select-</option>
-	<option value="Goa">Goa</option>
-	<option value="Mumbai">Mumbai</option>
-	<option value="Bangalore">Bangalore</option>
 	</select>
-	</td>
-</tr>
 <tr></tr>
 <tr>
 	<td colspan="2" align="center"><input type="submit" id="subBtn" name="subBtn" value="Submit">
-	<a href="addProject.jsp" style="text-decoration:none;"><input type="button" class="Button" id="resBtn" name="resBtn" value="Reset"></a></td>
+	<a href="modifyProject.jsp" style="text-decoration:none;"><input type="button" class="Button" id="resBtn" name="resBtn" value="Reset"></a></td>
 </tr>
 </tbody>
 </table>

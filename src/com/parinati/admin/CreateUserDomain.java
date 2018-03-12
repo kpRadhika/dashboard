@@ -198,53 +198,26 @@ public class CreateUserDomain {
 
 	public int modifyCandidate(List values){
 		int updateCount=-1;
-		List queryList = new ArrayList<>();
-		List totalValueList = new ArrayList<>();
-		List totalValueTypes = new ArrayList<>();
 
 		StringBuilder sql = new StringBuilder();
 		try{
-		sql.append("UPDATE CANDIDATEDTLS    ");
-		sql.append("SET SKILLS = ?,         ");
-		sql.append("INTERVIEWDATE = ?,      ");
-		sql.append("ISSELECTED = ?,         ");
-		sql.append("MODIFIEDDATE = SYSDATE  ");
-		sql.append("WHERE CANDIDATEID = ?   ");
+		sql.append("UPDATE CANDIDATEDTLS    				 ");
+		sql.append("SET SKILLS = ?,         				 ");
+		sql.append("ISSELECTED = ?,         				 ");
+		sql.append("INTERVIEWDATE = TO_DATE(?,'DD-MM-YYYY'), ");	
+		sql.append("MODIFIEDDATE = SYSDATE,  				 ");
+		sql.append("MODIFIEDBY = ?			  				 ");
+		sql.append("WHERE CANDIDATEID = ?   				 ");
 
-		queryList.add(sql.toString());
-		totalValueList.add(values);
 
 		List queryValueTypes = new ArrayList<>();
 		for (int i = 0; i < values.size(); i++) {
 			queryValueTypes.add(GenericConstDef.DB_STRING);
 		}
 
-		totalValueTypes.add(queryValueTypes);
-
-		if(((String) values.get(2)).equalsIgnoreCase("Y")){
-			sql = new StringBuilder();
-			sql.append("INSERT INTO EMPONBOARDINGTRACKER	");
-			sql.append("VALUES(?, ? , SYSDATE)				");
-
-			queryList.add(sql.toString());
-
-			List valueList = new ArrayList<>();
-			valueList.add((String) values.get(2));
-			valueList.add(0);
-			totalValueList.add(valueList);
-
-			queryValueTypes = new ArrayList<>();
-
-			for (int i = 0; i < valueList.size(); i++) {
-				queryValueTypes.add(GenericConstDef.DB_STRING);
-			}
-
-			totalValueTypes.add(queryValueTypes);
-		}
-
-		updateCount = dbhelper.prepStmtExecuteMultiple(queryList, totalValueList, totalValueTypes);
+		updateCount = dbhelper.executeInsertUpdate(sql.toString(), values, queryValueTypes);
 	}catch (Exception e) {
-		CustomLogger.exceptionJava(e, "Exception in modifyCandidate() while executing the query:"+queryList.toString()+" values:"+totalValueList.toString(), "CreateUserDomain.java");
+		CustomLogger.exceptionJava(e, "Exception in modifyCandidate() while executing the query:"+sql.toString()+" values:"+values.toString(), "CreateUserDomain.java");
 	}
 		return updateCount;
 	}

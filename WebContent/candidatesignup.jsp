@@ -20,8 +20,8 @@ background-position:center;
 z-index:-1;
 width:100%;
 height: 150%;
-opacity: 0.2;
-filter: alpha(opacity=20);
+opacity: 0.5;
+filter: alpha(opacity=50);
 
 }
 #signupform{

@@ -28,6 +28,9 @@ $( function() {
 			lastName : {
 				required : true
 			},
+			sex:{
+				required : true
+			},
 			DOB : {
 				required : true
 			},
@@ -54,6 +57,9 @@ $( function() {
 			},
 			uploadFile :{
 				required: true
+			},
+			interViewDate:{
+				required: true
 			}
 		},
 		messages : {
@@ -62,6 +68,9 @@ $( function() {
 			},
 			lastName : {
 				required : "Please enter the last name"
+			},
+			sex:{
+				required : "Please select the sex"	
 			},
 			DOB : {
 				required : "Please select the DOB"
@@ -86,6 +95,9 @@ $( function() {
 			},
 			uploadFile : {
 				required : "Please upload resume in pdf format"
+			},
+			interViewDate:{
+				required : "Please enter the interview date"
 			}
 		},
 

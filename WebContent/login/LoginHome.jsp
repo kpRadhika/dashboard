@@ -107,8 +107,9 @@ if(user!=null)
 <table width="100%">
 <tr>
 <td><img alt="" src="images/Parinati_white_logo.png"></td>
-<td align="right"><h4>Welcome&nbsp;<%= user.split("@")[0]%></h4></td>
+<td align="right"><h4>Welcome&nbsp;<%= user.split("@")[0]%></h4><br><a style="text-decoration: none;color: black" target="down" href="login/changePassword.jsp">Change Password</a></td>
 </tr>
+<!-- <tr><td colspan="2" align="right"><a style="text-decoration: none" href="login/changePassword.jsp">Change Password</a></td></tr> -->
 </table>
 <%
 int roleId = Integer.parseInt((String)session.getAttribute("role"));
