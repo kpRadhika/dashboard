@@ -78,6 +78,15 @@ padding: 5px;
 	color:red;
 	margin-left: 10% !important;
 }
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -92,6 +101,7 @@ $(document).ready(function(){
 		    	required: true,
 		    	digits: true
 			    },
+			    gender: "required",
 		    address: "required",
 		    qualification: "required",
 		    skills: "required",
@@ -108,6 +118,7 @@ $(document).ready(function(){
 		   		required : "Please specify your Mobile No.",
 		   		digits: "Enter digits only"
 		    },
+		    gender : {required: "Please select your gender"},
 		    address:{required: "Please specify your Address"},
 		    qualification:{required: "Please specify your Qualification"},
 		    skills:{required: "Please specify your Skills"},
@@ -143,6 +154,16 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 </td>
 </tr>
 <tr>
+<td>
+<select name="gender" class="formstyle valid" style="width: 82.5%;" required>
+<option value="" disabled selected >Gender*</option>
+<option value="M">Male</option>
+<option value="F">Female</option>
+<option value="O">Other</option>
+</select>
+</td>
+</tr>
+<tr>
 <td><input type="text" name="candidateemail" class="formstyle valid" placeholder="EmailId*"/></td>
 </tr>
 <tr>
@@ -160,17 +181,18 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 <tr>
 <td><input type="text" name="experience" class="formstyle valid" placeholder="Experience (in Years)*"/></td>
 </tr>
-<tr>
-<td><label class="formstyle" style="color: grey">* mandatory fields</label></td>
-</tr>
+
 <tr>
 <td>
-<input type="file" name="uploadcv" id="uploadfile" class="valid" accept=".pdf" style="display: none;"/>
 <label for="uploadfile"><div class="formstyle" id="uploadfilediv">
-<svg width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg> <span id="cvlabel">Click to Upload CV</span>
+<svg width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg> <span id="cvlabel">Click to Upload CV*</span>
 </div>
 </label>
+<input type="file" name="uploadcv" id="uploadfile" class="valid" accept=".pdf" style="position: absolute;margin-left: 10%;margin-top: -2%;opacity: 0;"/>
 </td>
+</tr>
+<tr>
+<td><label class="formstyle" style="color: grey">* mandatory fields</label></td>
 </tr>
 <tr>
 <td><input type="submit" id="register" class="formstyle" value="Register"/></td>
