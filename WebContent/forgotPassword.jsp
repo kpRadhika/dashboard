@@ -180,6 +180,7 @@ int resultVal = 0;
 	List<String> inputParam = new ArrayList();
 	inputParam.add(userId);
 	inputParam.add(newPassword);
+	inputParam.add("Forgot Password");
 	resultVal = loginsDomain.updatePasswordDetails(inputParam);
 	
 %>

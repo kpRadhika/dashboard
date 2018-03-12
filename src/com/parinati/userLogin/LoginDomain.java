@@ -121,15 +121,17 @@ public class LoginDomain {
 			sql.append("	SET                                     ");
 			sql.append("	    PASSWORD =?,                        ");
 			sql.append("	    MODIFIEDDATE = sysdate,             ");
-			sql.append("	    MODIFIEDBY = 'Forgot Password Tool' ");
+			sql.append("	    MODIFIEDBY = ?						");
 			sql.append("	WHERE                                   ");
 			sql.append("	LOGINID =?                              ");
 
 			queryValues=new ArrayList();
 			queryValues.add(inputParam.get(1));
+			queryValues.add(inputParam.get(2));
 			queryValues.add(inputParam.get(0));
 
 			queryTypes=new ArrayList();
+			queryTypes.add(GenericConstDef.DB_STRING);
 			queryTypes.add(GenericConstDef.DB_STRING);
 			queryTypes.add(GenericConstDef.DB_STRING);
 

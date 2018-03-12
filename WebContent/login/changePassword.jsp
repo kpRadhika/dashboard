@@ -87,13 +87,14 @@ if(submitClicked.isEmpty()){
 				<tr align="center"><td>New Password<span class="required"></span></td>
 				<td>
 					<input type="password" name="newPassword" id="newPassword"/>
-					<span id="errorNewdiv" style="font-size: 15px; color: #FF0000" align="center"></span>
+					<div id="errorNewdiv" style="font-size: 15px; color: #FF0000" align="center"></div>
 				</td>
+				
 				</tr>
 				<tr align="center"><td>Confirm Password<span class="required"></span></td>
 				<td>
 					<input type="password" name="confirmPassword" id="confirmPassword"/>
-					<span id="errorConfirmdiv" style="font-size: 15px; color: #FF0000" align="center"></span>
+					<div id="errorConfirmdiv" style="font-size: 15px; color: #FF0000" align="center"></div>
 					<br>
 				</td>
 				</tr>
@@ -110,6 +111,7 @@ int resultVal = 0;
 	List<String> inputParam = new ArrayList();
 	inputParam.add(userId);
 	inputParam.add(newPassword);
+	inputParam.add("Change Password");
 	resultVal = loginsDomain.updatePasswordDetails(inputParam);
 	
 %>
@@ -119,7 +121,7 @@ int resultVal = 0;
 	if(1 == resultVal){
 	%>
 			<tr>
-				<td  align="center"><b>Password Updated Successfully. Go to Home page<a href="login/Logout.jsp">Click Here</a></b></td>
+				<td  align="center"><b>Password Updated Successfully.</b></td>
 			</tr>
 
 	<%
