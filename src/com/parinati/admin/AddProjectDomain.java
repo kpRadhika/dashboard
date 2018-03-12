@@ -85,23 +85,23 @@ public class AddProjectDomain
 			sql.append(" || LNAME               ");
 			sql.append(" FROM                   ");
 			sql.append(" EMPLOYEEDTLS,          ");
-			sql.append(" FROM PROJECTMASTER     ");
+			sql.append(" PROJECTMASTER     		");
 			sql.append(" PROJECTLEADID = EMPID  ");
 			sql.append(" WHERE PROJECTID=?      ");
-			
+
 			List values = new ArrayList();
-			values.add(projectId);
-			
+			values.add(Integer.parseInt(projectId));
+
 			List valueTypes = new ArrayList();
 			valueTypes.add(GenericConstDef.DB_INT);
-			
+
 			List result1 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
 			String leadId = null;
 			if(result1!=null && !result1.isEmpty()){
 				leadId = (String)result1.get(2);
 			}
 			sql = new StringBuilder();
-			
+
 			sql.append(" SELECT                         ");
 			sql.append("     ERD.EMPID,                 ");
 			sql.append("     ED.FNAME                   ");
@@ -115,12 +115,12 @@ public class AddProjectDomain
 			sql.append("     AND   ERD.ROLEID = 3       ");
 			sql.append("     AND   ERD.PROJECTID = ?    ");
 			sql.append("     AND   EMPID NOT IN(?)    	");
-			
-			values.add(leadId);
+
+			values.add(Integer.parseInt(leadId));
 			valueTypes.add(GenericConstDef.DB_INT);
-			
+
 			List result2 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
-			
+
 			rs.add(result1);
 			rs.add(result2);
 		}

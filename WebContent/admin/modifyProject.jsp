@@ -12,11 +12,11 @@
 <script type = "text/javascript" src = "scripts/modifyProject.js"></script>
 <style >
 .Button{
-border-radius: 15px; 
+border-radius: 15px;
 font-family: Trebuchet-MS;
 font-size:Medium;
 padding : 3px 20px 3px 20px;
-background: linear-gradient(to top, darkgray, whitesmoke ); 
+background: linear-gradient(to top, darkgray, whitesmoke );
 }
 .error {
     color:#FF0000;  /* red */
@@ -33,9 +33,9 @@ String projectDropDownVal = GenericUtil.setValue(request.getParameter("projectDr
 if(submitClicked.isEmpty()){
 %>
 <form action="modifyProject.jsp" id="modifyProject">
-<table width="80%" align="center">
+<table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
 <tbody>
-<tr class="tableheader"><td colspan="2">Modify Project</td></tr><tr></tr>
+<tr class="tableheader"><td colspan="4">Modify Project</td></tr><tr></tr>
 <tr>
 	<th>Project Name</th>
 	<th>Project Technology</th>
@@ -57,9 +57,9 @@ if(submitClicked.isEmpty()){
 							}
 						%>
 				    </select></td>
-	
+
 	<td><input type="text" id="ptech" name="ptech" disabled="disabled"></td>
-	
+
 	<td><input type="text" id="ploc" name="ploc" disabled="disabled"></td>
 
 	<td><select id="plead" name="plead" disabled="disabled">
@@ -80,9 +80,9 @@ int resultVal = 0;
 	inputParam.add(projectName);
 	inputParam.add(projectTech);
 	inputParam.add(projectLocation);
-	
+
 	resultVal = addProjectDomain.insertProjectDtls(inputParam);
-	
+
 %>
 
 <table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: none">
@@ -101,7 +101,7 @@ int resultVal = 0;
 				<td align="center"><b style="color:red;"> Error Occured. Please Try Again.</b></td>
 			</tr>
 	</table>
-	<%} 
+	<%}
 	}%>
 </body>
 </html>
