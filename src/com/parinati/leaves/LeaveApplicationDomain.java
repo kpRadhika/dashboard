@@ -16,15 +16,26 @@ public class LeaveApplicationDomain {
 		dbhelper = new DBConnectionManager();
 	}
 
-	public List<ArrayList> fetchLeaveTypes(){
+	public List<ArrayList> fetchLeaveTypes(List<String> input){
 		List<ArrayList> rs = null;
 		StringBuilder sql = new StringBuilder();
 		try{
-			sql.append(" SELECT LEAVETYPEID,    ");
-			sql.append(" LEAVETYPE              ");
-			sql.append(" FROM LEAVETYPEMASTER   ");
 
-			rs = dbhelper.executeQuery(sql.toString(), null, null);
+			sql.append(" SELECT ELC.LEAVETYPEID,				 ");
+			sql.append(" LTM.LEAVETYPE,							 ");
+			sql.append(" ELC.LEAVECREDIT 						 ");
+			sql.append(" FROM EMPLEAVECREDIT ELC,				 ");
+			sql.append(" LEAVETYPEMASTER LTM,					 ");
+			sql.append(" EMPLOYEEDTLS ED						 ");
+			sql.append(" WHERE ELC.LEAVETYPEID = LTM.LEAVETYPEID ");
+			sql.append(" AND ELC.EMPID = ED.EMPID				 ");
+			sql.append(" AND ED.OFFICIALEMAIL = ?				 ");
+			sql.append(" AND ELC.LEAVECREDIT > 0				 ");
+
+			List<String> valueType = new ArrayList<>();
+			valueType.add(GenericConstDef.DB_STRING);
+
+			rs = dbhelper.executeQuery(sql.toString(), input, valueType);
 		}
 		catch (Exception e) {
 

@@ -38,26 +38,29 @@ if("Submit".equals(subButtonVal)){
 List<ArrayList> leaveList = null;
 
 String leaveType = null;
+String leaveCount = null;
 			try {
-				leaveList = leaveDom.fetchLeaveTypes();
+				List<String> input = new ArrayList();
+				input.add(userId);
+				leaveList = leaveDom.fetchLeaveTypes(input);
 				}
 			catch (Exception t) {
 				leaveList  = null;
-				}	
-	
- 		if (leaveList != null && !leaveList.isEmpty()) 
+				}
+
+ 		if (leaveList != null && !leaveList.isEmpty())
  			{
  			 for (int size = 0; size < leaveList.size(); size++)
 		 			{
 		 				ArrayList leaveRec = (ArrayList) leaveList.get(size);
 		 				leaveId = Integer.parseInt((String)leaveRec.get(0));
 		 				leaveType = leaveRec.get(1).toString();
-		 		
-		 			
-						 %> 
-						
-							<option value="<%=leaveId%>"><%=leaveType%></option>
-						 
+		 				leaveCount = (String)leaveRec.get(2);
+
+						 %>
+
+							<option value="<%=leaveId%>"><%=leaveType+"("+leaveCount+")"%></option>
+
 			<%
 					}
 			}
