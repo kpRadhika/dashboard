@@ -14,6 +14,9 @@ function enableDisable(i){
 			$("#emlId"+j).attr("name","emlId");
 			$("#isApproved"+j).attr("name","isApproved");
 			$("#emlSel"+j).attr("name","emlSel");
+			$("#emplType"+j).attr("name","empLeaveType");
+			$("#emplLeaveFrom"+j).attr("name","emplLeaveFrom");
+			$("#emplLeaveTo"+j).attr("name","emplLeaveTo");
 
 		}
 		else{

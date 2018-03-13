@@ -1,7 +1,11 @@
 package com.parinati.leaves;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.parinati.util.CustomLogger;
 import com.parinati.util.DBConnectionManager;
@@ -211,6 +215,9 @@ public class LeaveApplicationDomain {
 		int rs=0;
 		List queryValues = null;
 		List queryTypes = null;
+		List totalQueryList =null;
+		List totalValues = null;
+		List totalTypes = null;
 		try{
 			sql.append("	UPDATE LEAVEDETAILS				");
 			sql.append("	SET                             ");
@@ -220,17 +227,89 @@ public class LeaveApplicationDomain {
 			sql.append("	WHERE                           ");
 			sql.append("	APPLICATIONID =?                ");
 
+			totalQueryList = new ArrayList<>();
+			totalQueryList.add(sql.toString());
+
+			totalValues = new ArrayList<>();
 			queryValues = new ArrayList();
 			queryValues.add(inputParam.get(1));
 			queryValues.add(inputParam.get(2));
 			queryValues.add(Integer.parseInt(inputParam.get(0).toString()));
+			totalValues.add(queryValues);
 
+			totalTypes= new ArrayList<>();
 			queryTypes = new ArrayList();
 			queryTypes.add(GenericConstDef.DB_STRING);
 			queryTypes.add(GenericConstDef.DB_STRING);
 			queryTypes.add(GenericConstDef.DB_INT);
+			totalTypes.add(queryTypes);
 
-			rs = dbhelper.executeInsertUpdate(sql.toString(), queryValues, queryTypes);
+			if("A".equals(inputParam.get(1))){
+				String fromDate = (String) inputParam.get(5);
+				String toDate = (String) inputParam.get(6);
+				SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+				try {
+				    Date date1 = myFormat.parse(fromDate);
+				    Date date2 = myFormat.parse(toDate);
+				    long diff = date2.getTime() - date1.getTime();
+				    String days = Long.toString(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+
+				    sql = new StringBuilder();
+					sql.append(" SELECT leavecredit 			");
+					sql.append(" FROM empleavecredit           	");
+					sql.append(" WHERE empid = ? 					");
+					sql.append("and LEAVETYPEID = (select LEAVETYPEID from LEAVETYPEMASTER where LEAVETYPE = UPPER(?))");
+
+					queryValues = new ArrayList();
+
+					queryValues.add(Integer.parseInt(inputParam.get(3).toString()));
+					queryValues.add(inputParam.get(4));
+
+					queryTypes = new ArrayList();
+					queryTypes.add(GenericConstDef.DB_INT);
+					queryTypes.add(GenericConstDef.DB_STRING);
+
+					List result = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
+
+					int count = Integer.parseInt(((ArrayList)result.get(0)).get(0).toString());
+
+					int remainingDays = count - Integer.parseInt(days);
+
+				    sql = new StringBuilder();
+				    sql.append("		UPDATE empleavecredit	");
+				    sql.append("	SET                         ");
+				    sql.append("	    leavecredit =?,         ");
+				    sql.append("	    modifieddate = SYSDATE, ");
+				    sql.append("	    modifiedby =?           ");
+				    sql.append("	WHERE                       ");
+				    sql.append("	empid =?                    ");
+				    sql.append("and LEAVETYPEID = (select LEAVETYPEID from LEAVETYPEMASTER where LEAVETYPE = UPPER(?))");
+
+					totalQueryList.add(sql.toString());
+
+					queryValues = new ArrayList();
+					queryValues.add(remainingDays);
+					queryValues.add(inputParam.get(2));
+					queryValues.add(Integer.parseInt(inputParam.get(3).toString()));
+					queryValues.add(inputParam.get(4));
+					totalValues.add(queryValues);
+
+					queryTypes = new ArrayList();
+					queryTypes.add(GenericConstDef.DB_INT);
+					queryTypes.add(GenericConstDef.DB_STRING);
+					queryTypes.add(GenericConstDef.DB_INT);
+					queryTypes.add(GenericConstDef.DB_STRING);
+					totalTypes.add(queryTypes);
+
+
+				} catch (ParseException e) {
+				    e.printStackTrace();
+				}
+
+			}
+
+			rs = dbhelper.prepStmtExecuteMultiple(totalQueryList, totalValues, totalTypes);
 			if(rs > 0){
 				sql = new StringBuilder();
 				sql.append(" SELECT FNAME, OFFICIALEMAIL FROM EMPLOYEEDTLS,				");

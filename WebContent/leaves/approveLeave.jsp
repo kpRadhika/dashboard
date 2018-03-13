@@ -17,6 +17,11 @@ String submitVal = request.getParameter("submit") == null ? "" : request.getPara
 String emlAppId = request.getParameter("emlSel") == null ? "" : request.getParameter("emlSel");
 String emlId = request.getParameter("emlId") == null ? "" : request.getParameter("emlId");
 String isApproved = request.getParameter("isApproved") == null ? "" : request.getParameter("isApproved");
+String emplLeaveFrom = request.getParameter("emplLeaveFrom") == null ? "" : request.getParameter("emplLeaveFrom");
+String emplLeaveTo = request.getParameter("emplLeaveTo") == null ? "" : request.getParameter("emplLeaveTo");
+String emplLeaveType = request.getParameter("empLeaveType") == null ? "" : request.getParameter("empLeaveType");
+System.out.println(emplLeaveTo);
+System.out.println(emplLeaveFrom);
 int result = 0;
 if("".equals(submitVal)){
 List<ArrayList> emplList = leaveDomain.fetchEmployeeLeave(loginId);
@@ -79,11 +84,14 @@ if(!emplList.isEmpty()){
 	<%}
 	}else{
 	
-		List<String> inputParam = new ArrayList();
+		List<String> inputParam = new ArrayList<String>();
 		inputParam.add(emlAppId);
 		inputParam.add(isApproved);
 		inputParam.add(loginId);
 		inputParam.add(emlId);
+		inputParam.add(emplLeaveType);
+		inputParam.add(emplLeaveFrom);
+		inputParam.add(emplLeaveTo);
 		
 		result = leaveDomain.updateEmpLeaveDetail(inputParam);
 		%>
