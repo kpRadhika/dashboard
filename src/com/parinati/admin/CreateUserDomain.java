@@ -9,8 +9,10 @@ import javax.swing.plaf.synth.Region;
 
 import com.parinati.util.CustomLogger;
 import com.parinati.util.DBConnectionManager;
+import com.parinati.util.FileReadUtil;
 import com.parinati.util.GenericConstDef;
 import com.parinati.util.GenericUtil;
+import com.parinati.util.MailerUtil;
 
 public class CreateUserDomain {
 
@@ -70,7 +72,7 @@ public class CreateUserDomain {
 
 			candId = "PARI"+candId;
 
-			
+
 			sql = new StringBuilder();
 
 			sql.append("	INSERT INTO CANDIDATEDTLS (		");
@@ -89,7 +91,9 @@ public class CreateUserDomain {
 			sql.append("	    ACHIEVEMENTS,               ");
 			sql.append("	    INTERVIEWDATE,              ");
 			sql.append("	    RESUMEPATH,               	");
-			sql.append("	    CREATIONDATE               	");
+			sql.append("	    CREATIONDATE,              	");
+			sql.append("	    SEX,              			");
+			sql.append("	    CREATEDBY               	");
 			sql.append("	) VALUES (                      ");
 			sql.append("	    ?,                          ");
 			sql.append("	    ?,                          ");
@@ -106,7 +110,9 @@ public class CreateUserDomain {
 			sql.append("	    ?,                          ");
 			sql.append("	    TO_DATE(?,'DD-MM-YYYY'),    ");
 			sql.append("	    ?,                          ");
-			sql.append("	    SYSDATE                     ");
+			sql.append("	    SYSDATE,                    ");
+			sql.append("	    ?,		                    ");
+			sql.append("	    ?		                    ");
 			sql.append("	)                               ");
 
 			queryValues = new ArrayList<>();
@@ -118,7 +124,6 @@ public class CreateUserDomain {
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(4)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(5)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(6)));
-			//queryValues.add(GenericUtil.setValue((String)inputParam.get(7)));
 			queryValues.add(inputParam.get(7));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(8)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(9)));
@@ -126,6 +131,8 @@ public class CreateUserDomain {
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(11)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(12)));
 			queryValues.add(GenericUtil.setValue((String)inputParam.get(13)));
+			queryValues.add(GenericUtil.setValue((String)inputParam.get(14)));
+			queryValues.add(GenericUtil.setValue((String)inputParam.get(15)));
 
 			queryTypes = new ArrayList<>();
 			for(int i = 0; i<queryValues.size(); i++){
@@ -141,8 +148,16 @@ public class CreateUserDomain {
 			updateCount = -1;
 			CustomLogger.exceptionJava(e, "Exception in insertCandidateDtls() while executing the query:"+sql.toString()+" values:"+queryValues.toString(), "CreateUserDomain.java");
 		}
-		if(updateCount != -1)
+		if(updateCount != -1){
+			String mailTempPath = FileReadUtil.getValue("REFERENCEMAIL");
+			String[] var = new String[2];
+			var[0] = GenericUtil.setValue((String)((String)inputParam.get(0)));
+			var[1] = candId;
+
+			new MailerUtil().postMailWithTLSAuth(GenericUtil.setValue((String)inputParam.get(5)),(String)inputParam.get(15), "Resume submission status", mailTempPath, var);
+
 			return candId;
+		}
 		else
 			return "ERROR";
 
@@ -204,7 +219,7 @@ public class CreateUserDomain {
 		sql.append("UPDATE CANDIDATEDTLS    				 ");
 		sql.append("SET SKILLS = ?,         				 ");
 		sql.append("ISSELECTED = ?,         				 ");
-		sql.append("INTERVIEWDATE = TO_DATE(?,'DD-MM-YYYY'), ");	
+		sql.append("INTERVIEWDATE = TO_DATE(?,'DD-MM-YYYY'), ");
 		sql.append("MODIFIEDDATE = SYSDATE,  				 ");
 		sql.append("MODIFIEDBY = ?			  				 ");
 		sql.append("WHERE CANDIDATEID = ?   				 ");

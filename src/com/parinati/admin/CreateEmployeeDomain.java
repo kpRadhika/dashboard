@@ -1,6 +1,7 @@
 package com.parinati.admin;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.parinati.util.CustomLogger;
@@ -46,7 +47,8 @@ public class CreateEmployeeDomain {
 		sql.append(" EXPERIENCEINYRS,                       ");
 		sql.append(" SKILLS,                                ");
 		sql.append(" PRESENTADD,                            ");
-		sql.append(" ACHIEVEMENTS                           ");
+		sql.append(" ACHIEVEMENTS,                          ");
+		sql.append(" SEX		                            ");
 		sql.append(" FROM CANDIDATEDTLS                     ");
 		sql.append(" WHERE                                  ");
 		sql.append(" CANDIDATEID = ?						");
@@ -88,6 +90,12 @@ public class CreateEmployeeDomain {
 		else
 			actualLogin = proposedLogin+"@parinati.in";
 
+		sql = new StringBuilder();
+
+		sql.append(" SELECT * FROM LEAVEMASTER	");
+
+		List leaveResult = dbhelper.executeQuery(sql.toString(), null, null);
+
 		totalQueryList = new ArrayList();
 
 		sql = new StringBuilder();
@@ -107,7 +115,8 @@ public class CreateEmployeeDomain {
 		sql.append("    PRESENTADD,            ");
 		sql.append("    ACHIEVEMENTS,          ");
 		sql.append("    CANDIDATEID,           ");
-		sql.append("    ISACTIVE )             ");
+		sql.append("    ISACTIVE,              ");
+		sql.append("    SEX)	               ");
 		sql.append("	VALUES (               ");
 		sql.append("   ?,                      ");
 		sql.append("   ?,                      ");
@@ -119,6 +128,7 @@ public class CreateEmployeeDomain {
 		sql.append("   ?,                      ");
 		sql.append("   ?,                      ");
 		sql.append("   TO_DATE(?,'DD-MM-YYYY'),");
+		sql.append("   ?,                      ");
 		sql.append("   ?,                      ");
 		sql.append("   ?,                      ");
 		sql.append("   ?,                      ");
@@ -146,6 +156,7 @@ public class CreateEmployeeDomain {
 		values.add(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(10)));
 		values.add(candidateId);
 		values.add("Y");
+		values.add(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(11)));
 
 		totalValues.add(values);
 
@@ -220,8 +231,46 @@ public class CreateEmployeeDomain {
 		valueTypes.add(GenericConstDef.DB_STRING);
 		valueTypes.add(GenericConstDef.DB_STRING);
 		totalTypes.add(valueTypes);
-		
-	
+
+		Iterator<List<String>> leaveIter = leaveResult.listIterator();
+
+		while(leaveIter.hasNext()){
+			List leaveRec = leaveIter.next();
+			if(leaveRec != null && !leaveRec.isEmpty()){
+				if(!(leaveRec.get(0).equals("4") && ((String)((ArrayList)candDetails.get(0)).get(11)).equals("M"))){
+
+					sql = new StringBuilder();
+
+					sql.append("	INSERT INTO EMPLEAVECREDIT(	");
+					sql.append("	EMPID,                      ");
+					sql.append("	LEAVETYPEID,                ");
+					sql.append("	LEAVECREDIT,                ");
+					sql.append("	CREATEDBY,                  ");
+					sql.append("	CREATIONDATE                ");
+					sql.append("	)VALUES                     ");
+					sql.append("	(                           ");
+					sql.append("	?                           ");
+					sql.append("	?,                          ");
+					sql.append("	?,                          ");
+					sql.append("	'ADMIN',                    ");
+					sql.append("	SYSDATE)                    ");
+
+					values = new ArrayList();
+					values.add(empId);
+					values.add(leaveRec.get(0));
+					values.add(leaveRec.get(1));
+
+					valueTypes = new ArrayList();
+					for (int i = 0; i < values.size(); i++) {
+						valueTypes.add(GenericConstDef.DB_INT);
+					}
+
+					totalQueryList.add(sql.toString());
+					totalValues.add(values);
+					totalTypes.add(valueTypes);
+				}
+			}
+		}
 	    sql= new StringBuilder();
 		sql.append(" DELETE FROM CANDIDATEDTLS WHERE CANDIDATEID=?");;
 
@@ -229,13 +278,13 @@ public class CreateEmployeeDomain {
 
 		values = new ArrayList();
 		values.add(candidateId);
-		
+
 		totalValues.add(values);
 
 		valueTypes = new ArrayList();
 		valueTypes.add(GenericConstDef.DB_STRING);
 		totalTypes.add(valueTypes);
-		
+
 
 		int res = dbhelper.prepStmtExecuteMultiple(totalQueryList, totalValues, totalTypes);
 		//if success, welcome mail to be sent
@@ -249,7 +298,7 @@ public class CreateEmployeeDomain {
 		var[0] = GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(0));
 		var[1] = Integer.toString(empId);
 		var[2] = GenericUtil.setValue(actualLogin);
-		
+
 		new MailerUtil().postMailWithTLSAuth(GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(5)),"", "Welcome to Parinati", mailTempPath, var);
 		}
 		catch (Exception e) {
