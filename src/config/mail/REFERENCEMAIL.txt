@@ -1,0 +1,8 @@
+Hi {0},
+
+Thanks for showing your interest in Parinati Solutions.
+Your candidate id is {1}.
+We will get back to you once we find an opening for a position matching your competencies.
+
+Thank you,
+Parinati Solutions
