@@ -6,6 +6,7 @@ import java.util.List;
 import com.parinati.util.CustomLogger;
 import com.parinati.util.DBConnectionManager;
 import com.parinati.util.GenericConstDef;
+import com.parinati.util.GenericUtil;
 
 public class AddProjectDomain
 {
@@ -77,17 +78,17 @@ public class AddProjectDomain
 		List<List<ArrayList>> rs = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		try{
-			sql.append(" SELECT PROJECTLOC,		");
-			sql.append(" TECHNOLOGY,            ");
-			sql.append(" PROJECTLEADID,         ");
-			sql.append(" FNAME                  ");
-			sql.append(" || ' '                 ");
-			sql.append(" || LNAME               ");
-			sql.append(" FROM                   ");
-			sql.append(" EMPLOYEEDTLS,          ");
-			sql.append(" PROJECTMASTER     		");
-			sql.append(" PROJECTLEADID = EMPID  ");
-			sql.append(" WHERE PROJECTID=?      ");
+			sql.append(" SELECT PROJECTLOC,				");
+			sql.append(" TECHNOLOGY,            		");
+			sql.append(" PROJECTLEADID,         		");
+			sql.append(" FNAME                  		");
+			sql.append(" || ' '                 		");
+			sql.append(" || LNAME               		");
+			sql.append(" FROM                   		");
+			sql.append(" EMPLOYEEDTLS,          		");
+			sql.append(" PROJECTMASTER     				");
+			sql.append(" WHERE PROJECTLEADID = EMPID  	");
+			sql.append(" AND PROJECTID=?      			");
 
 			List values = new ArrayList();
 			values.add(Integer.parseInt(projectId));
@@ -98,7 +99,7 @@ public class AddProjectDomain
 			List result1 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
 			String leadId = null;
 			if(result1!=null && !result1.isEmpty()){
-				leadId = (String)result1.get(2);
+				leadId = GenericUtil.setValue((String)result1.get(2));
 			}
 			sql = new StringBuilder();
 
@@ -114,11 +115,13 @@ public class AddProjectDomain
 			sql.append("     ERD.EMPID = ED.EMPID       ");
 			sql.append("     AND   ERD.ROLEID = 3       ");
 			sql.append("     AND   ERD.PROJECTID = ?    ");
+			if(leadId != null && !leadId.isEmpty()){
 			sql.append("     AND   EMPID NOT IN(?)    	");
-
-			values.add(Integer.parseInt(leadId));
-			valueTypes.add(GenericConstDef.DB_INT);
-
+			
+			
+				values.add(Integer.parseInt(leadId));
+				valueTypes.add(GenericConstDef.DB_INT);
+			}
 			List result2 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
 
 			rs.add(result1);
