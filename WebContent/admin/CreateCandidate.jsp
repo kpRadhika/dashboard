@@ -46,6 +46,7 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 	String interViewDate  = null;
 	boolean flag = false;
 	String uploadPath = null;
+	String sex = null;
 	try {
 		List fileItems1 = null;
 		List fileItems = upload.parseRequest(request);
@@ -83,6 +84,9 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 					achievements = fi.getString();
 				}if (fi.getFieldName().equals("interViewDate")) {
 					interViewDate = fi.getString();
+				}
+				if (fi.getFieldName().equals("sex")) {
+					sex = fi.getString();
 				}
 			}
 		}
@@ -164,6 +168,9 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 		inputParam.add(achievements);
 		inputParam.add(interViewDate);
 		inputParam.add(uploadPath);
+		inputParam.add(sex);
+		inputParam.add((String)session.getAttribute("userID"));
+
 		result = userDoamin.insertCandidateDtls( inputParam);
 	}
 }
