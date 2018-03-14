@@ -1,10 +1,19 @@
 package com.parinati.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,381 +44,218 @@ public class DownloadReportServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		EmployeeReportDomain emplDoamin = new EmployeeReportDomain();
-		String radioVal = request.getParameter("reportRadio")== null ? "": request.getParameter("reportRadio");
 		String selProjectName = request.getParameter("projectDropDown")== null ? "": request.getParameter("projectDropDown");
 		String monthYear = request.getParameter("monthYear")== null ? "": request.getParameter("monthYear");
 
-		/*if("individual".equalsIgnoreCase(radioVal)){
 
-			List<String> reportData = null;//emplDoamin.fetchIndividualReportData(monthYear,projectName);
+		List<String> parsedDates = dateParse(monthYear);
+
+		List<ArrayList<String>> reportData = emplDoamin.fetchLeaveReportData(parsedDates.get(0),parsedDates.get(1),selProjectName);
+		String fileName = "LEAVE REPORT FOR THE MONTH OF "+monthYear;
+
+		byte[] byteArray = null;
+		ByteArrayOutputStream bos = null;
+		FileOutputStream fileOut = null;
 
 
-			if(reportData != null && !reportData.isEmpty())
+		if(reportData != null && !reportData.isEmpty())
+		{
+			XSSFWorkbook wb = new XSSFWorkbook();
+			XSSFSheet sheet = wb.createSheet(fileName);
+
+			sheet.setColumnWidth(0, 5000);
+			sheet.setColumnWidth(1, 5000);
+			sheet.setColumnWidth(2, 4000);
+			sheet.setColumnWidth(3, 4000);
+			sheet.setColumnWidth(4, 7000);
+			sheet.setColumnWidth(5, 4000);
+			sheet.setColumnWidth(6, 7000);
+			sheet.setColumnWidth(7, 5000);
+			sheet.setColumnWidth(8, 3000);
+			sheet.setColumnWidth(9, 3000);
+			sheet.setColumnWidth(10, 3000);
+			sheet.setColumnWidth(11, 3000);
+			sheet.setColumnWidth(12, 3000);
+			sheet.setColumnWidth(13,4000);
+			sheet.setColumnWidth(14, 7000);
+			sheet.setColumnWidth(15, 5000);
+			sheet.setColumnWidth(16, 3000);
+			sheet.setColumnWidth(17, 3000);
+			sheet.setColumnWidth(18, 3000);
+			sheet.setColumnWidth(19, 3000);
+			sheet.setColumnWidth(20, 3000);
+			sheet.setColumnWidth(21,4000);
+
+			XSSFCellStyle headerCellStyle = wb.createCellStyle();
+			XSSFColor color = new XSSFColor(new java.awt.Color(148, 197, 246));
+			headerCellStyle.setFillForegroundColor(color);
+			headerCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+			XSSFFont boldFont = wb.createFont();
+			boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
+			headerCellStyle.setWrapText(true);
+			headerCellStyle.setFont(boldFont);
+
+			XSSFRow row = sheet.createRow(0);
+
+			CellStyle cellStyle1 = wb.createCellStyle();
+			cellStyle1.setAlignment(CellStyle.ALIGN_CENTER);
+
+			Font font1 = wb.createFont();
+			font1.setFontHeightInPoints((short) 18);
+			cellStyle1.setFont(font1);
+
+			row = sheet.createRow(0);
+			XSSFCell cell = null;
+
+			for(int i=0;i<18;i++)
 			{
-				XSSFWorkbook wb = new XSSFWorkbook();
-				XSSFSheet sheet = wb.createSheet("Employee Report");
-
-
-				sheet.setColumnWidth(0, 5000);
-				sheet.setColumnWidth(1, 5000);
-				sheet.setColumnWidth(2, 4000);
-				sheet.setColumnWidth(3, 4000);
-				sheet.setColumnWidth(4, 7000);
-				sheet.setColumnWidth(5, 4000);
-				sheet.setColumnWidth(6, 7000);
-				sheet.setColumnWidth(7, 5000);
-				sheet.setColumnWidth(8, 3000);
-				sheet.setColumnWidth(9, 3000);
-				sheet.setColumnWidth(10, 3000);
-				sheet.setColumnWidth(11, 3000);
-				sheet.setColumnWidth(12, 3000);
-				sheet.setColumnWidth(13,4000);
-				sheet.setColumnWidth(14, 7000);
-				sheet.setColumnWidth(15, 5000);
-				sheet.setColumnWidth(16, 3000);
-				sheet.setColumnWidth(17, 3000);
-				sheet.setColumnWidth(18, 3000);
-				sheet.setColumnWidth(19, 3000);
-				sheet.setColumnWidth(20, 3000);
-				sheet.setColumnWidth(21,4000);
-
-				 XSSFCellStyle headerCellStyle = wb.createCellStyle();
-			        XSSFColor color = new XSSFColor(new java.awt.Color(148, 197, 246));
-			        headerCellStyle.setFillForegroundColor(color);
-			        headerCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
-			        XSSFFont boldFont = wb.createFont();
-			        boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
-			        headerCellStyle.setWrapText(true);
-			        headerCellStyle.setFont(boldFont);
-
-			        XSSFRow row = sheet.createRow(0);
-
-					CellStyle cellStyle1 = wb.createCellStyle();
-					cellStyle1.setAlignment(CellStyle.ALIGN_CENTER);
-
-					Font font1 = wb.createFont();
-					font1.setFontHeightInPoints((short) 18);
-					cellStyle1.setFont(font1);
-
-				  	row = sheet.createRow(0);
-					XSSFCell cell = null;
-
-					for(int i=0;i<18;i++)
-					{
-						cell = row.createCell(i);
-					    cell.setCellStyle(cellStyle1);
-					    if(i==0)
-					    {
-					    	cell.setCellValue("Module");
-					    }else{
-					    	cell.setCellValue(projectName);
-					    }
-					}
-
-					row = sheet.createRow(1);
-
-					CellStyle cellStyle2 = wb.createCellStyle();
-					cellStyle2.setAlignment(CellStyle.ALIGN_CENTER);
-					Font font2 = wb.createFont();
-					font2.setFontHeightInPoints((short) 12);
-					cellStyle2.setFont(font2);
-					for(int i=0;i<18;i++)
-					{
-						cell = row.createCell(i);
-						cell.setCellStyle(cellStyle2);
-						if(i==0)
-					    {
-							cell.setCellValue("Employee NO");
-					    }else{
-					    	cell.setCellValue("");//form DB
-					    }
-					}
-
-					row = sheet.createRow(3);
-
-					CellStyle cellStyle3 = wb.createCellStyle();
-					cellStyle3.setAlignment(CellStyle.ALIGN_CENTER);
-					Font font3 = wb.createFont();
-					font3.setFontHeightInPoints((short) 12);
-					cellStyle3.setFont(font3);
-					for(int i=0;i<18;i++)
-					{
-						cell = row.createCell(i);
-						cell.setCellStyle(cellStyle3);
-						if(i==0)
-					    {
-							cell.setCellValue("Resource Name");
-					    }else{
-					    	cell.setCellValue("");//form DB
-					    }
-					}
-
-
-				XSSFCellStyle headerCellStyle1 = wb.createCellStyle();
-				XSSFFont boldFont1 = wb.createFont();
-				boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
-				headerCellStyle1.setFont(boldFont1);
-
-				XSSFCellStyle alignCellStyle = wb.createCellStyle();
-				alignCellStyle.setAlignment(XSSFCellStyle.ALIGN_RIGHT);
-
-				row = sheet.createRow(4);
-
-				row = sheet.createRow(5);
-
-				cell = row.createCell(0);
-				cell = row.createCell(0);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("ATRN"));
-
-				cell = row.createCell(6);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("Gateway Name"));
-
-
-				double sumGatewayFeeABS = 0;
-				double sumServiceTaxPayable = 0;
-				for(int k=0;k<reportData.size();k++) {
-					row = sheet.createRow(k+1);
-					ArrayList records = (ArrayList)reportData.get(k);
-
-					String atrn=records.get(0)== null ? "":records.get(0).toString().trim();
-					cell = row.createCell(0);
-					XSSFRichTextString atrnHSS = new XSSFRichTextString(atrn);
-					cell.setCellValue(atrnHSS);
-
-					String gatewayName=records.get(1)== null ? "":records.get(1).toString().trim();
-					cell = row.createCell(1);
-					XSSFRichTextString gatewayNameHSS = new XSSFRichTextString(gatewayName);
-					cell.setCellValue(gatewayNameHSS);
-
+				cell = row.createCell(i);
+				cell.setCellStyle(cellStyle1);
+				if(i==0)
+				{
+					cell.setCellValue("PROJECT NAME");
+				}else{
+					cell.setCellValue(selProjectName);
 				}
+			}
+
+			row = sheet.createRow(1);
+			cell = null;
+
+			for(int i=0;i<18;i++)
+			{
+				cell = row.createCell(i);
+				cell.setCellStyle(cellStyle1);
+				if(i==0)
+				{
+					cell.setCellValue("MONTH");
+				}else{
+					cell.setCellValue(monthYear);
+				}
+			}
+
+
+			XSSFCellStyle headerCellStyle1 = wb.createCellStyle();
+			XSSFFont boldFont1 = wb.createFont();
+			boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
+			headerCellStyle1.setFont(boldFont1);
+
+			XSSFCellStyle alignCellStyle = wb.createCellStyle();
+			alignCellStyle.setAlignment(XSSFCellStyle.ALIGN_RIGHT);
+
+			row = sheet.createRow(2);
+
+			row = sheet.createRow(3);
+
+			cell = row.createCell(0);
+			cell.setCellStyle(headerCellStyle1);
+			cell.setCellValue(new XSSFRichTextString("EMP ID"));
+
+			cell = row.createCell(1);
+			cell.setCellStyle(headerCellStyle1);
+			cell.setCellValue(new XSSFRichTextString("EMPLOYEE NAME"));
+
+			cell = row.createCell(2);
+			cell.setCellStyle(headerCellStyle1);
+			cell.setCellValue(new XSSFRichTextString("LEVAE APPLICATION TYPE"));
+
+			cell = row.createCell(3);
+			cell.setCellStyle(headerCellStyle1);
+			cell.setCellValue(new XSSFRichTextString("LEAVE FROM"));
+
+			cell = row.createCell(4);
+			cell.setCellStyle(headerCellStyle1);
+			cell.setCellValue(new XSSFRichTextString("LEAVE TO"));
+
+			cell = row.createCell(5);
+			cell.setCellStyle(headerCellStyle1);
+			cell.setCellValue(new XSSFRichTextString("APPRVED BY"));
+
+
+			for(int k=0;k<reportData.size();k++) {
+				row = sheet.createRow(k+1);
+				ArrayList records = (ArrayList)reportData.get(k);
+
+				cell = row.createCell(0);
+				String empID=records.get(0)== null ? "":records.get(0).toString().trim();
+				XSSFRichTextString slNoHSS = new XSSFRichTextString(String.valueOf(k+1));
+				cell.setCellValue(slNoHSS);
+
+				String empFirstName=records.get(2)== null ? "":records.get(2).toString().trim();
+				String empLastName = records.get(3)== null ? "":records.get(3).toString().trim();
+				cell = row.createCell(1);
+				XSSFRichTextString gatewayNameHSS = new XSSFRichTextString(empFirstName +" "+empLastName);
+				cell.setCellValue(gatewayNameHSS);
+
+				String applId =records.get(1)== null ? "":records.get(1).toString().trim();
+				cell = row.createCell(2);
+				XSSFRichTextString applIdHSS = new XSSFRichTextString(applId);
+				cell.setCellValue(applIdHSS);
+
+				String leaveApplType =records.get(6)== null ? "":records.get(6).toString().trim();
+				cell = row.createCell(3);
+				XSSFRichTextString leaveApplTypeHSS = new XSSFRichTextString(leaveApplType);
+				cell.setCellValue(leaveApplTypeHSS);
+
+				String leaveForm = records.get(4)== null ? "":records.get(4).toString().trim();
+				cell = row.createCell(4);
+				XSSFRichTextString leaveFormHSS = new XSSFRichTextString(leaveForm);
+				cell.setCellValue(leaveFormHSS);
+
+				String leaveTo =records.get(5)== null ? "":records.get(5).toString().trim();
+				cell = row.createCell(5);
+				XSSFRichTextString leaveToHSS = new XSSFRichTextString(leaveTo);
+				cell.setCellValue(leaveToHSS);
+
+				String approvedBy =records.get(7)== null ? "":records.get(7).toString().trim();
+				cell = row.createCell(6);
+				XSSFRichTextString approvedByHSS = new XSSFRichTextString(approvedBy);
+				cell.setCellValue(approvedByHSS);
 
 			}
 
-		}else if("consolidated".equalsIgnoreCase(radioVal)){*/
+			response.setContentType("application/vnd.ms-excel");
+			response.addHeader("Content-Disposition", "attachment; filename="+fileName+".xlsx");
+			bos = new ByteArrayOutputStream();
+			wb.write(bos);
+			byteArray=bos.toByteArray();
 
-			List<ArrayList<String>> reportData = null;//emplDoamin.fetchConsolidatedReportData(monthYear,projectName);
+			ServletOutputStream print = response.getOutputStream();
+			print.write(byteArray);
+			print.flush();
+			print.close();
 
-			if(reportData != null && !reportData.isEmpty())
-			{
-				XSSFWorkbook wb = new XSSFWorkbook();
-				XSSFSheet sheet = wb.createSheet("Cosolidated Time Sheet");
+		}else{
+			response.sendRedirect("Report/employeeReport.jsp?msg=NODATA"+"&monthYear="+monthYear+"&projectDropDown="+selProjectName);
+		}
 
-				sheet.setColumnWidth(0, 5000);
-				sheet.setColumnWidth(1, 5000);
-				sheet.setColumnWidth(2, 4000);
-				sheet.setColumnWidth(3, 4000);
-				sheet.setColumnWidth(4, 7000);
-				sheet.setColumnWidth(5, 4000);
-				sheet.setColumnWidth(6, 7000);
-				sheet.setColumnWidth(7, 5000);
-				sheet.setColumnWidth(8, 3000);
-				sheet.setColumnWidth(9, 3000);
-				sheet.setColumnWidth(10, 3000);
-				sheet.setColumnWidth(11, 3000);
-				sheet.setColumnWidth(12, 3000);
-				sheet.setColumnWidth(13,4000);
-				sheet.setColumnWidth(14, 7000);
-				sheet.setColumnWidth(15, 5000);
-				sheet.setColumnWidth(16, 3000);
-				sheet.setColumnWidth(17, 3000);
-				sheet.setColumnWidth(18, 3000);
-				sheet.setColumnWidth(19, 3000);
-				sheet.setColumnWidth(20, 3000);
-				sheet.setColumnWidth(21,4000);
+	}
 
-				 XSSFCellStyle headerCellStyle = wb.createCellStyle();
-			        XSSFColor color = new XSSFColor(new java.awt.Color(148, 197, 246));
-			        headerCellStyle.setFillForegroundColor(color);
-			        headerCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
-			        XSSFFont boldFont = wb.createFont();
-			        boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
-			        headerCellStyle.setWrapText(true);
-			        headerCellStyle.setFont(boldFont);
+	public List<String> dateParse(String date){
 
-			        XSSFRow row = sheet.createRow(0);
+		String fromDate    = null;
+		String toDate	   = null;
+		SimpleDateFormat mnthFormat = new SimpleDateFormat("MM/yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy");
+		Date convertedDate=null;
+		try {
+			convertedDate = mnthFormat.parse(date);
+			Calendar c = Calendar.getInstance();
+			c.setTime(convertedDate);
+			c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH));
+			fromDate = dateFormat.format(c.getTime());
+			c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+			c.set(Calendar.HOUR_OF_DAY, 23);
+			c.set(Calendar.MINUTE, 59);
+			c.set(Calendar.SECOND, 59);
+			toDate = dateFormat.format(c.getTime());
+		} catch (Exception e) {
 
-					CellStyle cellStyle1 = wb.createCellStyle();
-					cellStyle1.setAlignment(CellStyle.ALIGN_CENTER);
-
-					Font font1 = wb.createFont();
-					font1.setFontHeightInPoints((short) 18);
-					cellStyle1.setFont(font1);
-
-				  	row = sheet.createRow(0);
-					XSSFCell cell = null;
-
-					for(int i=0;i<18;i++)
-					{
-						cell = row.createCell(i);
-					    cell.setCellStyle(cellStyle1);
-					    if(i==0)
-					    {
-					    	cell.setCellValue("CONSOLIDATED  EFFORTS FOR MONTH OF "+monthYear);
-					    }
-					}
-
-
-				XSSFCellStyle headerCellStyle1 = wb.createCellStyle();
-				XSSFFont boldFont1 = wb.createFont();
-				boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
-				headerCellStyle1.setFont(boldFont1);
-
-				XSSFCellStyle alignCellStyle = wb.createCellStyle();
-				alignCellStyle.setAlignment(XSSFCellStyle.ALIGN_RIGHT);
-
-				row = sheet.createRow(2);
-
-				row = sheet.createRow(3);
-
-				cell = row.createCell(0);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("SL NO."));
-
-				cell = row.createCell(1);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("EMPLOYEE NAME"));
-
-				cell = row.createCell(2);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("EMPLOYEE NAME"));
-
-				cell = row.createCell(3);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("APPLICATION"));
-
-				cell = row.createCell(4);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("WEEK-1"));
-
-				cell = row.createCell(5);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("WEEK-2"));
-
-				cell = row.createCell(6);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("WEEK-3"));
-
-				cell = row.createCell(7);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("WEEK-4"));
-
-				cell = row.createCell(8);
-				cell.setCellStyle(headerCellStyle1);
-				cell.setCellValue(new XSSFRichTextString("WEEK-5"));
-
-
-
-				double totalOfFirstWeek = 0;
-				double totalOfSecondWeek = 0;
-				double totalOfThirdWeek = 0;
-				double totalOfFourthWeek = 0;
-				double totalOfFifthWeek = 0;
-				for(int k=0;k<reportData.size();k++) {
-					row = sheet.createRow(k+1);
-					ArrayList records = (ArrayList)reportData.get(k);
-
-					cell = row.createCell(0);
-					XSSFRichTextString slNoHSS = new XSSFRichTextString(String.valueOf(k+1));
-					cell.setCellValue(slNoHSS);
-
-					String empName=records.get(0)== null ? "":records.get(0).toString().trim();
-					cell = row.createCell(1);
-					XSSFRichTextString gatewayNameHSS = new XSSFRichTextString(empName);
-					cell.setCellValue(gatewayNameHSS);
-
-					String projectName =records.get(1)== null ? "":records.get(1).toString().trim();
-					cell = row.createCell(2);
-					XSSFRichTextString projectNameHSS = new XSSFRichTextString(projectName);
-					cell.setCellValue(projectNameHSS);
-
-
-					String firstWeek = records.get(1)== null ? "":records.get(1).toString().trim();
-					totalOfFirstWeek = totalOfFirstWeek + Double.valueOf(firstWeek);
-					cell = row.createCell(3);
-					XSSFRichTextString firstWeekHSS = new XSSFRichTextString(firstWeek);
-					cell.setCellValue(firstWeekHSS);
-
-					String secondWeek=records.get(2)== null ? "":records.get(2).toString().trim();
-					totalOfSecondWeek = totalOfSecondWeek + Double.valueOf(secondWeek);
-					cell = row.createCell(4);
-					XSSFRichTextString secondWeekHSS = new XSSFRichTextString(secondWeek);
-					cell.setCellValue(secondWeekHSS);
-
-					String thirdWeek=records.get(3)== null ? "":records.get(3).toString().trim();
-					totalOfThirdWeek = totalOfThirdWeek + Double.valueOf(thirdWeek);
-					cell = row.createCell(5);
-					XSSFRichTextString thirdWeekHSS = new XSSFRichTextString(thirdWeek);
-					cell.setCellValue(thirdWeekHSS);
-
-					String fourthWeek=records.get(4)== null ? "":records.get(4).toString().trim();
-					totalOfFourthWeek = totalOfFourthWeek + Double.valueOf(fourthWeek);
-					cell = row.createCell(6);
-					XSSFRichTextString fourthWeekHSS = new XSSFRichTextString(fourthWeek);
-					cell.setCellValue(fourthWeekHSS);
-
-					String fifthWeek=records.get(5)== null ? "":records.get(5).toString().trim();
-					totalOfFifthWeek = totalOfFifthWeek + Double.valueOf(fifthWeek);
-					cell = row.createCell(7);
-					XSSFRichTextString fifthWeekHSS = new XSSFRichTextString(fifthWeek);
-					cell.setCellValue(fifthWeekHSS);
-
-				}
-				cell = row.createCell(0);
-
-				cell = row.createCell(1);
-				XSSFRichTextString totalHSS = new XSSFRichTextString("Total");
-				cell.setCellValue(totalHSS);
-
-				cell = row.createCell(2);
-				XSSFRichTextString appHSS = new XSSFRichTextString("");
-				cell.setCellValue(appHSS);
-
-				cell = row.createCell(3);
-				XSSFRichTextString totalOfFirstWeekHSS = new XSSFRichTextString(String.valueOf(totalOfFirstWeek));
-				cell.setCellValue(totalOfFirstWeekHSS);
-
-				cell = row.createCell(4);
-				XSSFRichTextString totalOfSecondWeekHSS = new XSSFRichTextString(String.valueOf(totalOfSecondWeek));
-				cell.setCellValue(totalOfSecondWeekHSS);
-
-				cell = row.createCell(5);
-				XSSFRichTextString totalOfThirdWeekHSS = new XSSFRichTextString(String.valueOf(totalOfThirdWeek));
-				cell.setCellValue(totalOfThirdWeek);
-
-				cell = row.createCell(6);
-				XSSFRichTextString totalOfFourthWeekHSS = new XSSFRichTextString(String.valueOf(totalOfFourthWeek));
-				cell.setCellValue(totalOfFourthWeekHSS);
-
-				cell = row.createCell(7);
-				XSSFRichTextString totalOfFifthWeekHSS = new XSSFRichTextString(String.valueOf(totalOfFifthWeek));
-				cell.setCellValue(totalOfFifthWeek);
-
-				XSSFCellStyle cellStyle3 = wb.createCellStyle();
-
-		 		Font font3 = wb.createFont();
-		 		font3.setFontHeightInPoints((short) 12);
-		 		cellStyle3.setFont(font3);
-
-		 		cellStyle3.setFillForegroundColor(color);
-		 		cellStyle3.setFillPattern(CellStyle.SOLID_FOREGROUND);
-
-		 		 row = sheet.createRow(reportData.size()+7);
-		 		for(int i=0;i<18;i++)
-		 		{
-		 			cell = row.createCell(i);
-		 		    cell.setCellStyle(cellStyle3);
-		 		    if(i==0)
-		 		    {
-		 		    	//cell.setCellValue("The report is printed on  " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
-		 		    }
-		 		}
-
-
-			}
-		//}
-
+		}
+		List<String> parsedDates = new ArrayList<>();
+		parsedDates.add(fromDate);
+		parsedDates.add(toDate);
+		return parsedDates;
 	}
 
 }

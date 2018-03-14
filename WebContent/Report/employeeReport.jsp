@@ -173,15 +173,14 @@ button {
 <body>
 <table width="100%" align="center">
 <tr class="tableheader">
-			<td colspan="3">Employee Report</td>
+			<td colspan="3">Leave Report</td>
 </tr>
 <tr>
 <td>
 <%
 int result = 0;
-
+String msg = request.getParameter("msg")== null ? "": request.getParameter("msg");
 String submitVal = request.getParameter("submit")== null ? "": request.getParameter("submit");
-	String radioVal = request.getParameter("reportRadio")== null ? "": request.getParameter("reportRadio");
 	String projectDropDownVal = request.getParameter("projectDropDown")== null ? "": request.getParameter("projectDropDown");
 	String monthYear = request.getParameter("monthYear")== null ? "": request.getParameter("monthYear");
 
@@ -189,15 +188,12 @@ String submitVal = request.getParameter("submit")== null ? "": request.getParame
 
 <form method="post" name = "report" id="report" action="<%=request.getContextPath()%>/DownloadReportServlet" >
 <table width="80%" align="center">			
-			<%-- <tr >
-				<td align="center">
-					<input type = "radio" id="individual" name = "reportRadio"  value="individual" <% if("individual".equals(radioVal)) {%> checked = "checked" <%} %>>Individual
-					<input type = "radio" id="consolidated" name= "reportRadio"  value="consolidated" <% if("consolidated".equals(radioVal)) {%> checked = "checked" <%} %>>Consolidated
-				</td>
-			</tr> --%>
-			<tr><td align="center">
+			<tr><td >
+			<label>Project Name<span class="required"></span>&nbsp;&nbsp;:</label>
+			</td>
+			<td>
 		 <div width="80%" id="projectOption" style="display: none">
-				<label>Project Name<span class="required"></span>&nbsp;&nbsp;:</label>
+				
 				<select name="projectDropDown" id="projectDropDown">
 						<option value="">Select</option>
 						<%
@@ -212,16 +208,15 @@ String submitVal = request.getParameter("submit")== null ? "": request.getParame
 							}
 						%>
 				    </select>
-				    <div id="projectNameError" style="display: none; color: red;" ></div>
 							  
 			</div>
 			</td></tr>
 			<tr id="monthPicker" >
-				<td align="center">Select Month<span class="required"></span>&nbsp;&nbsp;:<input id="monthYear" type="text" name="monthYear" value="<%=monthYear %>" readonly="readonly" /> 
-				<label id="monthErrorMsg" style="display: none;" generated="true" class="error"><font color="red"> Please Select Month and Year</font></label></td> 
+				<td >Select Month<span class="required"></span>&nbsp;&nbsp;:</td>
+				<td><input id="monthYear" type="text" name="monthYear" value="<%=monthYear %>" readonly="readonly" /> 
 			</tr>
 			<tr id="monthPicker">
-				<td align="center"><input type="submit" name="submit" value="submit" id="submit"></td>
+				<td><input type="submit" name="submit" value="submit" id="submit"></td>
 			</tr>
 		</table>
 		<br/>
@@ -229,6 +224,13 @@ String submitVal = request.getParameter("submit")== null ? "": request.getParame
 		
 		<input type="hidden" name="projectDropDown" value="<%=projectDropDownVal.trim()%>"/>
 		</form>
+		<table align="center">
+		<%if(!"".equals(msg)) {%>
+		<tr>
+				<td><b>No Record Found</b></td>
+			</tr>
+		<%} %>
+		</table>
 		
 </td>
 </tr>

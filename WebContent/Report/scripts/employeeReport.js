@@ -1,19 +1,11 @@
 $(function(){
 	$("#monthPicker").hide();
 	showDropDown();
-	/*document.getElementById("searchErrorMsg").style.display ="none";
-	document.getElementById("projectNameError").style.display ="none";*/
 
-	/*$('input:radio[name="reportRadio"]').click(function() {
-		$("#monthPicker").hide();
-		$("#projectDropDown").val("");
-			showDropDown();
-
-	});*/
 	$("#projectDropDown").change(function(){
 		$("#monthPicker").show();
-
 	});
+
 
 	$("#monthYear").MonthPicker({
 		MaxMonth: -1,
@@ -21,58 +13,32 @@ $(function(){
 
 	});
 
-if($("#skills").is(":checked")){
-	showDropDown();
-}
-if($("#name").is(":checked")){
-	$("#searchOption").show();
-	$("#projectOption").hide();
-
-}
-
-$("#viewModifyEmolyeeForm").validate({
-	rules: {
-		phone : {
-			required : true,
-			number : true,
-			maxlength : 10
-		},
-		panno : {
-			required : true,
-			panCheck : true,
-			maxlength : 10
-		},
-		aadharNo : {
-			aadharNo : true
-		},
+	if($("#projectDropDown").val()!="")
+		$("#monthPicker").show();
 
 
-	},
-	messages : {
-		phone : {
-			required : "Please enter the phone Number."
+$("#report").validate({
+	rules : {
+
+		monthYear : {
+			required : true
 		},
-		panno : {
-			required : "Please enter the pan Number."
+		projectDropDown : {
+			check_item_dropdown : true
 		}
 	},
-	errorPlacement : function(label, element) {
-		label.addClass('error');
-		label.insertAfter(element);
-    },
-	wrapper : "div"
+	messages : {
+		monthYear : {
+			required : "Please enter month"
+		}
+
+	},
+	errorElement : "div"
 
 });
-$.validator.addMethod("number", function(b, a) {
-	return this.optional(a) || /^\s*(?:[0-9]{10})\s*$/i.test(b)
-}, "Invalid phone number");
-$.validator.addMethod("panCheck", function(value, element)
-{
-	return this.optional(element) || /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/i.test(value);
-}, "Invalid pan number");
-$.validator.addMethod("aadharNo", function(b, a) {
-	return this.optional(a) || /^\d{12}$/i.test(b)
-}, "Invalid Aadhar Number.");
+$.validator.addMethod("check_item_dropdown", function(b, a) {
+	return $.trim(b) != ""
+}, "Please select Project");
 
 });
 
