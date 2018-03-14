@@ -51,7 +51,7 @@ public class DownloadReportServlet extends HttpServlet {
 		List<String> parsedDates = dateParse(monthYear);
 
 		List<ArrayList<String>> reportData = emplDoamin.fetchLeaveReportData(parsedDates.get(0),parsedDates.get(1),selProjectName);
-		String fileName = "LEAVE REPORT FOR THE MONTH OF "+monthYear;
+		String fileName = "LEAVES_"+selProjectName+"_"+monthYear;
 
 		byte[] byteArray = null;
 		ByteArrayOutputStream bos = null;

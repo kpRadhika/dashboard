@@ -2,6 +2,7 @@ $(function(){
 	$("#fromDate").datepicker({
     	changeMonth: true,
 		changeYear: true,
+		maxDate:"0",
 		yearRange: "-100:+0",
 		dateFormat: 'dd-mm-yy',
 		onSelect : function(selected) {
@@ -11,6 +12,7 @@ $(function(){
 	$("#toDate").datepicker({
     	changeMonth: true,
 		changeYear: true,
+		minDate:"0",
 		yearRange: "-100:+0",
 		dateFormat: 'dd-mm-yy',
 		onSelect : function(selected) {

@@ -158,8 +158,8 @@ public class TimesSheetDomain {
 			sql.append(" GETEMPLOYEESBYTASK(TASKID),                                        ");
 			sql.append(" TASKDESCRIPTION FROM TASKMASTER                                    ");
 			sql.append(" WHERE PROJECTID = ?	                                            ");
-			sql.append(" AND CREATIONDATE BETWEEN TO_DATE(?,'DD-MM-YYYY')            		");
-			sql.append(" AND TO_DATE(?,'DD-MM-YYYY')                                     	");
+			sql.append(" AND CREATIONDATE >= TO_DATE(?,'DD-MM-YYYY')  		          		");
+			sql.append(" AND CREATIONDATE <= TO_DATE(?,'DD-MM-YYYY')                        ");
 			
 			values.add(projectId);
 			values.add(fromDate);

@@ -211,9 +211,9 @@ String submitVal = request.getParameter("submit")== null ? "": request.getParame
 							  
 			</div>
 			</td></tr>
-			<tr id="monthPicker" >
+			<tr id="monthPicker">
 				<td >Select Month<span class="required"></span>&nbsp;&nbsp;:</td>
-				<td><input id="monthYear" type="text" name="monthYear" value="<%=monthYear %>" readonly="readonly" /> 
+				<td><input id="monthYear"  type="text" name="monthYear" value="<%=monthYear %>" readonly="readonly" /> 
 			</tr>
 			<tr id="monthPicker">
 				<td><input type="submit" name="submit" value="submit" id="submit"></td>

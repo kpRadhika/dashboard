@@ -1,11 +1,5 @@
 $(function(){
-	$("#monthPicker").hide();
 	showDropDown();
-
-	$("#projectDropDown").change(function(){
-		$("#monthPicker").show();
-	});
-
 
 	$("#monthYear").MonthPicker({
 		MaxMonth: -1,
