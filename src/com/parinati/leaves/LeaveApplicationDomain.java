@@ -304,7 +304,7 @@ public class LeaveApplicationDomain {
 
 
 				} catch (ParseException e) {
-				    e.printStackTrace();
+					CustomLogger.exceptionJava(e, "Exception in empleavecredit() while executing the query:"+totalQueryList.toString(), "LeaveApplicationDomain.java");
 				}
 
 			}
@@ -331,7 +331,7 @@ public class LeaveApplicationDomain {
 			}
 		}
 		catch (Exception e) {
-			CustomLogger.exceptionJava(e, "Exception in updateEmpLeaveDetail() while executing the query:"+sql.toString(), "LeaveApplicationDomain.java");
+			CustomLogger.exceptionJava(e, "Exception in updateEmpLeaveDetail() while executing the query:"+totalQueryList.toString(), "LeaveApplicationDomain.java");
 		}
 
 		return rs;
