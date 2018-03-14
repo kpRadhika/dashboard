@@ -56,10 +56,10 @@ if(subButtonVal.equals("Submit")){
 else{
 %>
 <form action="addTask.jsp" id="addTask" method = "Post">
-<table width="80%" align="center">
+<table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
 <tr class="tableheader"><td colspan="2">Add Task</td></tr><tr></tr>
 <tr>
-	<td align="right"><b>Project Name<span class="required"></span>:</b></td>
+	<td><b>Project Name<span class="required"></span></b></td>
 	<td>
 <select name="projectDropDown" id="projectDropDown" style="padding-right: 14%;">
 <option value="">Select</option>
@@ -97,21 +97,21 @@ String projectName = null;
 
 </tr>
 <tr>
-	<td align="right"><b>Client Task id<span class="required"></span>:</b></td>
+	<td><b>Client Task id<span class="required"></span></b></td>
 	<td><input type="text" id="clientTaskId" name="clientTaskId" disabled="disabled"></td>
 </tr>
 <tr>
-	<td align="right"><b>Task Description<span class="required"></span>:</b></td>
+	<td><b>Task Description<span class="required"></span></b></td>
 	<td><input type="text" id="taskDesc" name="taskDesc" disabled="disabled"></td>
 </tr>
 <tr>
-	<td align="right"><b>Resources mapped<span class="required"></span>:</b></td>
+	<td><b>Resources mapped<span class="required"></span></b></td>
 <td>
 <div id="resMapping" style="display: none"></div>
 </td>
 </tr>
 <tr>
-	<td align="right"><b>Remarks<span class="required"></span>:</b></td>
+	<td><b>Remarks<span class="required"></span></b></td>
 <td><input type="text" id="remarks" name="remarks" disabled="disabled"/></td>
 </tr>
 <tr>

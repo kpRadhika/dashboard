@@ -2,7 +2,7 @@
 <%@page import="java.util.*"%>
 
 
-<DROPDOWN> <jsp:useBean id="projDom" scope="session" class="com.parinati.admin.AddProjectDomain" /> 
+<jsp:useBean id="projDom" scope="session" class="com.parinati.admin.AddProjectDomain" /> 
 <PROJOPTION>
 <%
  	String projId = GenericUtil.setValue(request.getParameter("projectId"));			
@@ -17,22 +17,27 @@
 				List projectRec = projIter.next();
 				String projectLoc = (String)projectRec.get(0);
 				String tech = (String)projectRec.get(1);
-				String leadId = (String)projectRec.get(2);
-				String leadName = (String)projectRec.get(3);
+			
 				%>
 				<PROJLOC><%= projectLoc%></PROJLOC>
 				<PROJTECH><%= tech%></PROJTECH>
 				<%
-				if(leadId==null || leadId.isEmpty()){
-				%>
-				<LEAD><%=("" + "|Select") %></LEAD>
-				<%	
-				}else{%>
-					<LEAD><%=(leadId + "|"+leadName) %></LEAD>	
-				<%}
 			}
 		}
-		List leadDetails = (ArrayList)emplList.get(1);
+		List proLeadDetails = (ArrayList)emplList.get(1);
+		if(proLeadDetails!=null && !proLeadDetails.isEmpty()){
+			String leadId = (String)proLeadDetails.get(0);
+			String leadName = (String)proLeadDetails.get(1);
+			
+			%>
+				
+					<LEAD><%=(leadId + "|"+leadName) %></LEAD>	
+				<%
+		}else{%>
+		<LEAD><%=("" + "|Select") %></LEAD>
+		<%	
+		}
+		List leadDetails = (ArrayList)emplList.get(2);
 		if(leadDetails!=null && !leadDetails.isEmpty()){
 			Iterator<ArrayList> leadIter = leadDetails.listIterator();
 			while(leadIter.hasNext()){
@@ -48,4 +53,3 @@
  	}
 	%>
 </PROJOPTION> 
-</DROPDOWN>

@@ -32,7 +32,7 @@ String projectLocation = request.getParameter("ploc")==null?"":(String)request.g
 if(submitClicked.isEmpty()){
 %>
 <form action="addProject.jsp" id="addProject">
-<table width="80%" align="center">
+<table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
 <tbody>
 <tr class="tableheader"><td colspan="2">Add Project</td></tr><tr></tr>
 <tr>

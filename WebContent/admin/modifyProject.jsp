@@ -29,6 +29,7 @@ String submitClicked = GenericUtil.setValue(request.getParameter("subBtn"));
 String projectName = GenericUtil.setValue(request.getParameter("pname"));
 String projectTech = GenericUtil.setValue(request.getParameter("ptech"));
 String projectLocation = GenericUtil.setValue(request.getParameter("ploc"));
+String leadId = GenericUtil.setValue(request.getParameter("plead"));
 String projectDropDownVal = GenericUtil.setValue(request.getParameter("projectDropDown"));
 if(submitClicked.isEmpty()){
 %>
@@ -58,17 +59,17 @@ if(submitClicked.isEmpty()){
 						%>
 				    </select></td>
 
-	<td><input type="text" id="ptech" name="ptech" disabled="disabled"></td>
+	<td><input type="text" id="ptech" name="ptech" disabled="disabled"/></td>
 
-	<td><input type="text" id="ploc" name="ploc" disabled="disabled"></td>
+	<td><input type="text" id="ploc" name="ploc" disabled="disabled"/></td>
 
 	<td><select id="plead" name="plead" disabled="disabled">
 	<option value="">-Please select-</option>
 	</select>
 <tr></tr>
 <tr>
-	<td colspan="2" align="center"><input type="submit" id="subBtn" name="subBtn" value="Submit">
-	<a href="modifyProject.jsp" style="text-decoration:none;"><input type="button" class="Button" id="resBtn" name="resBtn" value="Reset"></a></td>
+	<td colspan="4" align="center"><input type="submit" id="subBtn" name="subBtn" value="Submit"><input type="reset"id="resBtn" name="resBtn" value="Reset">
+	<!-- <a href="modifyProject.jsp" style="text-decoration:none;"><input type="button" class="Button" id="resBtn" name="resBtn" value="Reset"></a> --></td>
 </tr>
 </tbody>
 </table>
@@ -76,12 +77,13 @@ if(submitClicked.isEmpty()){
 <%
 }else{
 int resultVal = 0;
-	List<String> inputParam = new ArrayList();
-	inputParam.add(projectName);
-	inputParam.add(projectTech);
+	List inputParam = new ArrayList();
 	inputParam.add(projectLocation);
+	inputParam.add(projectTech);
+	inputParam.add(Integer.parseInt(leadId));
+	inputParam.add(Integer.parseInt(projectDropDownVal));
 
-	resultVal = addProjectDomain.insertProjectDtls(inputParam);
+	resultVal = addProjectDomain.updateProjectDtls(inputParam);
 
 %>
 
@@ -90,7 +92,7 @@ int resultVal = 0;
 	if(1 == resultVal){
 	%>
 			<tr>
-				<td  align="center"><b>Project Added Successfully.</b></td>
+				<td  align="center"><b>Project details modified Successfully.</b></td>
 			</tr>
 
 	<%

@@ -53,17 +53,17 @@ function fetchProjectDetails(val){
 			var e = "";
 			$(d).find("PROJOPTION").each(
 					function() {
-						$(this).find("PROJLOC").each(
+						$(d).find("PROJLOC").each(
 								function() {
-									 $("#ploc").html($(this).text());
+									 $("#ploc").val($(this).text());
 									 $("#ploc").attr("disabled",false);
 									});
-						$(this).find("PROJTECH").each(
+						$(d).find("PROJTECH").each(
 								function() {
-									$("#ptech").html($(this).text());
+									$("#ptech").val($(this).text());
 									 $("#ptech").attr("disabled",false);
 								});
-						$(this).find("PROJLOC").each(
+						$(d).find("LEAD").each(
 								function() {
 									var lead = $(this).text().split("|");
 									var id = lead[0];

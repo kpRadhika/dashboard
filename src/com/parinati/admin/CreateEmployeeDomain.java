@@ -222,7 +222,7 @@ public class CreateEmployeeDomain {
 		values = new ArrayList();
 		values.add(empId);
 		values.add(actualLogin);
-		values.add((GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(4))).replaceAll("/", ""));
+		values.add((GenericUtil.setValue((String)((ArrayList)candDetails.get(0)).get(3))).replaceAll("-", ""));
 
 		totalValues.add(values);
 

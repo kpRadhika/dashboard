@@ -79,16 +79,9 @@ public class AddProjectDomain
 		StringBuilder sql = new StringBuilder();
 		try{
 			sql.append(" SELECT PROJECTLOC,				");
-			sql.append(" TECHNOLOGY,            		");
-			sql.append(" PROJECTLEADID,         		");
-			sql.append(" FNAME                  		");
-			sql.append(" || ' '                 		");
-			sql.append(" || LNAME               		");
-			sql.append(" FROM                   		");
-			sql.append(" EMPLOYEEDTLS,          		");
+			sql.append(" TECHNOLOGY  FROM      			");
 			sql.append(" PROJECTMASTER     				");
-			sql.append(" WHERE PROJECTLEADID = EMPID  	");
-			sql.append(" AND PROJECTID=?      			");
+			sql.append(" WHERE PROJECTID=?      		");
 
 			List values = new ArrayList();
 			values.add(Integer.parseInt(projectId));
@@ -97,8 +90,23 @@ public class AddProjectDomain
 			valueTypes.add(GenericConstDef.DB_INT);
 
 			List result1 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
+			
+			sql = new StringBuilder();
+			sql.append(" SELECT                         ");
+			sql.append("     ED.EMPID,                 ");
+			sql.append("     ED.FNAME                   ");
+			sql.append("     || ' '                     ");
+			sql.append("     || ED.LNAME                ");
+			sql.append(" FROM                           ");
+			sql.append("     EMPLOYEEDTLS ED,            ");
+			sql.append(" 	PROJECTMASTER   PM  				");
+			sql.append("     WHERE ED.EMPID = PM.PROJECTLEADID       ");
+			sql.append("     AND   PM.PROJECTID = ?    ");
+			
+			List result2 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
+			
 			String leadId = null;
-			if(result1!=null && !result1.isEmpty()){
+			if(result2!=null && !result2.isEmpty()){
 				leadId = GenericUtil.setValue((String)result1.get(2));
 			}
 			sql = new StringBuilder();
@@ -122,15 +130,40 @@ public class AddProjectDomain
 				values.add(Integer.parseInt(leadId));
 				valueTypes.add(GenericConstDef.DB_INT);
 			}
-			List result2 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
+			List result3 = dbhelper.executeQuery(sql.toString(), values, valueTypes);
 
 			rs.add(result1);
 			rs.add(result2);
+			rs.add(result3);
 		}
 		catch(Exception e){
-			CustomLogger.exceptionJava(e, "Exception in fetchEmployeeByProject() while executing the query:"+sql.toString(), "TimesSheetDomain.java");
+			CustomLogger.exceptionJava(e, "Exception in fetchEmployeeByProject() while executing the query:"+sql.toString(), "AddProjectDomain.java");
 		}
 		return rs;
 	}
-
+public int updateProjectDtls(List input){
+	StringBuilder sql = new StringBuilder();
+	int result = -1;
+	try{	
+	sql.append(" UPDATE PROJECTMASTER	");
+	sql.append(" SET 					");
+	sql.append(" PROJECTLOC = ?,        ");
+	sql.append(" TECHNOLOGY = ?,        ");
+	sql.append(" PROJECTLEADID = ?      ");
+	sql.append(" WHERE PROJECTID = ?    ");
+	
+	List<String> queryTypes = new ArrayList<>();
+	
+		queryTypes.add(GenericConstDef.DB_STRING);
+		queryTypes.add(GenericConstDef.DB_STRING);
+		queryTypes.add(GenericConstDef.DB_INT);
+		queryTypes.add(GenericConstDef.DB_INT);
+	
+	result = dbhelper.executeInsertUpdate(sql.toString(), input, queryTypes);
+	
+}catch (Exception e) {
+	CustomLogger.exceptionJava(e, "Exception in updateProjectDtls() while executing the query:"+sql.toString(), "AddProjectDomain.java");
+}
+	return result;
+}
 }
