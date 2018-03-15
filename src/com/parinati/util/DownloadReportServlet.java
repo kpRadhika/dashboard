@@ -1,11 +1,8 @@
 package com.parinati.util;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,10 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -46,12 +41,18 @@ public class DownloadReportServlet extends HttpServlet {
 		EmployeeReportDomain emplDoamin = new EmployeeReportDomain();
 		String selProjectName = request.getParameter("projectDropDown")== null ? "": request.getParameter("projectDropDown");
 		String monthYear = request.getParameter("monthYear")== null ? "": request.getParameter("monthYear");
-
+		String projectName=request.getParameter("projectName")== null ? "": request.getParameter("projectName");
 
 		List<String> parsedDates = dateParse(monthYear);
 
 		List<ArrayList<String>> reportData = emplDoamin.fetchLeaveReportData(parsedDates.get(0),parsedDates.get(1),selProjectName);
-		String fileName = "LEAVES_"+selProjectName+"_"+monthYear;
+		try{
+			monthYear=new SimpleDateFormat("MMM_yyyy").format(new SimpleDateFormat("MM/yyyy").parse(monthYear));
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		String fileName = "LEAVES_"+projectName+"_"+monthYear;
 
 		byte[] byteArray = null;
 		ByteArrayOutputStream bos = null;
@@ -86,99 +87,104 @@ public class DownloadReportServlet extends HttpServlet {
 			sheet.setColumnWidth(20, 3000);
 			sheet.setColumnWidth(21,4000);
 
-			XSSFCellStyle headerCellStyle = wb.createCellStyle();
+			/*XSSFCellStyle headerCellStyle = wb.createCellStyle();
 			XSSFColor color = new XSSFColor(new java.awt.Color(148, 197, 246));
 			headerCellStyle.setFillForegroundColor(color);
-			headerCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+			headerCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);*/
+			
+			
+			XSSFCellStyle headerCellStyle = wb.createCellStyle();
 			XSSFFont boldFont = wb.createFont();
 			boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
+			boldFont.setBold(true);
 			headerCellStyle.setWrapText(true);
 			headerCellStyle.setFont(boldFont);
+			
 
 			XSSFRow row = sheet.createRow(0);
 
 			CellStyle cellStyle1 = wb.createCellStyle();
 			cellStyle1.setAlignment(CellStyle.ALIGN_CENTER);
+			cellStyle1.setFont(boldFont);
+			cellStyle1.setWrapText(true);
 
-			Font font1 = wb.createFont();
-			font1.setFontHeightInPoints((short) 18);
-			cellStyle1.setFont(font1);
+			XSSFFont boldFont2 = wb.createFont();
+			boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
+			
+			CellStyle cellStyle2 = wb.createCellStyle();
+			cellStyle2.setAlignment(CellStyle.ALIGN_CENTER);
+			cellStyle2.setFont(boldFont2);
+			cellStyle2.setWrapText(true);
 
 			row = sheet.createRow(0);
 			XSSFCell cell = null;
 
-			for(int i=0;i<18;i++)
-			{
-				cell = row.createCell(i);
+				cell = row.createCell(0);
 				cell.setCellStyle(cellStyle1);
-				if(i==0)
-				{
-					cell.setCellValue("PROJECT NAME");
-				}else{
-					cell.setCellValue(selProjectName);
-				}
-			}
-
-			row = sheet.createRow(1);
-			cell = null;
-
-			for(int i=0;i<18;i++)
-			{
-				cell = row.createCell(i);
+				cell.setCellValue("PROJECT NAME");
+				
+				cell = row.createCell(1);
+				cell.setCellStyle(cellStyle2);
+				cell.setCellValue(projectName);
+				
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
 				cell.setCellStyle(cellStyle1);
-				if(i==0)
-				{
-					cell.setCellValue("MONTH");
-				}else{
-					cell.setCellValue(monthYear);
-				}
-			}
+				cell.setCellValue("MONTH");
+				
+				cell = row.createCell(1);
+				cell.setCellStyle(cellStyle2);
+				cell.setCellValue(monthYear);
+			
 
 
-			XSSFCellStyle headerCellStyle1 = wb.createCellStyle();
+		/*	XSSFCellStyle headerCellStyle1 = wb.createCellStyle();
 			XSSFFont boldFont1 = wb.createFont();
 			boldFont.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);
-			headerCellStyle1.setFont(boldFont1);
+			boldFont1.setBold(true);
+			headerCellStyle1.setFont(boldFont1);*/
 
 			XSSFCellStyle alignCellStyle = wb.createCellStyle();
 			alignCellStyle.setAlignment(XSSFCellStyle.ALIGN_RIGHT);
 
-			row = sheet.createRow(2);
-
 			row = sheet.createRow(3);
 
 			cell = row.createCell(0);
-			cell.setCellStyle(headerCellStyle1);
+			cell.setCellStyle(headerCellStyle);
 			cell.setCellValue(new XSSFRichTextString("EMP ID"));
 
 			cell = row.createCell(1);
-			cell.setCellStyle(headerCellStyle1);
+			cell.setCellStyle(headerCellStyle);
 			cell.setCellValue(new XSSFRichTextString("EMPLOYEE NAME"));
 
 			cell = row.createCell(2);
-			cell.setCellStyle(headerCellStyle1);
+			cell.setCellStyle(headerCellStyle);
+			cell.setCellValue(new XSSFRichTextString("APPLICATION ID"));
+			
+			cell = row.createCell(3);
+			cell.setCellStyle(headerCellStyle);
 			cell.setCellValue(new XSSFRichTextString("LEVAE APPLICATION TYPE"));
 
-			cell = row.createCell(3);
-			cell.setCellStyle(headerCellStyle1);
+			cell = row.createCell(4);
+			cell.setCellStyle(headerCellStyle);
 			cell.setCellValue(new XSSFRichTextString("LEAVE FROM"));
 
-			cell = row.createCell(4);
-			cell.setCellStyle(headerCellStyle1);
+			cell = row.createCell(5);
+			cell.setCellStyle(headerCellStyle);
 			cell.setCellValue(new XSSFRichTextString("LEAVE TO"));
 
-			cell = row.createCell(5);
-			cell.setCellStyle(headerCellStyle1);
+			cell = row.createCell(6);
+			cell.setCellStyle(headerCellStyle);
 			cell.setCellValue(new XSSFRichTextString("APPRVED BY"));
 
 
 			for(int k=0;k<reportData.size();k++) {
-				row = sheet.createRow(k+1);
+				row = sheet.createRow(k+4);
 				ArrayList records = (ArrayList)reportData.get(k);
 
 				cell = row.createCell(0);
 				String empID=records.get(0)== null ? "":records.get(0).toString().trim();
-				XSSFRichTextString slNoHSS = new XSSFRichTextString(String.valueOf(k+1));
+				XSSFRichTextString slNoHSS = new XSSFRichTextString(empID);
 				cell.setCellValue(slNoHSS);
 
 				String empFirstName=records.get(2)== null ? "":records.get(2).toString().trim();
