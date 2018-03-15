@@ -25,10 +25,10 @@ html, body, form {
 button {
      background:none!important;
      color:inherit;
-     border:none; 
+     border:none;
      padding:0!important;
      font: inherit;
-     border-bottom:1px solid #0147FA; 
+     border-bottom:1px solid #0147FA;
      cursor: pointer;
 }
 .labelstyle {
@@ -37,13 +37,13 @@ button {
 }
 </style>
 
-	
-	
+
+
 <script type = "text/javascript" src = "scripts/addTaskTime.js"></script>
 </head>
 <body>
 <%
- 
+
 String taskId=request.getParameter("taskId")==null?"":request.getParameter("taskId");
 String taskName=request.getParameter("taskName")==null?"":request.getParameter("taskName");
 String selectedStatus=request.getParameter("statusCode")==null?(request.getParameter("taskStatus")==null?"":request.getParameter("taskStatus")):request.getParameter("statusCode");
@@ -66,7 +66,7 @@ if(submitVal.equals("submit"))
 	inputList.add(selectedStatus);
 	inputList.add(hours);
 	int result=timesheetDomain.insertTaskDetails(inputList);
-	 if(result>0){		 
+	 if(result>0){
 %>
 		 <table align ="center" width="80%">
 		 <tr style="font-weight: bold; text-align: center;">
@@ -89,42 +89,42 @@ else{
 %>
 
 	<form method="post" name="addTaskTime" id="addTaskTime" action="addTaskTime.jsp" onsubmit="return formSubmit();">
-		<table width="50%" align="center">
-			<tr>
-				<th colspan="2">Add Task Time</th>
+		<table width="80%" align="center">
+			<tr class="tableheader">
+				<td colspan="2">Update Task Time</td>
 			</tr>
 			<tr>
-				<td>Task Name:</td><td><input type="text" readonly="readonly" name="taskName" id="taskName" value="<%=taskName%>"></input></td>
+				<td>Task Name</td><td><input type="text" readonly="readonly" name="taskName" id="taskName" value="<%=taskName%>"></input></td>
 			</tr>
 			<tr>
-				<td>Task Description:</td>
-				<td><textarea rows="5" cols="16" readonly="readonly" name="taskDesc" id="taskDesc"><%=taskName%></textarea></td>	
-			
+				<td>Task Description</td>
+				<td><textarea rows="5" cols="16" readonly="readonly" name="taskDesc" id="taskDesc"><%=taskName%></textarea></td>
+
 			</tr>
 			<tr>
-				<td>Start DateTime:</td><td><input type="text" id="startDateTime" name="startDateTime">
+				<td>Start DateTime</td><td><input type="text" id="startDateTime" name="startDateTime">
 				<div id ="startDateTimeError" for="startDateTime" generated="true" class="error"></div>
 				</td>
 			</tr>
 			<tr>
-				<td>End DateTime:</td><td><input type="text" id="endDateTime" name="endDateTime">
+				<td>End DateTime</td><td><input type="text" id="endDateTime" name="endDateTime">
 				<div id="endDateTimeError" for="endDateTime" generated="true" class="error"></div>
 				</td>
 			</tr>
-			
+
 			<tr>
-			    <td>Task Status:</td>
+			    <td>Task Status</td>
 			    <td>
 				<select id="taskStatus" name="taskStatus" onchange="setStatusOption(this.value)">
-				<% 
-				List<String> status=null; 
+				<%
+				List<String> status=null;
 				String statusCode=null,statusDesc=null;
 				for(int i=0;i<statusList.size();i++)
 				{
 					status=statusList.get(i);
 					statusCode=status.get(0);
 					statusDesc=status.get(1);
-					
+
 					if(selectedStatus.equals(statusCode))
 					{
 				%>
@@ -142,7 +142,7 @@ else{
 	<input type="hidden" id="taskIdHidden" name="taskIdHidden" value="<%=taskId %>">
 	<input type="hidden" id="empIdHidden" name="empIdHidden" value="<%=empId %>">
 	<input type="hidden" id="hours" name="hours">
-	
+
 			</td>
 			</tr>
 		</table>

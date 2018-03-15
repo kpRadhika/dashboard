@@ -9,7 +9,7 @@ import com.parinati.util.DBConnectionManager;
 import com.parinati.util.GenericConstDef;
 
 public class TimesSheetDomain {
-	
+
 	DBConnectionManager dbhelper = null;
 
 	public TimesSheetDomain() {
@@ -23,19 +23,26 @@ public class TimesSheetDomain {
 			sql.append("SELECT ER.EMPID,	");
 			sql.append("ED.FNAME,			");
 			sql.append("ED.LNAME			");
-			sql.append("FROM EMPROLEDTLS ER, ");	
+			sql.append("FROM EMPROLEDTLS ER, ");
 			sql.append("EMPLOYEEDTLS ED		");
 			sql.append("WHERE				");
 			sql.append("ED.EMPID = ER.EMPID	");
-			
-			rs = dbhelper.executeQuery(sql.toString(), null, null);
+			sql.append("AND ER.PROJECTID = ?");
+
+			List values = new ArrayList<>();
+			values.add(Integer.parseInt(projectId));
+
+			List valueTypes = new ArrayList<>();
+			valueTypes.add(GenericConstDef.DB_INT);
+
+			rs = dbhelper.executeQuery(sql.toString(), values, valueTypes);
 		}
 		catch(Exception e){
 			CustomLogger.exceptionJava(e, "Exception in fetchEmployeeByProject() while executing the query:"+sql.toString(), "TimesSheetDomain.java");
 		}
 		return rs;
 	}
-	
+
 	public int createTask(List<String> inputList){
 		String taskDes = inputList.get(0);
 		String clientId = inputList.get(1);
@@ -45,24 +52,24 @@ public class TimesSheetDomain {
 		String user = inputList.get(5);
 		String[] resourceList = resources.split(",");
 		int res = -1;
-		
+
 		StringBuilder sql = new StringBuilder();
 		List totalQueries = new ArrayList<>();
 		List totalValues = new ArrayList<>();
 		List totalValueTypes = new ArrayList<>();
 		List valueTypes = null;
 		List values = null;
-		
+
 		try{
-		
+
 		sql.append("SELECT TASKID_SEQ.NEXTVAL FROM DUAL");
-		
+
 		List result = dbhelper.executeQuery(sql.toString(), null, null);
 
 		int taskId = Integer.parseInt(((ArrayList)result.get(0)).get(0).toString());
-		
+
 		sql = new StringBuilder();
-		
+
 		sql.append(" INSERT INTO TASKMASTER( ");
 		sql.append(" TASKID,                 ");
 		sql.append(" PROJECTID,              ");
@@ -92,7 +99,7 @@ public class TimesSheetDomain {
 		values.add(remarks);
 		values.add(user);
 		values.add(taskDes);
-		
+
 		valueTypes = new ArrayList<>();
 		for(int i=0;i<values.size();i++){
 			if(i==3||i==0)
@@ -100,11 +107,11 @@ public class TimesSheetDomain {
 			else
 				valueTypes.add(GenericConstDef.DB_STRING);
 		}
-		
+
 		totalQueries.add(sql.toString());
 		totalValues.add(values);
 		totalValueTypes.add(valueTypes);
-		
+
 		for(String resourceId: resourceList){
 		sql = new StringBuilder();
 		sql.append(" INSERT INTO EMPTASKMAPPINGDTLS(  ");
@@ -117,20 +124,20 @@ public class TimesSheetDomain {
 		sql.append(" ?,		                          ");
 		sql.append(" SYSDATE,                         ");
 		sql.append(" ?)			                      ");
-		
+
 		values = new ArrayList<>();
 		values.add(taskId);
 		values.add(Integer.parseInt(resourceId));
 		values.add(user);
-		
+
 		valueTypes = new ArrayList<>();
 		valueTypes.add(GenericConstDef.DB_INT);
 		valueTypes.add(GenericConstDef.DB_INT);
 		valueTypes.add(GenericConstDef.DB_STRING);
-		
+
 		totalQueries.add(sql.toString());
 		totalValues.add(values);
-		totalValueTypes.add(valueTypes);		
+		totalValueTypes.add(valueTypes);
 		}
 		res = dbhelper.prepStmtExecuteMultiple(totalQueries, totalValues, totalValueTypes);
 		if(res>0){
@@ -160,24 +167,24 @@ public class TimesSheetDomain {
 			sql.append(" WHERE PROJECTID = ?	                                            ");
 			sql.append(" AND CREATIONDATE >= TO_DATE(?,'DD-MM-YYYY')  		          		");
 			sql.append(" AND CREATIONDATE <= TO_DATE(?,'DD-MM-YYYY')                        ");
-			
+
 			values.add(projectId);
 			values.add(fromDate);
 			values.add(toDate);
-			
+
 			valueTypes.add(GenericConstDef.DB_INT);
 			valueTypes.add(GenericConstDef.DB_STRING);
 			valueTypes.add(GenericConstDef.DB_STRING);
-			
+
 			result = dbhelper.executeQuery(sql.toString(), values, valueTypes);
-			
+
 		}
 		catch (Exception e) {
-	
+
 		}
 		return result;
 		}
-	
+
 	public List<List<String>> getTaskStatus(){
 
 		String sql=null;
@@ -195,7 +202,7 @@ public class TimesSheetDomain {
 		return statusList;
 
 	}
-	
+
 	public List<List<String>> getTaskDetails(String statusId,String userLogin)
 	{
 		StringBuffer sql=null;
@@ -206,46 +213,46 @@ public class TimesSheetDomain {
 		String empId=null;
 		try{
 			sql = new StringBuffer();
-			
+
 			sql.append(" SELECT EMPID                                  ");
 			sql.append(" FROM USERLOGIN                                ");
 			sql.append(" WHERE LOGINID=?                                ");
-			
+
 			queryValues=new ArrayList<>();
-			
+
 			queryValues.add(userLogin);
 			queryTypes = new ArrayList<>();
 			queryTypes.add(GenericConstDef.DB_STRING);
-			
+
 			empIdList = dbhelper.executeQuery(sql.toString(), queryValues, queryTypes);
-			
+
 			Iterator<List<String>> itr=empIdList.listIterator();
 			while (itr.hasNext()) {
 				empId=itr.next().get(0);
 			}
-			
+
 			sql = new StringBuffer();
-			
-			sql.append(" SELECT A.TASKID,						");	
-			sql.append(" A.TASKDESCRIPTION,						");	
+
+			sql.append(" SELECT A.TASKID,						");
+			sql.append(" A.TASKDESCRIPTION,						");
 			sql.append("B.STATUSDESCRIPTION,					");
 			sql.append(" C.EMPID,								");
 			sql.append(" B.TASKSTATUSIID						");
-			sql.append(" FROM TASKMASTER A,						");		
+			sql.append(" FROM TASKMASTER A,						");
 			sql.append("TASKSTATUSMASTER B,						");
 			sql.append("EMPTASKMAPPINGDTLS c					");
 			sql.append(" WHERE A.TASKSTATUSIID=B.TASKSTATUSIID	");
 			sql.append("AND A.TASKID=C.TASKID					");
 			sql.append(" AND C.EMPID=?							");
-			
+
 			if(!statusId.isEmpty())
 				sql.append("AND B.TASKSTATUSIID=?	");
 			queryValues=new ArrayList<>();
 			queryValues.add(empId);
-			
+
 			if(!statusId.isEmpty())
 				queryValues.add(statusId);
-			
+
 			queryTypes = new ArrayList<>();
 			queryTypes.add(GenericConstDef.DB_STRING);
 			if(!statusId.isEmpty())
@@ -256,7 +263,7 @@ public class TimesSheetDomain {
 		{
 			CustomLogger.exceptionJava(e, "Exception in getTaskDetails() while executing the query:"+sql, "TimesSheetDomain.java");
 		}
-		
+
 		return taskDetails;
 	}
 	public int insertTaskDetails(List<String> inpuList)
@@ -284,8 +291,8 @@ public class TimesSheetDomain {
 			sql.append(" 		TO_TIMESTAMP(?,'dd-MM-yyyy HH24:mi'),		");
 			sql.append(" 		?	,										");
 			sql.append(" 		TO_DATE(?,'dd-MM-yyyy')	)					");
-			
-			
+
+
 			queryValues=new ArrayList<>();
 			queryValues.add(empId);
 			queryValues.add(taskId);

@@ -35,15 +35,15 @@ if(!emplList.isEmpty()){
 <tr>
 <td>
 <div id="empltable" style="border: 1px solid black; margin: auto; width: 100%; height: 350px; vertical: 20px; overflow-y: scroll; overflow-x: scroll;">
-<table style= "width: 80%;border: none;" align="center" id="empltable" >
-	<tr align="center" class="tableheader">
-		<td>Select</td>
-		<td>Employee Id</td>
-		<td>Employee Name</td>
-		<td>Leave From</td>
-		<td>Leave To</td>
-		<td>Leave Type</td>
-		<td>Remark</td>
+<table style= "width: 80%;border: none;" align="center" id="empltable" class="zebra">
+	<tr align="center">
+		<th>Select</th>
+		<th>Employee Id</th>
+		<th>Employee Name</th>
+		<th>Leave From</th>
+		<th>Leave To</th>
+		<th>Leave Type</th>
+		<th>Remark</th>
 	</tr>
 <% for (int i = 0; i < emplList.size(); i++)
 	{
@@ -55,7 +55,7 @@ if(!emplList.isEmpty()){
 		String empLeaveTo = emplRec.get(4)== null ? "" : emplRec.get(4).toString();
 		String empLeaveType = emplRec.get(5)== null ? "" : emplRec.get(5).toString();
 		String empAppId = emplRec.get(6)== null ? "" : emplRec.get(6).toString();
-	
+
 		%>
 		<tr>
 			<td><input type="radio" id="emlSel<%=i %>" value="<%=empAppId%>" class="radioCheck" onclick="enableDisable(<%=i%>)"/></td>
@@ -70,7 +70,7 @@ if(!emplList.isEmpty()){
 				</select>
 			</td>
 		</tr>
-		
+
 	<%} %>
 	<tr align="center">
 		<td colspan="9"><input type="submit" id="submit" name="submit" value="Submit" disabled="disabled"/></td>
@@ -80,10 +80,10 @@ if(!emplList.isEmpty()){
 		<table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: 1px solid black;">
 		<tr><td align="center"><b>No Pending Records.</b></td></tr>
 		</table>
-		
+
 	<%}
 	}else{
-	
+
 		List<String> inputParam = new ArrayList<String>();
 		inputParam.add(emlAppId);
 		inputParam.add(isApproved);
@@ -92,7 +92,7 @@ if(!emplList.isEmpty()){
 		inputParam.add(emplLeaveType);
 		inputParam.add(emplLeaveFrom);
 		inputParam.add(emplLeaveTo);
-		
+
 		result = leaveDomain.updateEmpLeaveDetail(inputParam);
 		%>
 		<table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: 1px solid black;">
@@ -113,7 +113,7 @@ if(!emplList.isEmpty()){
 				<%} %>
 		</table>
 	<%}%>
-	
+
 </table>
 </div>
 </td>

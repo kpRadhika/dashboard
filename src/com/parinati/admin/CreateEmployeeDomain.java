@@ -249,7 +249,7 @@ public class CreateEmployeeDomain {
 					sql.append("	CREATIONDATE                ");
 					sql.append("	)VALUES                     ");
 					sql.append("	(                           ");
-					sql.append("	?                           ");
+					sql.append("	?,                          ");
 					sql.append("	?,                          ");
 					sql.append("	?,                          ");
 					sql.append("	'ADMIN',                    ");
@@ -257,8 +257,8 @@ public class CreateEmployeeDomain {
 
 					values = new ArrayList();
 					values.add(empId);
-					values.add(leaveRec.get(0));
-					values.add(leaveRec.get(1));
+					values.add(Integer.parseInt((String)leaveRec.get(0)));
+					values.add(Integer.parseInt((String)leaveRec.get(1)));
 
 					valueTypes = new ArrayList();
 					for (int i = 0; i < values.size(); i++) {
@@ -272,7 +272,7 @@ public class CreateEmployeeDomain {
 			}
 		}
 	    sql= new StringBuilder();
-		sql.append(" DELETE FROM CANDIDATEDTLS WHERE CANDIDATEID=?");;
+		sql.append(" DELETE FROM CANDIDATEDTLS WHERE CANDIDATEID=?");
 
 		totalQueryList.add(sql.toString());
 

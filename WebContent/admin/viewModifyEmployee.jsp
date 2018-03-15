@@ -41,7 +41,7 @@ button {
      cursor: pointer;
 }
 .labelstyle {
-    background:rgba(0,0,0,0); 
+    background:rgba(0,0,0,0);
     /* border:2px; */
 }
 
@@ -92,7 +92,7 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 %>
 
 <form method="post" name = "viewModifys" id="viewModifys" action="viewModifyEmployee.jsp" >
-<table width="80%" align="center">			
+<table width="80%" align="center">
 			<tr >
 			<td>Search By &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;:&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
 			<input type = "radio" id="name" name = "viewModify" style="padding-left : 15px" value="name" <% if("name".equals(radioButtonVal)) {%> checked = "checked" <%} %>>First Name
@@ -130,13 +130,13 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 				    </select>
 				    <div id="projectNameError" style="display: none; color: red;" ></div>
 				    <input type="submit" name="search" value="search" id="search" onclick="return formSubmit();" align="left">
-							  
+
 		</div>
 			</td></tr>
 		</table>
 		<br/>
 
-		
+
 		<input type="hidden" name="projectDropDown" value="<%=projectDropDownVal.trim()%>"/>
 		</form>
 		<br>
@@ -208,36 +208,43 @@ if(result != 1 && "".equalsIgnoreCase(submitVal)){
 		<%} %>
 		</select></td>
 		<td><select style="width: 100%;" id = "role<%=i %>" disabled="disabled"/>
-		<%for(int k=0;k<roleDetails.size();k++){ 
+		<%for(int k=0;k<roleDetails.size();k++){
 			List recordsSelect =new ArrayList();
 			recordsSelect=(ArrayList)roleDetails.get(k);
 			String roleId = recordsSelect.get(0) == null ? "" :recordsSelect.get(0).toString();
 			String roleDesc = recordsSelect.get(1) == null ? "" :recordsSelect.get(1).toString();
 			if(role.equals(roleId)){
-		
+
 		%>
 		<option value="<%=roleId%>" selected="selected"><%=roleDesc %></option>
-		
+
 		<%}else{ %>
 		<option value="<%=roleId%>" ><%= roleDesc%></option>
-		<%} 
+		<%}
 			}%>
 		</select>
 		</td>
 		<td><select style="width: 100%;" id = "projectName<%=i %>" disabled="disabled"/>
-		<%for(int k=0;k<projectDetails.size();k++){ 
+		<%
+		if(projectID.isEmpty()){
+			%>
+			<option value="" selected="selected">Please Select</option>
+			<%
+		}
+		for(int k=0;k<projectDetails.size();k++){
 			List recordsSelect =new ArrayList();
 			recordsSelect=(ArrayList)projectDetails.get(k);
 			String projectId = recordsSelect.get(0) == null ? "" :recordsSelect.get(0).toString();
 			String projectDesc = recordsSelect.get(1) == null ? "" :recordsSelect.get(1).toString();
+
 			if(projectID.equals(projectId)){
-		
+
 		%>
 		<option value="<%=projectId%>" selected="selected"><%=projectDesc %></option>
-		
+
 		<%}else{ %>
 		<option value="<%=projectId%>" ><%= projectDesc%></option>
-		<%} 
+		<%}
 			}%>
 		</select>
 		</td>

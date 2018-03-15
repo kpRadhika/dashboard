@@ -9,9 +9,6 @@ $(function(){
 
 	$("#addTask").validate({
 		rules: {
-			clientTaskId : {
-				required : true
-			},
 			taskDesc : {
 				required : true
 			},
@@ -28,9 +25,7 @@ $(function(){
 
 		},
 		messages : {
-			clientTaskId : {
-				required : "Please enter Clent Task Id."
-			},
+
 			taskDesc : {
 				required : "Please enter Task Description."
 			},
@@ -59,15 +54,15 @@ $(function(){
 });
 function selectResources(i){
 	var existing = $("#selectedRes").val();
-	$("#selectedRes").val(existing+i+",");	
-	
+	$("#selectedRes").val(existing+i+",");
+
 }
 
 function showResources(val){
 	$.ajax({
-		data: 
+		data:
 		{
-			projectId:val			
+			projectId:val
 		},
 		type: "POST",
 		dataType: 'xml',

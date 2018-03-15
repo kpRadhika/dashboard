@@ -2,8 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="java.util.*"%>
     <%@include file="../commonInclude.jsp" %>
- <jsp:useBean id="createEmplDom" scope="session" class="com.parinati.admin.CreateEmployeeDomain" /> 
- <jsp:useBean id="timeDom" scope="session" class="com.parinati.timesheet.TimesSheetDomain" /> 
+ <jsp:useBean id="createEmplDom" scope="session" class="com.parinati.admin.CreateEmployeeDomain" />
+ <jsp:useBean id="timeDom" scope="session" class="com.parinati.timesheet.TimesSheetDomain" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,8 +33,8 @@ if(subButtonVal.equals("Submit")){
 	 inputList.add(resources);
 	 inputList.add(remarks);
 	 inputList.add(user);
-	 int taskId = timeDom.createTask(inputList)	; 
-	 if(taskId>0){		 
+	 int taskId = timeDom.createTask(inputList)	;
+	 if(taskId>0){
 		 %>
 		 <table align ="center" width="80%">
 		 <tr style="font-weight: bold; text-align: center;">
@@ -59,7 +59,7 @@ else{
 <table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
 <tr class="tableheader"><td colspan="2">Add Task</td></tr><tr></tr>
 <tr>
-	<td><b>Project Name<span class="required"></span></b></td>
+	<td>Project Name<span class="required"></span></td>
 	<td>
 <select name="projectDropDown" id="projectDropDown" style="padding-right: 14%;">
 <option value="">Select</option>
@@ -72,21 +72,21 @@ String projectName = null;
 				}
 			catch (Exception t) {
 					allProjectList  = null;
-				}	
-	
- 		if (allProjectList != null && !allProjectList.isEmpty()) 
+				}
+
+ 		if (allProjectList != null && !allProjectList.isEmpty())
  			{
  			 for (int size = 0; size < allProjectList.size(); size++)
 		 			{
 		 				ArrayList allProjectListTemp = (ArrayList) allProjectList.get(size);
 		 				projectId = allProjectListTemp.get(0).toString();
 		 				projectName = allProjectListTemp.get(1).toString();
-		 		
-		 			
-						 %> 
-						
+
+
+						 %>
+
 							<option value="<%=projectId%>"><%=projectName%></option>
-						 
+
 			<%
 					}
 			}
@@ -97,21 +97,21 @@ String projectName = null;
 
 </tr>
 <tr>
-	<td><b>Client Task id<span class="required"></span></b></td>
+	<td>Client Task id</td>
 	<td><input type="text" id="clientTaskId" name="clientTaskId" disabled="disabled"></td>
 </tr>
 <tr>
-	<td><b>Task Description<span class="required"></span></b></td>
+	<td>Task Description<span class="required"></span></td>
 	<td><input type="text" id="taskDesc" name="taskDesc" disabled="disabled"></td>
 </tr>
 <tr>
-	<td><b>Resources mapped<span class="required"></span></b></td>
+	<td>Resources mapped<span class="required"></span></td>
 <td>
 <div id="resMapping" style="display: none"></div>
 </td>
 </tr>
 <tr>
-	<td><b>Remarks<span class="required"></span></b></td>
+	<td>Remarks<span class="required"></span></td>
 <td><input type="text" id="remarks" name="remarks" disabled="disabled"/></td>
 </tr>
 <tr>

@@ -48,7 +48,7 @@
 
 </script>
 <style >
- 
+
 
 .error {
     color:#FF0000;  /* red */
@@ -86,14 +86,14 @@ if(submitClicked.isEmpty()){
 				<table align="center" width="50%" style="background-color: white">
 				<tr align="center"><td>New Password<span class="required"></span></td>
 				<td>
-					<input type="password" name="newPassword" id="newPassword"/>
+					<input type="password" name="newPassword" id="newPassword"/><br>
 					<div id="errorNewdiv" style="font-size: 15px; color: #FF0000" align="center"></div>
 				</td>
 				
 				</tr>
 				<tr align="center"><td>Confirm Password<span class="required"></span></td>
 				<td>
-					<input type="password" name="confirmPassword" id="confirmPassword"/>
+					<input type="password" name="confirmPassword" id="confirmPassword"/><br>
 					<div id="errorConfirmdiv" style="font-size: 15px; color: #FF0000" align="center"></div>
 					<br>
 				</td>
@@ -113,7 +113,7 @@ int resultVal = 0;
 	inputParam.add(newPassword);
 	inputParam.add("Change Password");
 	resultVal = loginsDomain.updatePasswordDetails(inputParam);
-	
+
 %>
 
 <table width="80%"  cellspacing="1" cellpadding="2" align="center" style="margin-top: 1%;border: 1px solid #ccc">
@@ -132,7 +132,7 @@ int resultVal = 0;
 				<td align="center"><b style="color:red;"> Error Occured. Please Try Again.</b></td>
 			</tr>
 	</table>
-	<%} 
+	<%}
 	}%>
 	</table>
 </body>

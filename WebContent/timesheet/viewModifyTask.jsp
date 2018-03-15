@@ -24,10 +24,10 @@ html, body, form {
 button {
      background:none!important;
      color:inherit;
-     border:none; 
+     border:none;
      padding:0!important;
      font: inherit;
-     border-bottom:1px solid #0147FA; 
+     border-bottom:1px solid #0147FA;
      cursor: pointer;
 }
 .labelstyle {
@@ -54,25 +54,24 @@ session.setAttribute("statusList",statusList);
 %>
 
 <form  method="post" action="viewModifyTask.jsp" >
-<table width="50%" align="center" >
+<table width="80%" align="center" >
 			<tr>
-			<th  style="text-align: center;" colspan="7">View/Modify task</th>
+			<td  style="text-align: center;" colspan="7" class="tableheader">View/Modify mapped tasks</td>
 			</tr>
-			<tr></tr><tr></tr><tr></tr>
 			<tr >
-			<td>Task Status:</td>
+			<td>Task Status</td>
 				<td>
 				<select id="taskStatus" name="taskStatus">
-				<option value="">Please select Task Status</option>
-				<% 
-				List<String> status=null; 
+				<option value="">select Task Status</option>
+				<%
+				List<String> status=null;
 				String statusCode=null,statusDesc=null;
 				for(int i=0;i<statusList.size();i++)
 				{
 					status=statusList.get(i);
 					statusCode=status.get(0);
 					statusDesc=status.get(1);
-					
+
 					if(taskStatusCode.equals(statusCode))
 					{
 				%>
@@ -90,14 +89,14 @@ session.setAttribute("statusList",statusList);
 			<input type="reset" id="reset" name="reset" value="Reset" onclick="resetVal()">
 			</td>
 			</tr>
-		</table> 
+		</table>
 		<br/>
 </form>
 <form id="viewTask" action="addTaskTime.jsp">
 <%request.setAttribute("statusList",statusList); %>
-<table width="50%"  align="center" >
+<table width="80%"  align="center" class="zebra">
 			<tr>
-			<th colspan="3" align="center">Task Listing Report</th>
+			<td colspan="3" align="center" class="tableheader">Task Listing Report</td>
 			</tr>
 			<tr>
 				<th>Task Id</th>
@@ -109,7 +108,7 @@ session.setAttribute("statusList",statusList);
 				for(int i=0;i<taskDescription.size();i++)
 				{
 					taskDetails=taskDescription.get(i);
-			%>	
+			%>
 			<tr>
 				<td align="center"><a href="addTaskTime.jsp?taskId=<%=taskDetails.get(0)%>&taskName=<%=taskDetails.get(1)%>&taskStatus=<%=taskDetails.get(2)%>&statusCode=<%=taskDetails.get(4) %>&empId=<%=taskDetails.get(3) %>"><%=taskDetails.get(0)%></a></td>
 				<td align="center"><%=taskDetails.get(1) %></td>
