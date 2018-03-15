@@ -113,7 +113,12 @@ function enableDisable(i){
 
 }
 
-
+function setProjectOption()
+{
+	var projectName=$('#projectDropDown option:selected').text();
+	$("#projectName").val(projectName)
+	
+}
 
 
 

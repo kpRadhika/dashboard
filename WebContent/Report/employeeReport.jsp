@@ -181,8 +181,10 @@ button {
 int result = 0;
 String msg = request.getParameter("msg")== null ? "": request.getParameter("msg");
 String submitVal = request.getParameter("submit")== null ? "": request.getParameter("submit");
-	String projectDropDownVal = request.getParameter("projectDropDown")== null ? "": request.getParameter("projectDropDown");
-	String monthYear = request.getParameter("monthYear")== null ? "": request.getParameter("monthYear");
+String projectDropDownVal = request.getParameter("projectDropDown")== null ? "": request.getParameter("projectDropDown");
+String monthYear = request.getParameter("monthYear")== null ? "": request.getParameter("monthYear");
+	
+	
 
 %>
 
@@ -194,7 +196,7 @@ String submitVal = request.getParameter("submit")== null ? "": request.getParame
 			<td>
 		 <div width="80%" id="projectOption" style="display: none">
 				
-				<select name="projectDropDown" id="projectDropDown">
+				<select name="projectDropDown" id="projectDropDown" onchange="setProjectOption()">
 						<option value="">Select</option>
 						<%
 							 if(projectDropDownVal!=null && !"".equalsIgnoreCase(projectDropDownVal))
@@ -223,6 +225,7 @@ String submitVal = request.getParameter("submit")== null ? "": request.getParame
 
 		
 		<input type="hidden" name="projectDropDown" value="<%=projectDropDownVal.trim()%>"/>
+		<input type="hidden" id=projectName name="projectName"/>
 		</form>
 		<table align="center">
 		<%if(!"".equals(msg)) {%>
