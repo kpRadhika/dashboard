@@ -218,6 +218,7 @@ String monthYear = request.getParameter("monthYear")== null ? "": request.getPar
 				<td><input id="monthYear"  type="text" name="monthYear" value="<%=monthYear %>" readonly="readonly" /> 
 			</tr>
 			<tr id="monthPicker">
+			<td></td>
 				<td><input type="submit" name="submit" value="submit" id="submit"></td>
 			</tr>
 		</table>
