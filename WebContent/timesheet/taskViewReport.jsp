@@ -17,15 +17,19 @@
 </style>
 </head>
 <body>
+<table width="100%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
+<tr class="tableheader"><td colspan="4">Task View Report</td></tr>
 <%
 String subButtonVal = request.getParameter("subBtn") == null?"":request.getParameter("subBtn");
 String from = request.getParameter("fromDate") == null?"":request.getParameter("fromDate");;
 String to = request.getParameter("toDate") == null?"":request.getParameter("toDate");
 int projectId = request.getParameter("projectDropDown") == null?0:Integer.parseInt(request.getParameter("projectDropDown"));
 %>
+<tr><td>
 <form action="taskViewReport.jsp"  id="viewTaskTbl" method = "Post">
-<table width="80%" align="center">
-<tr class="tableheader"><td colspan="4">Task View Report</td></tr><tr></tr>
+
+<table width="80%" align="center" style="padding-left: 4%;background:white;">
+
 <tr>
 	<td>From Date<span class="required"></span></td>
 	<td><input type="text" id="fromDate" name="fromDate" value="<%=from%>"></td>
@@ -71,16 +75,22 @@ String pName = null;
 <tr align="center">
 <td colspan="4"><input type="submit" id="subBtn" name="subBtn" value="Submit"></td>
 </tr>
+<tr>
+<td><br></td>
+</tr>
 </table>
 </form>
+</td>
+</tr>
 <%
 if(subButtonVal.equals("Submit")){
 	List<ArrayList> taskList = timeDom.getTaskList(from,to,projectId);
 	if(taskList!=null && !taskList.isEmpty()){
 		Iterator iterator = taskList.listIterator();
 			%>
+			<tr><td>
 			<form action="">
-			<div id="empltable" style="border: 1px solid silver; margin: auto; width: 100%;margin-top: 1%; height: 350px; vertical: 20px; overflow-y: scroll; overflow-x: scroll;">
+			<div id="empltable" style="border: 1px solid silver; margin: auto; width: 80%;margin-top: 1%; height: 350px; vertical: 20px; overflow-y: scroll; overflow-x: scroll;">
 			<table align="center" class="zebra" width="100%" style="border: none">
 			<tr>
 			<th>TaskId</th>
@@ -127,5 +137,7 @@ if(subButtonVal.equals("Submit")){
 		}
 	}
 %>
+</td></tr>
+</table>
 </body>
 </html>

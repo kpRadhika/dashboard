@@ -39,10 +39,7 @@ button {
      border-bottom:1px solid #0147FA;
      cursor: pointer;
 }
-.labelstyle {
-    background:rgba(0,0,0,0); 
-    /* border:2px; */
-}
+
 .ui-button-text-only .ui-button-text {
 	font-size: .7em;
 }
@@ -189,9 +186,9 @@ String monthYear = request.getParameter("monthYear")== null ? "": request.getPar
 %>
 
 <form method="post" name = "report" id="report" action="<%=request.getContextPath()%>/DownloadReportServlet" >
-<table width="80%" align="center">			
+<table width="80%" align="center" style="padding-left: 4%">			
 			<tr><td >
-			<label>Project Name<span class="required"></span>&nbsp;&nbsp;:</label>
+			<label>Project Name<span class="required"></span></label>
 			</td>
 			<td>
 		 <div width="80%" id="projectOption" style="display: none">
@@ -214,7 +211,7 @@ String monthYear = request.getParameter("monthYear")== null ? "": request.getPar
 			</div>
 			</td></tr>
 			<tr id="monthPicker">
-				<td >Select Month<span class="required"></span>&nbsp;&nbsp;:</td>
+				<td >Select Month<span class="required"></span></td>
 				<td><input id="monthYear"  type="text" name="monthYear" value="<%=monthYear %>" readonly="readonly" /> 
 			</tr>
 			<tr id="monthPicker">

@@ -32,9 +32,17 @@ String projectLocation = request.getParameter("ploc")==null?"":(String)request.g
 if(submitClicked.isEmpty()){
 %>
 <form action="addProject.jsp" id="addProject">
-<table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
+
+<table width="100%" style="background: radial-gradient(ellipse at top,lavender,white );">
+<tr>
+<td>
+<div class="tableheader" >Add Project</div>
+</td>
+</tr>
+<tr>
+<td>
+<table width="80%" align="center" style="background: white; padding-left: 4%">
 <tbody>
-<tr class="tableheader"><td colspan="2">Add Project</td></tr><tr></tr>
 <tr>
 	<td>Project Name<span class="required"></span></td>
 	<td><input type="text" id="pname" name="pname"></td>
@@ -60,7 +68,11 @@ if(submitClicked.isEmpty()){
 </tr>
 </tbody>
 </table>
+</td>
+</tr>
+</table>
 </form>
+
 <%
 }else{
 int resultVal = 0;

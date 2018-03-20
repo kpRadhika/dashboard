@@ -163,7 +163,7 @@ public class DownloadReportServlet extends HttpServlet {
 			
 			cell = row.createCell(3);
 			cell.setCellStyle(headerCellStyle);
-			cell.setCellValue(new XSSFRichTextString("LEVAE APPLICATION TYPE"));
+			cell.setCellValue(new XSSFRichTextString("LEAVE TYPE"));
 
 			cell = row.createCell(4);
 			cell.setCellStyle(headerCellStyle);
@@ -175,7 +175,7 @@ public class DownloadReportServlet extends HttpServlet {
 
 			cell = row.createCell(6);
 			cell.setCellStyle(headerCellStyle);
-			cell.setCellValue(new XSSFRichTextString("APPRVED BY"));
+			cell.setCellValue(new XSSFRichTextString("APPROVED BY"));
 
 
 			for(int k=0;k<reportData.size();k++) {

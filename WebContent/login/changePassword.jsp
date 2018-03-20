@@ -83,15 +83,16 @@ if(submitClicked.isEmpty()){
 %>
 <tr><td>
 	<form action="changePassword.jsp" id="forgotPassword" autocomplete="off">
-				<table align="center" width="50%" style="background-color: white">
-				<tr align="center"><td>New Password<span class="required"></span></td>
+				<table align="center" width="50%" style="background-color: white;padding-left: 4%">
+				<tr><td><br><br></td></tr>
+				<tr><td>New Password<span class="required"></span></td>
 				<td>
 					<input type="password" name="newPassword" id="newPassword"/><br>
 					<div id="errorNewdiv" style="font-size: 15px; color: #FF0000" align="center"></div>
 				</td>
 				
 				</tr>
-				<tr align="center"><td>Confirm Password<span class="required"></span></td>
+				<tr><td>Confirm Password<span class="required"></span></td>
 				<td>
 					<input type="password" name="confirmPassword" id="confirmPassword"/><br>
 					<div id="errorConfirmdiv" style="font-size: 15px; color: #FF0000" align="center"></div>
@@ -101,6 +102,7 @@ if(submitClicked.isEmpty()){
 				<tr align="center"><td colspan="2">
 					<input type="submit" name="subBtn" value="Update" onclick="return check()"/>
 				</td></tr>
+				<tr><td><br><br></td></tr>
 				</table>
 	</form>
 	</td></tr>
@@ -134,6 +136,7 @@ int resultVal = 0;
 	</table>
 	<%}
 	}%>
+	<tr><td><br><br><br></td></tr>
 	</table>
 </body>
 </html>

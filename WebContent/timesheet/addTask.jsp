@@ -55,9 +55,12 @@ if(subButtonVal.equals("Submit")){
 }
 else{
 %>
-<form action="addTask.jsp" id="addTask" method = "Post">
-<table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
+<table width="100%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
 <tr class="tableheader"><td colspan="2">Add Task</td></tr><tr></tr>
+<tr>
+<td>
+<form action="addTask.jsp" id="addTask" method = "Post">
+<table width="80%" align="center" style="background: white; padding-left: 4%;">
 <tr>
 	<td>Project Name<span class="required"></span></td>
 	<td>
@@ -121,6 +124,7 @@ String projectName = null;
 </table>
 <input type="hidden" id="selectedRes" name="selectedRes" value="">
 </form>
+</td></tr></table>
 <%}
 
 %>

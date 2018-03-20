@@ -52,17 +52,21 @@ session.setAttribute("statusList",statusList);
 
 
 %>
-
+<table width="100%" style="background: radial-gradient(ellipse at top,lavender,white );">
+<tr>
+<td  style="text-align: center;" colspan="7" class="tableheader">View/Modify mapped tasks</td>
+</tr>
+<tr><td>
 <form  method="post" action="viewModifyTask.jsp" >
 <table width="80%" align="center" >
 			<tr>
-			<td  style="text-align: center;" colspan="7" class="tableheader">View/Modify mapped tasks</td>
+			
 			</tr>
 			<tr >
 			<td>Task Status</td>
 				<td>
 				<select id="taskStatus" name="taskStatus">
-				<option value="">select Task Status</option>
+				<option value="">Select Task Status</option>
 				<%
 				List<String> status=null;
 				String statusCode=null,statusDesc=null;
@@ -92,6 +96,8 @@ session.setAttribute("statusList",statusList);
 		</table>
 		<br/>
 </form>
+</td></tr>
+<tr><td>
 <form id="viewTask" action="addTaskTime.jsp">
 <%request.setAttribute("statusList",statusList); %>
 <table width="80%"  align="center" class="zebra">
@@ -121,6 +127,8 @@ session.setAttribute("statusList",statusList);
 			</tr>
 <%} %>
 </table>
-<form>
+</form>
+</td></tr>
+</table>
 </body>
 </html>

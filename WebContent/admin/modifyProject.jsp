@@ -34,7 +34,7 @@ String projectDropDownVal = GenericUtil.setValue(request.getParameter("projectDr
 if(submitClicked.isEmpty()){
 %>
 <form action="modifyProject.jsp" id="modifyProject">
-<table width="80%" align="center" style="background: radial-gradient(ellipse at top,lavender,white );">
+<table width="80%" align="center">
 <tbody>
 <tr class="tableheader"><td colspan="4">Modify Project</td></tr><tr></tr>
 <tr>
@@ -43,7 +43,7 @@ if(submitClicked.isEmpty()){
 	<th>Project Location</th>
 	<th>Project Lead</th>
 	</tr>
-	<tr>
+	<tr style="background:linear-gradient(to top, #DCDCDC, white);">
 	<td><select name="projectDropDown" id="projectDropDown">
 						<option value="">Select</option>
 						<%
