@@ -1,6 +1,7 @@
 package com.parinati.userLogin;
 
 import java.io.IOException;
+import java.security.KeyPair;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			request.getSession().invalidate();
+			//request.getSession().invalidate(); //need to check
 			HttpSession session = request.getSession(true);
 			response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId());
 
@@ -38,7 +39,11 @@ public class LoginServlet extends HttpServlet {
 	         response.setHeader("Cache-Control", "no-cache");
 		  response.setHeader("Cache-Control", "no-store");
 	         response.setDateHeader("Expires",0);
-			List result = new LoginDomain().validateUser(request.getParameter("userId").trim(), request.getParameter("userPassword").trim());
+	         KeyPair keys = (KeyPair) request.getSession(true).getAttribute("keys");
+	         
+	         String userId=JCryptionUtil.decrypt(request.getParameter("userId").trim(), keys);
+	         String password=JCryptionUtil.decrypt(request.getParameter("userPassword").trim(), keys);
+			List result = new LoginDomain().validateUser(userId.trim(), password.trim());
 
 			if (result!=null && !result.isEmpty()) {
 

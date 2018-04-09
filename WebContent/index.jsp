@@ -4,10 +4,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login title</title>
-
-
+<script type = "text/javascript" src = "scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jcryption-1.1.min.js" ></script>
 <script type="text/javascript">
+var keys;
+$(document).ready(function(){
+	getKeys();
+	
+})
 
+function getKeys() {
+	$.jCryption.getKeys("EncryptionServlet?generateKeypair=true", function(receivedKeys) {keys = receivedKeys;
+	if(keys != undefined || keys != "")
+	{
+	$(".overlay").css('display','none');
+	}
+	});
+}
+
+	
 	function check()
 	{
 		document.getElementById("errordiv").innerHTML='';
@@ -25,7 +40,14 @@
 	   }
 
 	  else{
-	  return true;
+		  $.jCryption.encrypt($("#userId").val(), keys, function(j) {
+				$.jCryption.encrypt($("#userPassword").val(), keys, function(k){
+					$("#userId").val(j);
+					$("#userPassword").val(k);
+					$("#login").submit();
+				});
+			});
+	  
 	  }
 	}
 
@@ -168,7 +190,7 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 <div id="signupfooter">Sign Up Form For Candidates.</div>
 <div class="bgimage"></div>
 <div id="loginform">
-	<form action="<%=request.getContextPath()%>/login" method="post" autocomplete="off">
+	<form id="login" action="<%=request.getContextPath()%>/login" method="post" autocomplete="off">
 			<img src="<%=request.getContextPath()%>/images/Parinati_white_logo.png" style="align: center;" />
 				<div class="login">
 					<div id="signup"><img id="signupimg" src="<%=request.getContextPath()%>/images/signup.png" /></div>
@@ -188,7 +210,7 @@ response.setHeader( "Set-Cookie", "JSESSIONID="+session.getId()+"; HttpOnly; Pat
 							<%	}
 				%>
 						</span>
-						<input type="submit" class="formbuttons" value="Login" onClick="return check()" />
+						<input type="button" class="formbuttons" value="Login" onClick="return check()" />
 						<div align="left" style="margin-left: 10%;"><a style="color:  blue;text-decoration: none" href="forgotPassword.jsp">Forgot Password?</a></div>
 						<div align="left" style="margin-left: 10%;"><a style="color:  blue;text-decoration: none;" href="candidatesignup.jsp">Career explorer? Submit your resume</a></div>
 						</div>

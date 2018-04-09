@@ -105,4 +105,14 @@
     <url-pattern>/DownloadReportServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+		<display-name>EncryptionServlet</display-name>
+		<servlet-name>EncryptionServlet</servlet-name>
+		<servlet-class>com.parinati.userLogin.EncryptionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EncryptionServlet</servlet-name>
+		<url-pattern>/EncryptionServlet</url-pattern>
+	</servlet-mapping>
+  
 </web-app>
